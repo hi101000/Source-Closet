@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Source Closet - About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <style>
+        h1{
+            font-family: Copperplate, ui-rounded;
+        }
+        h2{
+            font-family: Copperplate, ui-rounded;
+        }
+        p{
+            font-family: Copperplate, ui-rounded;
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+      <a href="{{url_for('index')}}">Home</a>
+      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+      <a href="{{ url_for('index') }}">Search</a>
+      <a class="active" href="{{ url_for('about') }}">About</a>
+    </div>
+    <h1>About me and this site</h1>
+    <p>I'm  a high school student in the USA who interested in both history and coding. Therefore, I thought I'd contribute my two cents
+    to the history nerd community by creating this website. Here, you will find historical sources from across history (though focusing more on the 20th and 21st century).
+    I really just upload the sources as I come across them. As such, the exact list of sources and the topic of new sources will be kind of biased
+    by whatever I'm researching at the moment. Nonetheless, I hope to make a meaningful contribution to the lives of people around the world who have an interest in history
+    and save them the hours of hair-pulling which I had to endure to find some of these sources. Feel free to contact me using the below details with any questions or concerns.
+    I'll try to be prompt in my responses, but sometimes it might take me over a week to reply, due to my own personal schedule and busyness level.</p>
+
+    <h2>Contact information</h2>
+    <p>
+        Email: <a href="mailto:person.person.101000@gmail.com">person.person.101000@gmail.com</a>
+    </p>
+</body>
+</html>

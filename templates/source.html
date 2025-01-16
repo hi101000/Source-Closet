@@ -25,7 +25,7 @@
     <div class="topnav">
       <a href="{{url_for('index')}}">Home</a>
       <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-      <a href="{{ url_for('index') }}">Contact</a>
+      <a href="{{ url_for('index') }}">Search</a>
       <a href="{{ url_for('about') }}">About</a>
     </div>
     <h1 id="title">{{ source[0] }}</h1>
@@ -48,7 +48,13 @@
             Topics: {{ ', '.join(source[6].split('/')) }}<br><br>
             Description: {{ source[7] }}<br><br>
             Source: {{ source[8] }}<br><br>
+            {% if source[13] != None %}
+                Link: <a href="{{ source[13] }}">{{ source[13] }}</a>
+            {% endif %}
         </p>
+    <br>
+    <br>
+    <br>
     </div>
 
 </body>

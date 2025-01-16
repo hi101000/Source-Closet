@@ -30,7 +30,7 @@ def sources_abbr():
 
 @app.route('/about')
 def about():
-    return "newfbnkfebikewbfbewkifikewfkekfkewkfqjkbfjk"
+    return render_template("about.html")
 
 if __name__ == '__main__':
     app.run()
