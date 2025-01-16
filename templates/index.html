@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Source Closet - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+<body>
+<div class="topnav">
+  <a class="active" href="{{url_for('index')}}">Home</a>
+  <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+  <a href="{{ url_for('index') }}">Contact</a>
+  <a href="{{ url_for('about') }}">About</a>
+</div>
+<h1 id="title">Source Closet</h1>
+{% for src in sources[:6] %}
+<a href="{{ url_for("source", id=src[11]) }}" class="src_link">
+    <div class="source">
+        <h2 class="src_heading">{{ src[0] }}</h2>
+        <p>{{ src[2] }}/{{ src[1] }}/{{ src[3] }}</p>
+        <p>Author: {{ src[4] }}</p>
+        <p>Description: {{ src[7] }}</p>
+        <p>Tags: {{ ', '.join(src[6].split('/')) }}</p>
+    </div>
+</a>
+<br>
+{% endfor %}
+<footer>
+    Copyright IARF, Pikleman 2025
+</footer>
+</body>
+</html>

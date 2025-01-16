@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Source Closet - {{ source[0] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script type="text/javascript">
+        if({{ source[9] }} === 1){
+            let foo = prompt('Due to copyright concerns, I am required to ask you for a password \"bar\": ');
+            if (foo === "bar"){
+                //
+            }
+            else{
+                while(foo !== "bar"){
+                    foo = prompt('Due to copyright concerns, I am required to ask you for a password \"bar\": ');
+                    if(foo === "bar"){
+                        break;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="topnav">
+      <a href="{{url_for('index')}}">Home</a>
+      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+      <a href="{{ url_for('index') }}">Contact</a>
+      <a href="{{ url_for('about') }}">About</a>
+    </div>
+    <h1 id="title">{{ source[0] }}</h1>
+    <div id="content">
+        {% if source[12] == 1 %}
+            <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[10]) }}" width="80%"></object>
+        {% else %}
+            {% if ".pdf" in source[10] %}
+                <object id="src_frame" class="scaled pdf" data="{{ url_for('static', filename=source[10]) }}" width="180%"></object>
+            {% else %}
+                <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[10]) }}" width="180%"></object>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div id="metadata">
+        <p>
+            Author: {{ source[4] }}<br><br>
+            Date: {{ source[2] }}/{{ source[1] }}/{{ source[3] }}<br><br>
+            Country: {{ ', '.join(source[5].split('/')) }}<br><br>
+            Topics: {{ ', '.join(source[6].split('/')) }}<br><br>
+            Description: {{ source[7] }}<br><br>
+            Source: {{ source[8] }}<br><br>
+        </p>
+    </div>
+
+</body>
+<footer>
+    <br>
+    <br>
+    Copyright IARF, Pikleman 2025
+    <br>
+</footer>
+</html>

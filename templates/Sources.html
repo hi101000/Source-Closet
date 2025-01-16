@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Source Closet - Sources List</title>
+    <style>
+        p{
+            padding: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+<body>
+    <div class="topnav">
+      <a href="{{url_for('index')}}">Home</a>
+      <a class="active" href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+      <a href="{{ url_for('index') }}">Contact</a>
+      <a href="{{ url_for('about') }}">About</a>
+    </div>
+    <p>
+        This will be a list of abbreviated archive names or other sources (e.g. book titles) from which I get the sources.
+    </p>
+    <p>
+        BArch - Bundesarchiv (aka the German Federal Archive)<br>
+        NARA - National Archives and Records Administration (aka the United States National Archives)<br>
+        TNA - The National Archives (aka the U.K. National Archives)<br>
+    </p>
+</body>
+</html>
