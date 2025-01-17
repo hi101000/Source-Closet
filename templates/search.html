@@ -8,6 +8,18 @@
             overflow: auto;
             height: 500px;
         }
+        h4{
+            font-family: Copperplate, ui-rounded;
+        }
+        p{
+            font-family: Copperplate, ui-rounded;
+        }
+        input{
+            font-family: Copperplate, ui-rounded;
+        }
+        label{
+            font-family: Copperplate, ui-rounded;
+        }
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
@@ -34,6 +46,8 @@
         <label for="end_yr">To: </label>
         <input type="text" id="end_yr">
     </div>
+    <label for="id">Source ID:</label>
+    <input type="text" id="id">
 </form>
 </body>
 </html>
