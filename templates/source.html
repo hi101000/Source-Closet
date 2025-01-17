@@ -25,13 +25,13 @@
     <div class="topnav">
       <a href="{{url_for('index')}}">Home</a>
       <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-      <a href="{{ url_for('index') }}">Search</a>
+      <a href="{{ url_for('search') }}">Search</a>
       <a href="{{ url_for('about') }}">About</a>
     </div>
     <h1 id="title">{{ source[0] }}</h1>
     <div id="content">
         {% if source[12] == 1 %}
-            <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[10]) }}" width="80%"></object>
+            <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[10]) }}" width="120%"></object>
         {% else %}
             {% if ".pdf" in source[10] %}
                 <object id="src_frame" class="scaled pdf" data="{{ url_for('static', filename=source[10]) }}" width="180%"></object>
@@ -49,7 +49,10 @@
             Description: {{ source[7] }}<br><br>
             Source: {{ source[8] }}<br><br>
             {% if source[13] != None %}
-                Link: <a href="{{ source[13] }}">{{ source[13] }}</a>
+                Link: <a href="{{ source[13] }}">{{ source[13] }}</a><br><br>
+            {% endif %}
+            {% if source[14] != None %}
+                Attribution Statement: {{ source[14] }}<br><br>
             {% endif %}
         </p>
     <br>

@@ -36,5 +36,9 @@ def about():
 def search():
     return render_template("search.html")
 
+@app.route('/search_process')
+def search_process():
+    return "skibidi"
+
 if __name__ == '__main__':
     app.run()

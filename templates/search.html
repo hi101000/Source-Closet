@@ -3,8 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Source Closet - Search</title>
+    <style>
+        .scrollable-div{
+            overflow: auto;
+            height: 500px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
 <body>
-
+<div class="topnav">
+      <a href="{{url_for('index')}}">Home</a>
+      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+      <a class="active" href="{{ url_for('search') }}">Search</a>
+      <a href="{{ url_for('about') }}">About</a>
+</div>
+<form action="{{ url_for('search_process') }}">
+    <label for="Keywds">Keywords:</label><br>
+    <input type="search" id="Keywds">
+    <div class="scrollable-div">
+        <h4>Topics:</h4>
+    </div>
+    <div class="scrollable-div">
+        <h4>Countries:</h4>
+    </div>
+    <div>
+        <h4>Year</h4>
+        <label for="start_yr">From: </label>
+        <input type="text" id="start_yr"><br>
+        <label for="end_yr">To: </label>
+        <input type="text" id="end_yr">
+    </div>
+</form>
 </body>
 </html>
