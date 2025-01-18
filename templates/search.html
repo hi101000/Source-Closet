@@ -10,6 +10,7 @@
         }
         h4{
             font-family: Copperplate, ui-rounded;
+            font-size: 30px;
         }
         p{
             font-family: Copperplate, ui-rounded;
@@ -19,6 +20,7 @@
         }
         label{
             font-family: Copperplate, ui-rounded;
+            font-size: 20px;
         }
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
@@ -30,11 +32,17 @@
       <a class="active" href="{{ url_for('search') }}">Search</a>
       <a href="{{ url_for('about') }}">About</a>
 </div>
+<br>
+<br>
 <form action="{{ url_for('search_process') }}">
-    <label for="Keywds">Keywords:</label><br>
-    <input type="search" id="Keywds">
+    <label for="Keywds">Keywords:</label>
+    <input type="search" id="Keywds" width="150px" height="40px">
     <div class="scrollable-div">
         <h4>Topics:</h4>
+        {% for tag in tags %}
+            <label for={{ tag }}>{{ tag }}</label>
+            <input type="checkbox" id={{ tag }}><br>
+        {% endfor %}
     </div>
     <div class="scrollable-div">
         <h4>Countries:</h4>

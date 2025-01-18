@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+import json
+
+from flask import Flask, render_template, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -34,7 +36,9 @@ def about():
 
 @app.route('/search')
 def search():
-    return render_template("search.html")
+    with open("static/JSON/tags.json", "r") as f:
+        tags = json.loads(f.read())[0]["Tags"]
+    return render_template("search.html", tags=tags)
 
 @app.route('/search_process')
 def search_process():
