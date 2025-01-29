@@ -22,6 +22,23 @@
             font-family: Copperplate, ui-rounded;
             font-size: 20px;
         }
+        input[type=checkbox] {
+            vertical-align: middle;
+            position: relative;
+            bottom: 1px;
+        }
+
+        label {
+            display: block;
+        }
+        #main_search_content{
+            padding-left: 50px;
+        }
+        #submit{
+            font-size: 50px;
+            border-radius: 20px;
+            background-color: blueviolet;
+        }
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
@@ -34,28 +51,33 @@
 </div>
 <br>
 <br>
-<form action="{{ url_for('search_process') }}">
-    <label for="Keywds">Keywords:</label>
-    <input type="search" id="Keywds" width="150px" height="40px">
+<div id="main_search_content">
+<form action="{{ url_for('search_process') }}" method="post">
+    <label for="Keywds">Keywords: <input type="search" id="Keywds"></label>
+    <label for="id">Source ID: <input type="text" id="id"></label>
     <div class="scrollable-div">
         <h4>Topics:</h4>
         {% for tag in tags %}
-            <label for={{ tag }}>{{ tag }}</label>
-            <input type="checkbox" id={{ tag }}><br>
+            <label for={{ tag }}><input type="checkbox" id={{ tag }}> {{ tag }}</label>
+            <br>
         {% endfor %}
     </div>
     <div class="scrollable-div">
         <h4>Countries:</h4>
+        {% for country in countries %}
+            <label for={{ country }}><input type="checkbox" id={{ country }}> {{ country }}</label>
+            <br>
+        {% endfor %}
     </div>
     <div>
         <h4>Year</h4>
-        <label for="start_yr">From: </label>
-        <input type="text" id="start_yr"><br>
-        <label for="end_yr">To: </label>
-        <input type="text" id="end_yr">
+        <label for="start_yr">From: <input type="text" id="start_yr"><br></label>
+        <label for="end_yr">To: <input type="text" id="end_yr"></label>
     </div>
-    <label for="id">Source ID:</label>
-    <input type="text" id="id">
+    <br>
+    <br>
+    <input type="submit" value="Submit" id="submit">
 </form>
+</div>
 </body>
 </html>

@@ -1,7 +1,8 @@
 import json
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request
 import sqlite3
+import random
 
 app = Flask(__name__)
 
@@ -11,9 +12,10 @@ app = Flask(__name__)
 def index():  # put application's code here
     db = sqlite3.connect('sources.db')
     sources = []
-    for source in db.execute('SELECT * FROM sources'):
+    for source in db.execute('SELECT * FROM sources WHERE USABLE = 1'):
         sources.append(source)
     db.close()
+    random.shuffle(sources)
     return render_template("index.html", sources=sources)
 
 @app.route('/source/<id>')
@@ -24,6 +26,7 @@ def source(id):
     for row in cursor:
         for col in row:
             source.append(col)
+    db.close()
     return render_template("source.html", source=source)
 
 @app.route('/sources_abbr')
@@ -38,10 +41,13 @@ def about():
 def search():
     with open("static/JSON/tags.json", "r") as f:
         tags = json.loads(f.read())[0]["Tags"]
-    return render_template("search.html", tags=tags)
+    with open("static/JSON/countries.json", "r") as f:
+        countries = json.loads(f.read())[0]["Countries"]
+    return render_template("search.html", tags=tags, countries=countries)
 
-@app.route('/search_process')
+@app.route('/search_process', methods=["POST"])
 def search_process():
+    data = request.form
     return "skibidi"
 
 if __name__ == '__main__':
