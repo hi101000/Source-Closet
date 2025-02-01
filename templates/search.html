@@ -53,26 +53,26 @@
 <br>
 <div id="main_search_content">
 <form action="{{ url_for('search_process') }}" method="post">
-    <label for="Keywds">Keywords: <input type="search" id="Keywds"></label>
-    <label for="id">Source ID: <input type="text" id="id"></label>
+    <label for="Keywds">Keywords: <input type="search" id="Keywds" name="keywds_"></label>
+    <label for="id">Source ID: <input type="text" id="id" name="id_"></label>
     <div class="scrollable-div">
         <h4>Topics:</h4>
         {% for tag in tags %}
-            <label for={{ tag }}><input type="checkbox" id={{ tag }}> {{ tag }}</label>
+            <label for="tag"><input type="checkbox" id="tag" name="tag_{{ tag }}"> {{ tag }}</label>
             <br>
         {% endfor %}
     </div>
     <div class="scrollable-div">
         <h4>Countries:</h4>
         {% for country in countries %}
-            <label for={{ country }}><input type="checkbox" id={{ country }}> {{ country }}</label>
+            <label for={{ country }}><input type="checkbox" id={{ country }} name="country_{{ country }}"> {{ country }}</label>
             <br>
         {% endfor %}
     </div>
     <div>
         <h4>Year</h4>
-        <label for="start_yr">From: <input type="text" id="start_yr"><br></label>
-        <label for="end_yr">To: <input type="text" id="end_yr"></label>
+        <label for="start_yr">From: <input type="text" id="start_yr" name = "start_yr"><br></label>
+        <label for="end_yr">To: <input type="text" id="end_yr" name="end_yr"></label>
     </div>
     <br>
     <br>

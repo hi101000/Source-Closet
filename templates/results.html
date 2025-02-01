@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    {% for src in sources %}
+
+<a href="{{ url_for("source", id=src[11]) }}" class="src_link">
+    <div class="source">
+        <h2 class="src_heading">{{ src[0] }}</h2>
+        <p>{{ src[2] }}/{{ src[1] }}/{{ src[3] }}</p>
+        <p>Author: {{ src[4] }}</p>
+        <p>Description: {{ src[7] }}</p>
+        <p>Tags: {{ ', '.join(src[6].split('/')) }}</p>
+    </div>
+</a>
+        <br>
+    {% endfor %}
+</p>
+</body>
+</html>

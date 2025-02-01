@@ -1,11 +1,11 @@
 import json
-
 from flask import Flask, render_template, request
 import sqlite3
 import random
+from collections import Counter
 
 app = Flask(__name__)
-
+#app.config['SECRET_KEY'] = 'G@1v55k1b1d1cv5M@x1mv5'
 
 
 @app.route('/')
@@ -48,7 +48,79 @@ def search():
 @app.route('/search_process', methods=["POST"])
 def search_process():
     data = request.form
-    return "skibidi"
+    tags = []
+    countries = []
+    keywds = []
+    id = 0
+    start_yr = 0
+    end_yr = 0
+    added = False
+    for key, value in data.items():
+        print(f"{key}: {value}")
+        if "tag_" in key:
+            tags.append(key.split("_")[1])
+            print(tags)
+        elif "country_" in key:
+            countries.append(key.split("_")[1])
+            print(countries)
+        elif "keywds_" in key:
+            keywds = data[key].split()
+            print(keywds)
+        elif "id_" in key and value != "":
+            id = int(data[key])
+        elif "start_" in key and value != "":
+            start_yr = int(data[key])
+        elif "end_" in key and value != "":
+            end_yr = int(data[key])
+
+    db = sqlite3.connect('sources.db')
+    cmd = "SELECT * FROM SOURCES WHERE "
+    if id != 0:
+        cmd += f"ID = {id} AND "
+        added = True;
+    if start_yr != 0 and end_yr != 0:
+        cmd += f"(YEAR BETWEEN {start_yr} AND {end_yr}) AND "
+        added = True
+    elif start_yr != 0:
+        cmd += f"(YEAR BETWEEN {start_yr} AND {2025}) AND "
+        added = True
+    elif end_yr != 0:
+        added = True
+        cmd += f"(YEAR BETWEEN {0} AND {end_yr}) AND "
+
+    if tags != []:
+        tags = Counter(tags)
+    else:
+        tags = Counter("None")
+
+    if countries != []:
+        countries = Counter(countries)
+    else:
+        countries = Counter("None")
+
+    if keywds != []:
+        add_on = ""
+        for key in keywds:
+            add_on += f"TITLE LIKE %{key}% OR"
+        add_on.removesuffix(" OR")
+        cmd += f"({add_on}) AND "
+        added = True
+    cmd.removesuffix(" AND ")
+    print(cmd)
+    if added:
+        cursor = db.execute(cmd)
+    else:
+        cursor = db.execute("SELECT * FROM SOURCES")
+    sources = []
+    for src in cursor:
+        if tags - Counter(src[6].split("/")) == Counter() and countries - Counter(src[5].split("/")) == Counter():
+            sources.append(src)
+    db.close()
+
+    '''for key, value in data.items():
+        print(key, value)'''
+    print(sources)
+    return render_template("results.html", sources = sources)
 
 if __name__ == '__main__':
     app.run()
