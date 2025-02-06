@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 import sqlite3
 import random
 from collections import Counter
+from difflib import SequenceMatcher as SM
 
 app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'G@1v55k1b1d1cv5M@x1mv5'
@@ -10,24 +11,25 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():  # put application's code here
-    db = sqlite3.connect('sources.db')
     sources = []
-    for source in db.execute('SELECT * FROM sources WHERE USABLE = 1'):
-        sources.append(source)
-    db.close()
+    with open('static/JSON/sources.json', 'r') as f:
+        src = json.load(f)[0]
+    ids = src.keys()
+    ids = list(ids)
+    for i in range(9):
+        sources.append([src[ids[i]], ids[i]])
     random.shuffle(sources)
     return render_template("index.html", sources=sources)
 
 @app.route('/source/<id>')
 def source(id):
-    db = sqlite3.connect('sources.db')
-    cursor = db.execute('SELECT * FROM SOURCES WHERE ID = ?', (id,))
     source = []
-    for row in cursor:
-        for col in row:
-            source.append(col)
-    db.close()
-    return render_template("source.html", source=source)
+    with open('static/JSON/sources.json', 'r') as f:
+        src = json.load(f)[0]
+    for key in src[f"{id}"].keys():
+        source.append(src[f"{id}"][key])
+    print(source)
+    return render_template("source.html", source=source, id=id)
 
 @app.route('/sources_abbr')
 def sources_abbr():
@@ -48,79 +50,63 @@ def search():
 @app.route('/search_process', methods=["POST"])
 def search_process():
     data = request.form
+    sources = []
     tags = []
     countries = []
     keywds = []
     id = 0
     start_yr = 0
     end_yr = 0
-    added = False
+
     for key, value in data.items():
-        print(f"{key}: {value}")
         if "tag_" in key:
             tags.append(key.split("_")[1])
-            print(tags)
         elif "country_" in key:
             countries.append(key.split("_")[1])
-            print(countries)
         elif "keywds_" in key:
-            keywds = data[key].split()
-            print(keywds)
-        elif "id_" in key and value != "":
-            id = int(data[key])
-        elif "start_" in key and value != "":
-            start_yr = int(data[key])
-        elif "end_" in key and value != "":
-            end_yr = int(data[key])
+            keywds = value
+        elif "id_" in key and value != '':
+            id = int(value)
+        elif "start_" in key and value != '':
+            start_yr = int(value)
+        elif "end_" in key and value != '':
+            end_yr = int(value)
 
-    db = sqlite3.connect('sources.db')
-    cmd = "SELECT * FROM SOURCES WHERE "
-    if id != 0:
-        cmd += f"ID = {id} AND "
-        added = True;
-    if start_yr != 0 and end_yr != 0:
-        cmd += f"(YEAR BETWEEN {start_yr} AND {end_yr}) AND "
-        added = True
-    elif start_yr != 0:
-        cmd += f"(YEAR BETWEEN {start_yr} AND {2025}) AND "
-        added = True
-    elif end_yr != 0:
-        added = True
-        cmd += f"(YEAR BETWEEN {0} AND {end_yr}) AND "
+    if start_yr > end_yr:
+        return render_template("error.html", error=f"The year range which you entered does not work physically. The starting year {start_yr} comes after the end year {end_yr}, so that doesn't work.")
 
-    if tags != []:
-        tags = Counter(tags)
-    else:
-        tags = Counter("None")
+    with open("static/JSON/sources.json", "r") as f:
+        src = json.load(f)[0]
 
-    if countries != []:
-        countries = Counter(countries)
-    else:
-        countries = Counter("None")
+    results = []
 
-    if keywds != []:
-        add_on = ""
-        for key in keywds:
-            add_on += f"TITLE LIKE %{key}% OR"
-        add_on.removesuffix(" OR")
-        cmd += f"({add_on}) AND "
-        added = True
-    cmd.removesuffix(" AND ")
-    print(cmd)
-    if added:
-        cursor = db.execute(cmd)
-    else:
-        cursor = db.execute("SELECT * FROM SOURCES")
-    sources = []
-    for src in cursor:
-        if tags - Counter(src[6].split("/")) == Counter() and countries - Counter(src[5].split("/")) == Counter():
-            sources.append(src)
-    db.close()
+    for key, value in src.items():
+        if id != 0 and f"{id}" != key:
+            continue
 
-    '''for key, value in data.items():
-        print(key, value)'''
-    print(sources)
-    return render_template("results.html", sources = sources)
+        match_score = 0
+        if keywds:
+            text = value["Title"] + " " + value["Description"]
+            for keyword in keywds:
+                match_score += SM(None, keyword, text).ratio()
+
+        if tags:
+            match_score += len(set(tags).intersection(set(value["Tags"])))
+
+        if countries:
+            match_score += len(set(countries).intersection(set(value["Countries"])))
+
+        if start_yr and end_yr and (start_yr <= int(value["Year"]) <= end_yr):
+            match_score += 1
+
+        if match_score > 0:
+            results.append((match_score, key, value))
+
+    results.sort(reverse=True, key=lambda x: x[0])
+
+    ranked_sources = {key: value for _, key, value in results}
+
+    return render_template("results.html", sources=[ranked_sources])
 
 if __name__ == '__main__':
     app.run()

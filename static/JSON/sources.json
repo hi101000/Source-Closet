@@ -1,0 +1,196 @@
+[
+    {
+        "1": {
+            "Title": "ISCOT 399",
+            "Month": 10,
+            "Date": 21,
+            "Year": 1944,
+            "Author": "UNKNOWN",
+            "Countries": [
+                "UK",
+                "Poland"
+            ],
+            "Tags": [
+                "Holocaust",
+                "Auschwitz",
+                "Hungarian Jews Deportation",
+                "SIGINT",
+                "COMINTERN"
+            ],
+            "Description": "A British SIGINT intercept of a COMINTERN message regarding the gassing of Hungarian Jews in Auschwitz",
+            "Source": "TNA HW 17/56",
+            "Path": "Images/ISCOT-399.jpg",
+            "Link": null,
+            "Scaled": 1,
+            "Attribution": null
+        },
+        "2": {
+            "Title": "Höfle Telegram",
+            "Month": 1,
+            "Date": 11,
+            "Year": 1943,
+            "Author": "SS Sturmbahnführer Hermann Höfle",
+            "Countries": [
+                "Germany",
+                "UK"
+            ],
+            "Tags": [
+                "Holocaust",
+                "Aktion Reinhard",
+                "Belzec",
+                "Sobibor",
+                "Treblinka"
+            ],
+            "Description": "A Telegram from Höfle tabulating the total number of deportees to the Aktion Reinhard Camps",
+            "Source": "TNA HW 16/23",
+            "Path": "Images/Höfle_Telegram.jpg",
+            "Link": "https://www.nationalarchives.gov.uk/education/resources/holocaust/hoefle-telegram/",
+            "Scaled": 0,
+            "Attribution": " Contains public sector information licensed under the Open Government Licence v3.0."
+        },
+        "3": {
+            "Title": "Generalplan Ost",
+            "Month": 6,
+            "Date": "UNKNOWN",
+            "Year": 1942,
+            "Author": "Dr. Konrad Meyer-Hetling",
+            "Countries": [
+                "Germany"
+            ],
+            "Tags": [
+                "Generalplan Ost",
+                "Lebensraum"
+            ],
+            "Description": "Konrad Meyer-Hetling's Generalplan Ost document",
+            "Source": "BArch R 49/157a",
+            "Path": "Images/GeneralPlanOst.pdf",
+            "Link": "https://invenio.bundesarchiv.de/invenio/direktlink/4922bf06-9b50-4ef7-ac9b-bcb4b02dc2c8/",
+            "Scaled": 0,
+            "Attribution": null
+        },
+        "4": {
+            "Title": "Bericht zur innen politischen Lager 001",
+            "Month": 10,
+            "Date": 9,
+            "Year": 1939,
+            "Author": "UNKNOWN",
+            "Countries": [
+                "Germany"
+            ],
+            "Tags": [
+                "RSHA",
+                "WW2",
+                "German Internal Intelligence"
+            ],
+            "Description": "The first in a series of reports from within the RSHA on the internal state of the Third Reich",
+            "Source": "NARA, T-175, reel 258, frames 6-18",
+            "Path": "Images/Bericht-zur-innen politischen-Lager 001.pdf",
+            "Link": "https://catalog.archives.gov/id/274076099?objectPage=6",
+            "Scaled": 0,
+            "Attribution": null
+        },
+        "5": {
+            "Title": "Bericht zur innen politischen Lager 002",
+            "Month": 10,
+            "Date": 11,
+            "Year": 1939,
+            "Author": "UNKNOWN",
+            "Countries": [
+                "Germany"
+            ],
+            "Tags": [
+                "RSHA",
+                "WW2",
+                "German Internal Intelligence"
+            ],
+            "Description": "The second in a series of reports from within the RSHA on the internal state of the Third Reich",
+            "Source": "NARA, T-175, reel 258, frames 19-33",
+            "Path": "Images/Bericht-zur-innen politischen-Lager 002.pdf",
+            "Link": "https://catalog.archives.gov/id/274076099?objectPage=19",
+            "Scaled": 0,
+            "Attribution": null
+        },
+        "6": {
+            "Title": "Declaration of the causes which impel the state of Texas to secede from the Federal Union : also the ordinance of secession",
+            "Month": 2,
+            "Date": 1,
+            "Year": 1861,
+            "Author": "State of Texas",
+            "Countries": [
+                "United States of America",
+                "Confederate States of America"
+            ],
+            "Tags": [
+                "Secession Crisis",
+                "Texas",
+                "American Civil War"
+            ],
+            "Description": "Texas' Ordinance of Secession, which effectively severed its ties with the USA from 1861-1865.",
+            "Source": "Library of Congress, Printed Ephemera Collection; Portfolio 346, Folder 43.",
+            "Path": "Images/Texas-Secession-Causes-Decl.jpg",
+            "Link": "https://www.loc.gov/resource/rbpe.34604300/?sp=1&st=image",
+            "Scaled": 0,
+            "Attribution": null
+        },
+        "7": {
+            "Title": "Abgrenzung der Siedlungsgebiete im ehemals sowjetischen Raum",
+            "Month": 5,
+            "Date": 7,
+            "Year": 1942,
+            "Author": "UNKOWN",
+            "Countries": [
+                "Germany"
+            ],
+            "Tags": [
+                "Generalplan Ost",
+                "Lebensraum"
+            ],
+            "Description": "A document describing Himmler's thoughts on prescribing boundaries for German settlement in former Soviet territories.",
+            "Source": "BArch 49/2989, p. 3",
+            "Path": "Images/R_49_2989_0003.jpg",
+            "Link": "https://invenio.bundesarchiv.de/invenio/direktlink/a07c8a6e-3dd1-457b-aa70-28fff902eca4/",
+            "Scaled": 0,
+            "Attribution": null
+        },
+        "8": {
+            "Title": "Planungsgrundlagen für den Aufbau der Ostgebiete.- Bericht der Planungshauptabteilung des RKFV",
+            "Month": "UNKNOWN",
+            "Date": "UNKNOWN",
+            "Year": 1942,
+            "Author": "UNKOWN",
+            "Countries": [
+                "Germany"
+            ],
+            "Tags": [
+                "Generalplan Ost",
+                "Lebensraum"
+            ],
+            "Description": "A report on the status of Generalplan Ost planning and execution, among other things",
+            "Source": "BArch 49/157",
+            "Path": "Images/R_49_157.pdf",
+            "Link": "https://invenio.bundesarchiv.de/invenio/direktlink/292d39b1-7156-4ebb-a6d5-80ae62fb4ae8/",
+            "Scaled": 0,
+            "Attribution": null
+        },
+        "9": {
+            "Title": "A Second Jäger Report",
+            "Month": 2,
+            "Date": 9,
+            "Year": 1942,
+            "Author": "Karl Jäger",
+            "Countries": [
+                "Germany"
+            ],
+            "Tags": [
+                "Einsatzgruppen",
+                "Holocaust"
+            ],
+            "Description": "A second report from Karl Jäger, updating the figures of murdered civilians given in his first report",
+            "Source": "Wolfram Wette, Karl Jäger. Mörder der litauischen Juden, S. Fischer Verlag, Frankfurt am Main 2011. p. 147",
+            "Path": "Images/Jaeger_Report_2.png",
+            "Link": null,
+            "Scaled": 0,
+            "Attribution": null
+        }
+    }
+]

@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
 <body>
-<p>
-    {% for src in sources %}
-
-<a href="{{ url_for("source", id=src[11]) }}" class="src_link">
-    <div class="source">
-        <h2 class="src_heading">{{ src[0] }}</h2>
-        <p>{{ src[2] }}/{{ src[1] }}/{{ src[3] }}</p>
-        <p>Author: {{ src[4] }}</p>
-        <p>Description: {{ src[7] }}</p>
-        <p>Tags: {{ ', '.join(src[6].split('/')) }}</p>
+<div class="topnav">
+      <a href="{{url_for('index')}}">Home</a>
+      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+      <a href="{{ url_for('search') }}">Search</a>
+      <a href="{{ url_for('about') }}">About</a>
     </div>
-</a>
+<p>
+    {% for key, value in sources[0].items() %}
+
+        <a href="{{ url_for("source", id=key) }}" class="src_link">
+            <div class="source">
+                <h2 class="src_heading">{{ value['Title'] }}</h2>
+                <p>{{ value["Month"] }}/{{ value["Date"] }}/{{ value["Year"] }}</p>
+                <p>Author: {{ value["Author"] }}</p>
+                <p>Description: {{ value["Description"] }}</p>
+                <p>Tags: {{', '.join(value["Tags"]) }}</p>
+            </div>
+        </a>
+        <p>{{ src }}</p>
+        <script>
+        console.log('{{ key }}, {{ value }}')
+        </script>
         <br>
     {% endfor %}
 </p>

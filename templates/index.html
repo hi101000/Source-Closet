@@ -14,13 +14,13 @@
 </div>
 <h1 id="title">Source Closet</h1>
 {% for src in sources[:6] %}
-<a href="{{ url_for("source", id=src[11]) }}" class="src_link">
+<a href="{{ url_for("source", id=src[1]) }}" class="src_link">
     <div class="source">
-        <h2 class="src_heading">{{ src[0] }}</h2>
-        <p>{{ src[2] }}/{{ src[1] }}/{{ src[3] }}</p>
-        <p>Author: {{ src[4] }}</p>
-        <p>Description: {{ src[7] }}</p>
-        <p>Tags: {{ ', '.join(src[6].split('/')) }}</p>
+        <h2 class="src_heading">{{ src[0]["Title"] }}</h2>
+        <p>{{ src[0]["Month"] }}/{{ src[0]["Date"] }}/{{ src[0]["Year"] }}</p>
+        <p>Author: {{ src[0]["Author"] }}</p>
+        <p>Description: {{ src[0]["Description"] }}</p>
+        <p>Tags: {{ ', '.join(src[0]["Tags"]) }}</p>
     </div>
 </a>
 <br>
