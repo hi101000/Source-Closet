@@ -22,7 +22,7 @@
             "Path": "Images/ISCOT-399.jpg",
             "Link": null,
             "Scaled": 1,
-            "Attribution": null
+            "Attribution": ["PROTECTED", {"Transcript": "Images/ISCOT-transcript.png"}]
         },
         "2": {
             "Title": "Höfle Telegram",

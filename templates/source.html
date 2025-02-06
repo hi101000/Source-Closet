@@ -5,20 +5,7 @@
     <title>Source Closet - {{ source[0] }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
     <script type="text/javascript">
-        if({{ source[9] }} === 1){
-            let foo = prompt('Due to copyright concerns, I am required to ask you for a password \"bar\": ');
-            if (foo === "bar"){
-                //
-            }
-            else{
-                while(foo !== "bar"){
-                    foo = prompt('Due to copyright concerns, I am required to ask you for a password \"bar\": ');
-                    if(foo === "bar"){
-                        break;
-                    }
-                }
-            }
-        }
+
     </script>
     <style>
         #my-pdf { height: 500px; border: 1px solid #ccc; }
@@ -34,7 +21,12 @@
     </div>
     <h1 id="title">{{ source[0] }}</h1>
     <div id="content">
-        {% if source[12] == 1 %}
+        {% if prot %}
+            <script type="text/javascript">
+                alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile');
+            </script>
+            <object id="src_frame" data="{{ url_for('static', filename=source[12][1]["Transcript"]) }}" width="120%"></object>
+        {% elif source[12] == 1 %}
             <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[9]) }}" width="120%" height="900%"></object>
         {% else %}
             {% if ".pdf" in source[9] %}

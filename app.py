@@ -29,7 +29,13 @@ def source(id):
     for key in src[f"{id}"].keys():
         source.append(src[f"{id}"][key])
     print(source)
-    return render_template("source.html", source=source, id=id)
+    print(len(source))
+    if isinstance(source[12], list):
+        prot = True
+        print(source[12][1])
+    else:
+        prot = False
+    return render_template("source.html", source=source, id=id, prot=prot)
 
 @app.route('/sources_abbr')
 def sources_abbr():
