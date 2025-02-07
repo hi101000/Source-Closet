@@ -98,7 +98,7 @@ def search_process():
 
         if tags:
             match_score += len(set(tags).intersection(set(value["Tags"])))
-            if not set(tags).intersection(set(value["Tags"])):
+            if len(set(tags).intersection(set(value["Tags"]))) == 0:
                 match_score -= 500
 
         if countries:
@@ -106,7 +106,7 @@ def search_process():
 
         if start_yr and end_yr and (start_yr <= int(value["Year"]) <= end_yr):
             match_score += 1
-        else:
+        elif end_year and start_year and not (start_yr <= int(value["Year"]) <= end_yr):
             match_score -= 500
 
         if match_score > 0:
