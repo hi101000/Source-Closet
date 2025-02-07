@@ -98,12 +98,16 @@ def search_process():
 
         if tags:
             match_score += len(set(tags).intersection(set(value["Tags"])))
+            if not set(tags).intersection(set(value["Tags"])):
+                match_score -= 500
 
         if countries:
             match_score += len(set(countries).intersection(set(value["Countries"])))
 
         if start_yr and end_yr and (start_yr <= int(value["Year"]) <= end_yr):
             match_score += 1
+        else:
+            match_score -= 500
 
         if match_score > 0:
             results.append((match_score, key, value))
