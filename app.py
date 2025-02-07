@@ -1,8 +1,6 @@
 import json
 from flask import Flask, render_template, request
-import sqlite3
 import random
-from collections import Counter
 from difflib import SequenceMatcher as SM
 
 app = Flask(__name__)
@@ -93,8 +91,7 @@ def search_process():
         match_score = 0
         if keywds:
             text = value["Title"] + " " + value["Description"]
-            for keyword in keywds:
-                match_score += SM(None, keyword, text).ratio()
+            match_score += SM(lambda x: x==" ", keywds.lower(), text.lower(), True).ratio() * 30
 
         if tags:
             match_score += len(set(tags).intersection(set(value["Tags"])))
@@ -103,16 +100,19 @@ def search_process():
 
         if countries:
             match_score += len(set(countries).intersection(set(value["Countries"])))
+            if len(set(countries).intersection(set(value["Countries"]))) == 0:
+                match_score -= 500
 
         if start_yr and end_yr and (start_yr <= int(value["Year"]) <= end_yr):
             match_score += 1
         elif end_yr and start_yr and not (start_yr <= int(value["Year"]) <= end_yr):
             match_score -= 500
 
-        if match_score > 0:
+        if match_score > 1:
             results.append((match_score, key, value))
 
     results.sort(reverse=True, key=lambda x: x[0])
+
 
     ranked_sources = {key: value for _, key, value in results}
 
