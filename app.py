@@ -106,7 +106,7 @@ def search_process():
 
         if start_yr and end_yr and (start_yr <= int(value["Year"]) <= end_yr):
             match_score += 1
-        elif end_year and start_year and not (start_yr <= int(value["Year"]) <= end_yr):
+        elif end_yr and start_yr and not (start_yr <= int(value["Year"]) <= end_yr):
             match_score -= 500
 
         if match_score > 0:
