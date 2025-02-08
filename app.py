@@ -58,7 +58,7 @@ def search_process():
     tags = []
     countries = []
     keywds = []
-    id = 0
+    id = "0"
     start_yr = 0
     end_yr = 0
 
