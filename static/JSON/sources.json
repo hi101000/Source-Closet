@@ -186,8 +186,48 @@
                 "Holocaust"
             ],
             "Description": "A second report from Karl Jäger, updating the figures of murdered civilians given in his first report",
-            "Source": "Wolfram Wette, Karl Jäger. Mörder der litauischen Juden, S. Fischer Verlag, Frankfurt am Main 2011. p. 147",
+            "Source": "Wolfram Wette, Karl Jäger. Mörder der litauischen Juden, S. Fischer Verlag, Frankfurt am Main 2011, p. 147",
             "Path": "Images/Jaeger_Report_2.png",
+            "Link": null,
+            "Scaled": 0,
+            "Attribution": null
+        },
+        "10": {
+            "Title": "A Drafted Memorandum from Winston Churchill Regarding the Dresden Bombing",
+            "Month": 3,
+            "Date": 28,
+            "Year": 1945,
+            "Author": "Winston Churchill",
+            "Countries": [
+                "UK"
+            ],
+            "Tags": [
+                "Strategic Bombing",
+                "Dresden"
+            ],
+            "Description": "A draft of a memorandum from Churchill condemning the firebombing of Dresden",
+            "Source": "Joel, Tony, The Dresden Firebombing: Memory and the Politics of Commemorating Destruction, Paperback ed. London, UK: Bloomsbury Academic, 2020, p. 69.",
+            "Path": "Images/Churchill_Dresden_memo_draft.png",
+            "Link": null,
+            "Scaled": 0,
+            "Attribution": null
+        },
+        "11": {
+            "Title": "A Memorandum from Winston Churchill Regarding the Dresden Bombing",
+            "Month": 4,
+            "Date": 1,
+            "Year": 1945,
+            "Author": "Winston Churchill",
+            "Countries": [
+                "UK"
+            ],
+            "Tags": [
+                "Strategic Bombing",
+                "Dresden"
+            ],
+            "Description": "A memorandum from Churchill condemning the firebombing of Dresden",
+            "Source": "Joel, Tony, The Dresden Firebombing: Memory and the Politics of Commemorating Destruction, Paperback ed. London, UK: Bloomsbury Academic, 2020, p. 70.",
+            "Path": "Images/Churchill_Dresden_memorandum.png",
             "Link": null,
             "Scaled": 0,
             "Attribution": null

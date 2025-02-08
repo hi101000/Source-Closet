@@ -70,7 +70,7 @@ def search_process():
         elif "keywds_" in key:
             keywds = value
         elif "id_" in key and value != '':
-            id = int(value)
+            id = value
         elif "start_" in key and value != '':
             start_yr = int(value)
         elif "end_" in key and value != '':
@@ -85,10 +85,11 @@ def search_process():
     results = []
 
     for key, value in src.items():
-        if id != 0 and f"{id}" != key:
-            continue
-
         match_score = 0
+        if id != "0" and id != key:
+            continue
+        else:
+            match_score += 500
         if keywds:
             text = value["Title"] + " " + value["Description"]
             match_score += SM(lambda x: x==" ", keywds.lower(), text.lower(), True).ratio() * 30
