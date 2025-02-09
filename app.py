@@ -26,8 +26,6 @@ def source(id):
         src = json.load(f)[0]
     for key in src[f"{id}"].keys():
         source.append(src[f"{id}"][key])
-    print(source)
-    print(len(source))
     if isinstance(source[12], list):
         prot = True
         print(source[12][1])

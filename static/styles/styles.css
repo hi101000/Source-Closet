@@ -9,6 +9,7 @@
 #title{
     color: saddlebrown;
     font-family: Copperplate;
+    text-align: center;
 }
 footer{
     position: fixed;
@@ -28,8 +29,8 @@ footer{
 }
 #content{
     padding-left: 330px;
-    width: 30%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
     align-items: center;
 }
 .scaled{
@@ -56,6 +57,7 @@ h1{
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+    font-family: Copperplate, ui-rounded;
   font-size: 17px;
 }
 
@@ -75,4 +77,29 @@ h1{
 
 .pdf{
     height: 900px;
+}
+
+.sidebar{
+    width: 300px;
+    box-sizing: border-box;
+    position: fixed;
+    background-color: blueviolet;
+    border-radius: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    height: 100%;
+}
+
+#main{
+    position: fixed;
+    padding-right: 50px;
+    display: flex;
+    overflow: auto;
+    height: 500px;
+}
+
+#main_content{
+    margin-left: 230px;
+    padding-left: 10%;
+    padding-right: 50px;
 }
