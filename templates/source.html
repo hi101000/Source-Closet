@@ -30,6 +30,9 @@
             <br>
             <br>
             <a id="sidebar-a" href="https://www.ns-archiv.de">NS-Archiv</a>
+            <br>
+            <br>
+            <a id="sidebar-a" href="https://holocausthistory.site">Holocaust History Site</a>
         </p>
     </div>
     <div id="main_content">
@@ -41,15 +44,13 @@
                 <script type="text/javascript">
                     alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile');
                 </script>
-                <object id="src_frame" data="{{ url_for('static', filename=source[12][1]["Transcript"]) }}" width="120%"></object>
+                <object id="src_frame" data="{{ url_for('static', filename=source[12][1]["Transcript"]) }}" width="{{ source[13] }}"></object>
+            {% elif ".pdf" in source[9] %}
+                <object id="src_frame" data="{{ url_for('static', filename=source[9]) }}#view=FitV" width="{{ source[13] }}" height="1000px"></object>
             {% elif source[12] == 1 %}
-                <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[9]) }}" width="120%" height="900%"></object>
+                <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[9]) }}" width="{{ source[13] }}" height="900%"></object>
             {% else %}
-                {% if ".pdf" in source[9] %}
-                    <object id="src_frame" class="scaled pdf" data="{{ url_for('static', filename=source[9]) }}" width="190%" height="100%"></object>
-                {% else %}
-                    <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[9]) }}" width="180%"></object>
-                {% endif %}
+                    <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[9]) }}" width="{{ source[13] }}"></object>
             {% endif %}
         </div>
         <div id="metadata">

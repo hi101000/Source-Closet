@@ -22,7 +22,8 @@
             "Path": "Images/ISCOT-399.jpg",
             "Link": null,
             "Scaled": 1,
-            "Attribution": ["PROTECTED", {"Transcript": "Images/ISCOT-transcript.png"}]
+            "Attribution": ["PROTECTED", {"Transcript": "Images/ISCOT-transcript.png"}],
+            "Width": "120%"
         },
         "2": {
             "Title": "Höfle Telegram",
@@ -46,7 +47,8 @@
             "Path": "Images/Höfle_Telegram.jpg",
             "Link": "https://www.nationalarchives.gov.uk/education/resources/holocaust/hoefle-telegram/",
             "Scaled": 0,
-            "Attribution": " Contains public sector information licensed under the Open Government Licence v3.0."
+            "Attribution": " Contains public sector information licensed under the Open Government Licence v3.0.",
+            "Width": "180%"
         },
         "3": {
             "Title": "Generalplan Ost",
@@ -66,7 +68,8 @@
             "Path": "Images/GeneralPlanOst.pdf",
             "Link": "https://invenio.bundesarchiv.de/invenio/direktlink/4922bf06-9b50-4ef7-ac9b-bcb4b02dc2c8/",
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
         },
         "4": {
             "Title": "Bericht zur innen politischen Lager 001",
@@ -87,7 +90,8 @@
             "Path": "Images/Bericht-zur-innen politischen-Lager 001.pdf",
             "Link": "https://catalog.archives.gov/id/274076099?objectPage=6",
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
         },
         "5": {
             "Title": "Bericht zur innen politischen Lager 002",
@@ -108,7 +112,8 @@
             "Path": "Images/Bericht-zur-innen politischen-Lager 002.pdf",
             "Link": "https://catalog.archives.gov/id/274076099?objectPage=19",
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
         },
         "6": {
             "Title": "Declaration of the causes which impel the state of Texas to secede from the Federal Union : also the ordinance of secession",
@@ -130,7 +135,8 @@
             "Path": "Images/Texas-Secession-Causes-Decl.jpg",
             "Link": "https://www.loc.gov/resource/rbpe.34604300/?sp=1&st=image",
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
         },
         "7": {
             "Title": "Abgrenzung der Siedlungsgebiete im ehemals sowjetischen Raum",
@@ -150,7 +156,8 @@
             "Path": "Images/R_49_2989_0003.jpg",
             "Link": "https://invenio.bundesarchiv.de/invenio/direktlink/a07c8a6e-3dd1-457b-aa70-28fff902eca4/",
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
         },
         "8": {
             "Title": "Planungsgrundlagen für den Aufbau der Ostgebiete.- Bericht der Planungshauptabteilung des RKFV",
@@ -170,7 +177,8 @@
             "Path": "Images/R_49_157.pdf",
             "Link": "https://invenio.bundesarchiv.de/invenio/direktlink/292d39b1-7156-4ebb-a6d5-80ae62fb4ae8/",
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
         },
         "9": {
             "Title": "A Second Jäger Report",
@@ -190,7 +198,8 @@
             "Path": "Images/Jaeger_Report_2.png",
             "Link": null,
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
         },
         "10": {
             "Title": "A Drafted Memorandum from Winston Churchill Regarding the Dresden Bombing",
@@ -210,7 +219,8 @@
             "Path": "Images/Churchill_Dresden_memo_draft.png",
             "Link": null,
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
         },
         "11": {
             "Title": "A Memorandum from Winston Churchill Regarding the Dresden Bombing",
@@ -230,7 +240,29 @@
             "Path": "Images/Churchill_Dresden_memorandum.png",
             "Link": null,
             "Scaled": 0,
-            "Attribution": null
+            "Attribution": null,
+            "Width": "180%"
+        },
+        "12": {
+            "Title": "The War Powers Resolution",
+            "Month": 11,
+            "Date": 7,
+            "Year": 1973,
+            "Author": "United States Congress",
+            "Countries": [
+                "United States of America"
+            ],
+            "Tags": [
+                "Legislation",
+                "U.S. Constitution"
+            ],
+            "Description": "The War Powers Resolution passed by the U.S. Congress",
+            "Source": "Joint Resolution of November 7, 1973, Public Law 93-148, 87 STAT 555, Concerning the War Powers of Congress and the President; 11/7/1973; Enrolled Acts and Resolutions of Congress, 1789 - 2011; General Records of the United States Government, Record Group 11; National Archives Building, Washington, DC. [Online Version, https://www.docsteach.org/documents/document/war-powers-resolution, February 13, 2025]",
+            "Path": "Images/War_Powers_Res.pdf",
+            "Link": "https://www.docsteach.org/documents/document/war-powers-resolution",
+            "Scaled": 0,
+            "Attribution": null,
+            "Width": "330%"
         }
     }
 ]
