@@ -2,6 +2,7 @@ import json
 from flask import Flask, render_template, request
 import random
 from difflib import SequenceMatcher as SM
+import similarity as sim
 
 app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'G@1v55k1b1d1cv5M@x1mv5'
@@ -14,9 +15,9 @@ def index():  # put application's code here
         src = json.load(f)[0]
     ids = src.keys()
     ids = list(ids)
+    random.shuffle(ids)
     for i in range(9):
         sources.append([src[ids[i]], ids[i]])
-    random.shuffle(sources)
     return render_template("index.html", sources=sources)
 
 @app.route('/source/<id>')
@@ -28,9 +29,10 @@ def source(id):
         source.append(src[f"{id}"][key])
     if isinstance(source[12], list):
         prot = True
-        print(source[12][1])
     else:
         prot = False
+    print(source[9])
+
     return render_template("source.html", source=source, id=id, prot=prot)
 
 @app.route('/sources_abbr')
@@ -55,10 +57,16 @@ def search_process():
     sources = []
     tags = []
     countries = []
-    keywds = []
+    keywds = ''
     id = "0"
     start_yr = 0
     end_yr = 0
+    common_words = {"the", "a", "an", "and", "or", "but", "if", "in", "on", "at", "by", "for", "with", "about",
+                    "against", "between", "into", "through", "during", "before", "after", "above", "below", "to",
+                    "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once",
+                    "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most",
+                    "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very",
+                    "s", "t", "can", "will", "just", "don", "should", "now"}
 
     for key, value in data.items():
         if "tag_" in key:
@@ -81,6 +89,7 @@ def search_process():
         src = json.load(f)[0]
 
     results = []
+    keywords = [word for word in keywds.split(' ') if word.lower() not in common_words]
 
     for key, value in src.items():
         match_score = 0
@@ -90,7 +99,9 @@ def search_process():
             match_score += 500
         if keywds:
             text = value["Title"] + " " + value["Description"]
-            match_score += SM(lambda x: x==" ", keywds.lower(), text.lower(), True).ratio() * 30
+            text = [word for word in text.split(' ') if word.lower() not in common_words]
+            match_score += sim.jaccard_distance(set(keywords), set(text))*10-10
+
 
         if tags:
             match_score += len(set(tags).intersection(set(value["Tags"])))

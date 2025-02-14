@@ -46,7 +46,7 @@
                 </script>
                 <object id="src_frame" data="{{ url_for('static', filename=source[12][1]["Transcript"]) }}" width="{{ source[13] }}"></object>
             {% elif ".pdf" in source[9] %}
-                <object id="src_frame" data="{{ url_for('static', filename=source[9]) }}#view=FitV" width="{{ source[13] }}" height="1000px"></object>
+                <object type="application/pdf" id="src_frame" data="{{ url_for('static', filename=source[9]) }}#view=FitV" width="{{ source[13] }}" height="1000px"></object>
             {% elif source[12] == 1 %}
                 <object id="src_frame" class="scaled" data="{{ url_for('static', filename=source[9]) }}" width="{{ source[13] }}" height="900%"></object>
             {% else %}
