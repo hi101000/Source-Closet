@@ -336,7 +336,7 @@
         "Link": ["https://www.loc.gov/resource/mal.0907400/?st=gallery", "https://www.senate.gov/artandhistory/history/resources/pdf/LincolnEmergencySession.pdf"],
         "Scaled": 0,
         "Attribution": "Library of Congress, Manuscript Division, Abraham Lincoln Papers.",
-        "Width": "240%"
+        "Width": "290%"
     },
     "16": {
         "Title": "Presidential Proclamation 80",
@@ -357,6 +357,6 @@
         "Link": ["https://docsteach.org/documents/document/presidential-proclamation-80-by-president-abraham-lincoln-calling-for-75000-troops", "https://catalog.archives.gov/id/4656013"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "290%"
+        "Width": "320%"
     }
 }]

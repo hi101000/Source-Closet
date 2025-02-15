@@ -17,6 +17,7 @@ footer{
     left: 0;
     right: 0;
     background-color: aqua;
+    z-index: 35;
 }
 .src_link{
     text-decoration: none;
@@ -79,20 +80,22 @@ h1{
 .sidebar{
     width: 300px;
     box-sizing: border-box;
-    position: fixed;
+    position:absolute;
     background-color: blueviolet;
     border-radius: 10px;
     padding-left: 40px;
     padding-right: 40px;
-    height: 100%;
+    height: 150%;
+    z-index: 20;
 }
 
 #main{
-    position: fixed;
+
     padding-right: 50px;
     display: flex;
     overflow: auto;
     height: 560px;
+    padding-bottom: 100px;
 }
 
 #main_content{
@@ -108,4 +111,7 @@ h1{
     padding-left: 100px;
     overflow: auto;
 
+}
+body{
+    overflow: auto;
 }
