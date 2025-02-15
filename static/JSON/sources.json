@@ -337,5 +337,26 @@
         "Scaled": 0,
         "Attribution": "Library of Congress, Manuscript Division, Abraham Lincoln Papers.",
         "Width": "240%"
+    },
+    "16": {
+        "Title": "Presidential Proclamation 80",
+        "Month": 4,
+        "Date": 15,
+        "Year": 1861,
+        "Author": "Abraham Lincoln",
+        "Countries": [
+            "United States of America"
+        ],
+        "Tags": [
+            "American Civil War",
+            "Secession Crisis"
+        ],
+        "Description": "The final version of Abraham Lincoln's Presidential Proclamation 80, calling up 75,000 militiamen for 3 month's service and calling Congress into an emergency session",
+        "Source": "Presidential Proclamation 80 by President Abraham Lincoln Calling for 75,000 Troops. 4/15/1861. NARA. General Records of the United States Government, Record Group 11. [Online Version, https://docsteach.org/documents/document/presidential-proclamation-80-by-president-abraham-lincoln-calling-for-75000-troops, February 14, 2025]",
+        "Path": "Images/US_Pres_Proc_80.pdf",
+        "Link": ["https://docsteach.org/documents/document/presidential-proclamation-80-by-president-abraham-lincoln-calling-for-75000-troops", "https://catalog.archives.gov/id/4656013"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "290%"
     }
 }]
