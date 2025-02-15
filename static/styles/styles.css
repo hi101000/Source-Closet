@@ -23,10 +23,7 @@ footer{
     color: peachpuff;
     font-family: Copperplate;
  }
-#metadata{
-    font-family: Copperplate;
-    padding-left: 330px;
-}
+
 #content{
     padding-left: 330px;
     width: 50%;
@@ -102,4 +99,13 @@ h1{
     margin-left: 230px;
     padding-left: 10%;
     padding-right: 50px;
+}
+
+#metadata{
+    font-family: Copperplate;
+    font-size: 15px;
+    margin-left: 330px;
+    padding-left: 100px;
+    overflow: auto;
+
 }

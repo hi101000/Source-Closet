@@ -31,7 +31,6 @@ def source(id):
         prot = True
     else:
         prot = False
-    print(source[9])
 
     return render_template("source.html", source=source, id=id, prot=prot)
 
