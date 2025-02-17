@@ -3,5 +3,6 @@ def jaccard_distance(set1, set2):
     symmetric_difference = set1.symmetric_difference(set2)
     # Unions of two sets
     union = set1.union(set2)
+    #print(len(union), len(symmetric_difference))
 
     return float(len(union))/float(len(symmetric_difference))

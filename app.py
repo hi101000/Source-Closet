@@ -56,10 +56,11 @@ def search_process():
     sources = []
     tags = []
     countries = []
-    keywds = ''
-    id = "0"
+    keywds = []
+    id = 0
     start_yr = 0
     end_yr = 0
+
     common_words = {"the", "a", "an", "and", "or", "but", "if", "in", "on", "at", "by", "for", "with", "about",
                     "against", "between", "into", "through", "during", "before", "after", "above", "below", "to",
                     "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once",
@@ -73,9 +74,9 @@ def search_process():
         elif "country_" in key:
             countries.append(key.split("_")[1])
         elif "keywds_" in key:
-            keywds = value
+            keywds = value.lower().split(" ")
         elif "id_" in key and value != '':
-            id = value
+            id = int(value)
         elif "start_" in key and value != '':
             start_yr = int(value)
         elif "end_" in key and value != '':
@@ -88,40 +89,40 @@ def search_process():
         src = json.load(f)[0]
 
     results = []
-    keywords = [word for word in keywds.split(' ') if word.lower() not in common_words]
 
     for key, value in src.items():
         match_score = 0
-        if id != "0" and id != key:
+
+        if id != 0 and id != int(key):
             continue
-        else:
+        elif id != 0 and id == int(key):
             match_score += 500
-        if keywds:
-            text = value["Title"] + " " + value["Description"]
-            text = [word for word in text.split(' ') if word.lower() not in common_words]
-            match_score += sim.jaccard_distance(set(keywords), set(text))*10-10
 
+        if keywds != []:
+            text = (value["Title"] + " " + value["Description"]).lower().split(' ')
+            dist = sim.jaccard_distance(set(text), set(keywds))*10-10
+            match_score += dist
+            print(dist)
 
-        if tags:
+        if tags != []:
             match_score += len(set(tags).intersection(set(value["Tags"])))
             if len(set(tags).intersection(set(value["Tags"]))) == 0:
-                match_score -= 500
+                continue
 
         if countries:
             match_score += len(set(countries).intersection(set(value["Countries"])))
             if len(set(countries).intersection(set(value["Countries"]))) == 0:
-                match_score -= 500
+                continue
 
-        if start_yr and end_yr and (start_yr <= int(value["Year"]) <= end_yr):
+        if start_yr != 0 and end_yr != 0 and (start_yr <= int(value["Year"]) <= end_yr):
             match_score += 1
-        elif end_yr and start_yr and not (start_yr <= int(value["Year"]) <= end_yr):
-            match_score -= 500
+        elif end_yr != 0 and start_yr != 0 and not (start_yr <= int(value["Year"]) <= end_yr):
+            continue
 
-        if match_score > 1:
+        if match_score > 0.01:
             results.append((match_score, key, value))
 
     results.sort(reverse=True, key=lambda x: x[0])
-
 
     ranked_sources = {key: value for _, key, value in results}
 
