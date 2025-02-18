@@ -358,5 +358,27 @@
         "Scaled": 0,
         "Attribution": null,
         "Width": "320%"
+    },
+    "17": {
+        "Title": "John Brown's Last Words",
+        "Month": 12,
+        "Date": 2,
+        "Year": 1859,
+        "Author": "John Brown",
+        "Countries": [
+            "United States of America"
+        ],
+        "Tags": [
+            "American Civil War",
+            "Secession Crisis",
+	    "Abolitionism"
+        ],
+        "Description": "John Brown's last words, as written by him on a slip of paper",
+        "Source": "Villard, Owen Garrison. \"John Brown, 1800-1859: A Biography fifty Years After.\" 1910. Constable. p. 554",
+        "Path": "Images/John_Brown_Final_Words.jpg",
+        "Link": ["https://archive.org/details/johnbrown00villuoft/page/n612/mode/1up"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "230%"
     }
 }]
