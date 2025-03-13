@@ -380,5 +380,48 @@
         "Scaled": 0,
         "Attribution": null,
         "Width": "230%"
+    },
+    "18": {
+        "Title": "Wannsee Protocol",
+        "Month": 1,
+        "Date": 20,
+        "Year": 1942,
+        "Author": "Adolf Eichmann",
+        "Countries": [
+            "Germany"
+        ],
+        "Tags": [
+            "WW2",
+            "Holocaust"
+        ],
+        "Description": "The minutes for the 1942 Wannsee Conference at which the extermination of European Jewry was officially set as state policy",
+        "Source": "Gedenk- und Bildunsstätte Haus der Wannsee-Konferenz",
+        "Path": "Images/Wannsee_Protokoll_januar_1942.pdf",
+        "Link": ["https://www.ghwk.de/fileadmin/Redaktion/PDF/Konferenz/protokoll-januar1942_barrierefrei.pdf"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "230%"
+    },
+    "19": {
+        "Title": "Himmler's Speech to the SS-Gruppenführer of October 4th, 1943",
+        "Month": 10,
+        "Date": 4,
+        "Year": 1943,
+        "Author": "Heinrich Himmler",
+        "Countries": [
+            "Germany"
+        ],
+        "Tags": [
+            "WW2",
+            "Holocaust",
+            "SS"
+        ],
+        "Description": "A full and original transcript of Himmler's speech from October 4th, 1943",
+        "Source": "Harvard Law School Library Nuremberg Trials Project",
+        "Path": "Images/Speech_of_the_Reichsfuehrer-SS_at_the_meeting_of_the_SS-Major_Generals_(SS-Gruppenfuehrer)_at_Posen_4_October_1943_(German).pdf",
+        "Link": ["https://nuremberg.law.harvard.edu/documents/3791-speeches-concerning-the-ss"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "200%"
     }
 }]
