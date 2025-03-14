@@ -102,7 +102,6 @@ def search_process():
             text = (value["Title"] + " " + value["Description"]).lower().split(' ')
             dist = sim.jaccard_distance(set(text), set(keywds))*10-10
             match_score += dist
-            print(dist)
 
         if tags != []:
             match_score += len(set(tags).intersection(set(value["Tags"])))

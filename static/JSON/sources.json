@@ -448,5 +448,76 @@
         "Scaled": 0,
         "Attribution": null,
         "Width": "230%"
+    },
+    "21": {
+        "Title": "Long Korherr Report",
+        "Month": 3,
+        "Date": 23,
+        "Year": 1943,
+        "Author": "Richard Korherr",
+        "Countries": [
+            "Germany"
+        ],
+        "Tags": [
+            "WW2",
+            "Holocaust",
+            "SS",
+            "Aktion Reinhard"
+        ],
+        "Description": "The long version of Richard Korherr's 1943 report detailing the process of Aktion Reinhard",
+        "Source": "The Holocaust, Selected Documents in Eighteen Volumes, volume 12, p. 224-240 (Document 19)",
+        "Path": "Images/Korherr_long_facsimile.pdf",
+        "Link": ["https://www.ns-archiv.de/verfolgung/korherr/korherr-lang.php"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "230%"
+    },
+    "22": {
+        "Title": "Short Korherr Report",
+        "Month": 4,
+        "Date": 19,
+        "Year": 1943,
+        "Author": "Richard Korherr",
+        "Countries": [
+            "Germany"
+        ],
+        "Tags": [
+            "WW2",
+            "Holocaust",
+            "SS",
+            "Aktion Reinhard"
+        ],
+        "Description": "The short version of Korherr's Aktion Reinhard Report, meant for Adolf Hitler himself to read.",
+        "Source": "The Holocaust, Selected Documents in Eighteen Volumes, volume 12, p. 213-219 (Document 18)",
+        "Path": "Images/Korherr_short_facsimile.pdf",
+        "Link": ["https://www.ns-archiv.de/verfolgung/korherr/korherr-kurz.php"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "230%"
+    },
+    "23": {
+        "Title": "Cover Letter for the Short Korherr Report",
+        "Month": 4,
+        "Date": 19,
+        "Year": 1943,
+        "Author": "Richard Korherr",
+        "Countries": [
+            "Germany"
+        ],
+        "Tags": [
+            "WW2",
+            "Holocaust",
+            "SS",
+            "Aktion Reinhard"
+        ],
+        "Description": "Korherr's cover letter for his short report",
+        "Source": "The Holocaust, Selected Documents in Eighteen Volumes, volume 12, p. 212 (Document 18)",
+        "Path": "Images/Korherr_short_cover.pdf",
+        "Link": [
+            "https://www.ns-archiv.de/verfolgung/korherr/korherr-begleitschreiben.php"
+        ],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "200%"
     }
 }]
