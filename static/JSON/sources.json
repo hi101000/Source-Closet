@@ -392,7 +392,9 @@
         ],
         "Tags": [
             "WW2",
-            "Holocaust"
+            "Holocaust",
+            "SS",
+            "Wannsee Conference"
         ],
         "Description": "The minutes for the 1942 Wannsee Conference at which the extermination of European Jewry was officially set as state policy",
         "Source": "Gedenk- und Bildunsstätte Haus der Wannsee-Konferenz",
@@ -423,5 +425,28 @@
         "Scaled": 0,
         "Attribution": null,
         "Width": "200%"
+    },
+    "20": {
+        "Title": "1942 Letter from Reinhard Heydrich to Martin Luther, which was attached to the minutes of the Wannsee Protocol",
+        "Month": 2,
+        "Date": 26,
+        "Year": 1942,
+        "Author": "Reinhard Heydrich",
+        "Countries": [
+            "Germany"
+        ],
+        "Tags": [
+            "WW2",
+            "Holocaust",
+            "SS",
+            "Wannsee Conference"
+        ],
+        "Description": "A 1942 Letter from Reinhard Heydrich to Martin Luther, which was attached to the minutes of the Wannsee Protocol",
+        "Source": "Gedenk- und Bildunsstätte Haus der Wannsee-Konferenz",
+        "Path": "Images/begleitschreiben-heydrich-1942.pdf",
+        "Link": ["https://web.archive.org/web/20160206182111/http://www.ghwk.de/fileadmin/user_upload/pdf-wannsee/dokumente/begleitschreiben-heydrich-1942.pdf"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "230%"
     }
 }]
