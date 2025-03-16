@@ -52,6 +52,8 @@ def search():
 
 @app.route('/sitemap.txt')
 def sitemap():
+    with open("static/assets/sitemap.txt", "r") as f:
+        smap = f.read()
     return smap
 
 @app.route('/search_process', methods=["POST"])
