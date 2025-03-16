@@ -511,7 +511,7 @@
             "Aktion Reinhard"
         ],
         "Description": "Korherr's cover letter for his short report",
-        "Source": "The Holocaust, Selected Documents in Eighteen Volumes, volume 12, p. 212 (Document 18)",
+        "Source": "Poliakov, Léon & Wulf, Josef. Das Dritte Reich und die Juden: Dokumente und Aufsätze. p. 242",
         "Path": "Images/Korherr_short_cover.pdf",
         "Link": [
             "https://www.ns-archiv.de/verfolgung/korherr/korherr-begleitschreiben.php"
@@ -519,5 +519,28 @@
         "Scaled": 0,
         "Attribution": null,
         "Width": "200%"
+    },
+    "24": {
+        "Title": "Himmler's Instructions to Korherr",
+        "Month": 4,
+        "Day": 10,
+        "Year": 1943,
+        "Author": "Heinrich Himmler",
+        "Countries": [
+            "Germany"
+        ],
+        "Tags": [
+            "WW2",
+            "Holocaust",
+            "SS",
+            "Aktion Reinhard"
+        ],
+        "Description": "A letter from Himmler to Korherr ordering him to remove all references to 'Sonderbehandlung' (i.e. 'special treatment') from his report.",
+        "Source": "Poliakov, Léon & Wulf, Josef. Das Dritte Reich und die Juden: Dokumente und Aufsätze. p. 241",
+        "Path": "Images/Himmler_reply.png",
+        "Link": ["https://www.ns-archiv.de/verfolgung/korherr/anweisung-himmler.php"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "230%"
     }
 }]

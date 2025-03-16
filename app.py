@@ -50,6 +50,10 @@ def search():
         countries = json.loads(f.read())[0]["Countries"]
     return render_template("search.html", tags=tags, countries=countries)
 
+@app.route('/sitemap.txt')
+def sitemap():
+    return smap
+
 @app.route('/search_process', methods=["POST"])
 def search_process():
     data = request.form
