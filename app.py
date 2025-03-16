@@ -1,5 +1,5 @@
 import json
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import random
 from difflib import SequenceMatcher as SM
 import similarity as sim
@@ -51,10 +51,8 @@ def search():
     return render_template("search.html", tags=tags, countries=countries)
 
 @app.route('/sitemap.txt')
-def sitemap():
-    with open("static/assets/sitemap.txt", "r") as f:
-        smap = f.read()
-    return smap
+def static_from_root():
+    return send_from_directory(app.static_folder, 'assets/'+request.path[1:])
 
 @app.route('/search_process', methods=["POST"])
 def search_process():
