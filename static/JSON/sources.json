@@ -22,12 +22,7 @@
         "Path": "Images/ISCOT-399.jpg",
         "Link": null,
         "Scaled": 1,
-        "Attribution": [
-            "PROTECTED",
-            {
-                "Transcript": "Images/ISCOT-transcript.png"
-            }
-        ],
+        "Attribution": null,
         "Width": "120%"
     },
     "2": {
@@ -53,7 +48,7 @@
         "Path": "Images/H\u00f6fle_Telegram.jpg",
         "Link": ["https://www.nationalarchives.gov.uk/education/resources/holocaust/hoefle-telegram/"],
         "Scaled": 0,
-        "Attribution": " Contains public sector information licensed under the Open Government Licence v3.0.",
+        "Attribution": "Contains public sector information licensed under the Open Government Licence v3.0.",
         "Width": "180%"
     },
     "3": {
@@ -542,5 +537,50 @@
         "Scaled": 0,
         "Attribution": null,
         "Width": "230%"
+    },
+    "25": {
+        "Title": "Map of Lithuanian Railroads, circa 1939",
+        "Month": 3,
+        "Day": 17,
+        "Year": 1943,
+        "Author": "Office of Strategic Services",
+        "Countries": [
+            "Lithuania",
+            "United States of America"
+        ],
+        "Tags": [
+            "WW2",
+            "Railroads",
+            "OSS",
+            "OSS Branch of Research and Analysis"
+        ],
+        "Description": "A map showing Lithuania's railroads as they were in 1939, as sorted by gauge",
+        "Source": "United States. Office of Strategic Services. Research and Analysis Branch. \"Railroads of Lithuania, 1939.\" Map. Washington, D.C.?: Reproduction Section, OSS, 1943. Norman B. Leventhal Map & Education Center (accessed March 25, 2025).",
+        "Path": "Images/Lithuania_rail_map.jpg",
+        "Link": ["https://collections.leventhalmap.org/search/commonwealth:0z709688k"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "320%"
+    },
+    "26": {
+        "Title": "Map of Polish Railroads, circa 1939",
+        "Month": null,
+        "Day": null,
+        "Year": 1939,
+        "Author": null,
+        "Countries": [
+            "Poland"
+        ],
+        "Tags": [
+            "WW2",
+            "Railroads"
+        ],
+        "Description": "A map showing Poland's railroads as they were in 1939, as sorted by gauge",
+        "Source": "Mapa Polskich Kolei Państwowych i prywatnych oraz linii samochodowych P. K. P. Bydgoszcz 1939",
+        "Path": "Images/Poland_Rail_map.jpg",
+        "Link": ["https://polona.pl/item-view/d132d7b1-1b2c-4f3f-96c7-5b0ea830c1b6?page=0"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "220%"
     }
 }]
