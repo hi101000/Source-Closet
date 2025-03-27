@@ -584,7 +584,7 @@
         "Width": "220%"
     },
     "27": {
-        "Title": " The Mass Extermination of Jews in German Occupied Poland",
+        "Title": "The Mass Extermination of Jews in German Occupied Poland",
         "Month": 12,
         "Day": 10,
         "Year": 1942,
@@ -603,5 +603,26 @@
         "Scaled": 0,
         "Attribution": null,
         "Width": "220%"
+    },
+    "28":{
+        "Title": "Interim Policy Changes Regarding Charging, Sentencing, And Immigration Enforcement",
+        "Month": 1,
+        "Day": 21,
+        "Year": 2025,
+        "Author": "Emil Bove",
+        "Countries": [
+            "United States of America"
+        ],
+        "Tags": [
+            "2nd Donald Trump Presidency",
+            "U.S. Immigration"
+        ],
+        "Description": "A memorandum to all DoJ employees rescinding multiple prior DoJ policies pertaining to immigration enforcement and reinstating as interim policy a 2017 memo that orders U.S. Attorney's Offices to pursue “the most serious, readily provable offenses.”",
+        "Source": "FOIA Request to Office of Deputy Attorney General of the United States of America (although, unknown to me, the document was already available on document cloud from the day after its promulgation)",
+        "Path": "Images/Memo_Immigration_Enforcement_2025.pdf",
+        "Link": ["https://www.documentcloud.org/documents/25501043-memorandum-from-the-acting-deputy-attorney-general-01/"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "350%"
     }
 }]
