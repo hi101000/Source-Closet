@@ -582,5 +582,26 @@
         "Scaled": 0,
         "Attribution": null,
         "Width": "220%"
+    },
+    "27": {
+        "Title": " The Mass Extermination of Jews in German Occupied Poland",
+        "Month": 12,
+        "Day": 10,
+        "Year": 1942,
+        "Author": "2nd Polish Republic",
+        "Countries": [
+            "Poland"
+        ],
+        "Tags": [
+            "WW2",
+            "Holocaust"
+        ],
+        "Description": "A pamphlet from the Polish Ministry of Foreign Affairs on the Holocaust",
+        "Source": "Polish Ministry of Foreign Affairs (via Internet Archive)",
+        "Path": "Images/ The Mass Extermination of Jews in German Occupied Poland (1942, Polish government-in-exile) - libgen.li.pdf",
+        "Link": ["https://web.archive.org/web/20180202220337/https://www.msz.gov.pl/pl/p/msz_pl/ministerstwo/historia/zbioryon-line/broszura_msz_1942", "https://archive.org/details/TheMassExterminationOfJewsInGermanOccupiedPoland/mode/2up"],
+        "Scaled": 0,
+        "Attribution": null,
+        "Width": "220%"
     }
 }]
