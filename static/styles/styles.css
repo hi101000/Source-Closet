@@ -17,7 +17,7 @@ footer{
     left: 0;
     right: 0;
     background-color: aqua;
-    z-index: 35;
+    z-index: 200;
 }
 .src_link{
     text-decoration: none;
@@ -27,12 +27,21 @@ footer{
 
 #content{
     padding-left: 330px;
-    width: 50%;
-    height: 50%;
+    width: 150%;
+    height: 550%;
     align-items: center;
-    /*overflow: hidden;*/
+    overflow: auto;
+    position: relative;
+    padding-right: 0;
 }
-.scaled{
+
+.scaled {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+    z-index: 100;
+    overflow: auto;
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -108,11 +117,17 @@ h1{
 #metadata{
     font-family: Copperplate;
     font-size: 15px;
-    margin-left: 330px;
-    padding-left: 100px;
+    margin-left: 0px;
+    padding-left: 40px;
     overflow: auto;
 
 }
 body{
     overflow: auto;
+}
+
+#src_frame{
+    position: relative;
+    top: 0;
+    left: 0;
 }

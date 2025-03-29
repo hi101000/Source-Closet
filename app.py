@@ -23,14 +23,13 @@ def index():  # put application's code here
 @app.route('/source/<id>')
 def source(id):
     source = []
+    prot = False
+    if id == "1":
+        prot = True
     with open('static/JSON/sources.json', 'r') as f:
         src = json.load(f)[0]
     for key in src[f"{id}"].keys():
         source.append(src[f"{id}"][key])
-    if isinstance(source[12], list):
-        prot = True
-    else:
-        prot = False
 
     return render_template("source.html", source=source, id=id, prot=prot)
 
@@ -130,6 +129,10 @@ def search_process():
     ranked_sources = {key: value for _, key, value in results}
 
     return render_template("results.html", sources=[ranked_sources])
+
+@app.route('/.well-known/discord')
+def discord():
+    return 'dh=b423c40a76035ddef43e4d16052440ac71a9be4d'
 
 if __name__ == '__main__':
     app.run()
