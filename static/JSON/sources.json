@@ -93,7 +93,7 @@
         "Link": ["https://catalog.archives.gov/id/274076099?objectPage=6"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "180%"
+        "Width": "100%"
     },
     "5": {
         "Title": "Bericht zur innen politischen Lager 002",
@@ -115,7 +115,7 @@
         "Link": ["https://catalog.archives.gov/id/274076099?objectPage=19"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "180%"
+        "Width": "100%"
     },
     "6": {
         "Title": "Declaration of the causes which impel the state of Texas to secede from the Federal Union : also the ordinance of secession",
@@ -135,7 +135,7 @@
         "Description": "Texas' Ordinance of Secession, which effectively severed its ties with the USA from 1861-1865.",
         "Source": "Library of Congress, Printed Ephemera Collection; Portfolio 346, Folder 43.",
         "Path": "Images/Texas-Secession-Causes-Decl.jpg",
-        "Link": ["https://www.loc.gov/resource/rbpe.34604300/?sp=1&st=image"],
+        "Link": ["https://www.loc.gov/resource/rbpe.34604300"],
         "Scaled": 0,
         "Attribution": null,
         "Width": "100%"
@@ -182,7 +182,7 @@
         "Link": ["https://invenio.bundesarchiv.de/invenio/direktlink/292d39b1-7156-4ebb-a6d5-80ae62fb4ae8/"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "180%"
+        "Width": "100%"
     },
     "9": {
         "Title": "A Second J\u00e4ger Report",
@@ -269,7 +269,7 @@
         "Link": ["https://www.docsteach.org/documents/document/war-powers-resolution"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "430%"
+        "Width": "100%"
     },
     "13": {
         "Title": "Final Report: Japanese Evacuation from the West Coast, Chapters 1 and 2",
@@ -290,7 +290,7 @@
         "Link": ["https://catalog.archives.gov/id/296055"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "350%"
+        "Width": "100%"
     },
     "14": {
         "Title": "The Militia Act of 1795",
@@ -310,7 +310,7 @@
         "Link": ["https://www.loc.gov/resource/rbpe.22201300/?sp=2&st=image"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "330%"
+        "Width": "100%"
     },
     "15": {
         "Title": "A Draft of Presidential Proclamation 80",
@@ -331,7 +331,7 @@
         "Link": ["https://www.loc.gov/resource/mal.0907400/?st=gallery", "https://www.senate.gov/artandhistory/history/resources/pdf/LincolnEmergencySession.pdf"],
         "Scaled": 0,
         "Attribution": "Library of Congress, Manuscript Division, Abraham Lincoln Papers.",
-        "Width": "290%"
+        "Width": "100%"
     },
     "16": {
         "Title": "Presidential Proclamation 80",
@@ -352,7 +352,7 @@
         "Link": ["https://docsteach.org/documents/document/presidential-proclamation-80-by-president-abraham-lincoln-calling-for-75000-troops", "https://catalog.archives.gov/id/4656013"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "320%"
+        "Width": "100%"
     },
     "17": {
         "Title": "John Brown's Last Words",
@@ -397,7 +397,7 @@
         "Link": ["https://www.ghwk.de/fileadmin/Redaktion/PDF/Konferenz/protokoll-januar1942_barrierefrei.pdf"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "230%"
+        "Width": "100%"
     },
     "19": {
         "Title": "Himmler's Speech to the SS-Gruppenführer of October 4th, 1943",
@@ -419,7 +419,7 @@
         "Link": ["https://nuremberg.law.harvard.edu/documents/3791-speeches-concerning-the-ss"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "200%"
+        "Width": "100%"
     },
     "20": {
         "Title": "1942 Letter from Reinhard Heydrich to Martin Luther, which was attached to the minutes of the Wannsee Protocol",
@@ -442,7 +442,7 @@
         "Link": ["https://web.archive.org/web/20160206182111/http://www.ghwk.de/fileadmin/user_upload/pdf-wannsee/dokumente/begleitschreiben-heydrich-1942.pdf"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "230%"
+        "Width": "100%"
     },
     "21": {
         "Title": "Long Korherr Report",
@@ -465,7 +465,7 @@
         "Link": ["https://www.ns-archiv.de/verfolgung/korherr/korherr-lang.php"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "230%"
+        "Width": "100%"
     },
     "22": {
         "Title": "Short Korherr Report",
@@ -488,7 +488,7 @@
         "Link": ["https://www.ns-archiv.de/verfolgung/korherr/korherr-kurz.php"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "230%"
+        "Width": "100%"
     },
     "23": {
         "Title": "Cover Letter for the Short Korherr Report",
@@ -513,7 +513,7 @@
         ],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "200%"
+        "Width": "100%"
     },
     "24": {
         "Title": "Himmler's Instructions to Korherr",
@@ -560,7 +560,7 @@
         "Link": ["https://collections.leventhalmap.org/search/commonwealth:0z709688k"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "320%"
+        "Width": "100%"
     },
     "26": {
         "Title": "Map of Polish Railroads, circa 1939",
@@ -602,7 +602,7 @@
         "Link": ["https://web.archive.org/web/20180202220337/https://www.msz.gov.pl/pl/p/msz_pl/ministerstwo/historia/zbioryon-line/broszura_msz_1942", "https://archive.org/details/TheMassExterminationOfJewsInGermanOccupiedPoland/mode/2up"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "220%"
+        "Width": "100%"
     },
     "28":{
         "Title": "Interim Policy Changes Regarding Charging, Sentencing, And Immigration Enforcement",
@@ -623,6 +623,6 @@
         "Link": ["https://www.documentcloud.org/documents/25501043-memorandum-from-the-acting-deputy-attorney-general-01/"],
         "Scaled": 0,
         "Attribution": null,
-        "Width": "350%"
+        "Width": "100%"
     }
 }]
