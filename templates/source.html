@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Source Closet - {{ source[0] }}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
     <script type="text/javascript">
 
@@ -25,19 +28,17 @@
     </div>
 
     <div class="sidebar">
-        <h2 class="src_link" style="text-align: center">Other Helpful Sources</h2>
+        <h2 class="src_link" style="text-align: center">Other Helpful Sources and Further Reading</h2>
         <p class="src_link">
-            <a id="sidebar-a" href="https://holocaustcontroversies.blogspot.com">Holocaust Controversies</a>
-            <br>
-            <br>
-            <a id="sidebar-a" href="https://www.ns-archiv.de">NS-Archiv</a>
-            <br>
-            <br>
-            <a id="sidebar-a" href="https://holocausthistory.site">Holocaust History Site</a>
+            {% for key, value in further.items() %}
+                <a id="sidebar-a" href="{{ value }}">{{ key }}</a>
+                <br>
+                <br>
+            {% endfor %}
         </p>
     </div>
     <div id="main_content">
-    <h1 id="title">{{ source[0] }}</h1>
+    <h1 id="title">{{ source[10] }}</h1>
     </div>
     <div id="main">
         <div id="content" style="height: 1000px">
@@ -45,47 +46,36 @@
                 <script type="text/javascript">
                     alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile');
                 </script>
-                <object draggable="false" id="src_frame" class="scaled" style="zoom: 100%" data="{{ url_for('static', filename=source[9]) }}" width="{{ source[13] }}"></object>
-            {% elif ".pdf" in source[9] and "Images/" in source[9] %}
-                <object type="application/pdf" style="zoom: 100%" id="src_frame" data="{{ url_for('static', filename=source[9]) }}#view=FitV" width="{{ source[13] }}" height="700px"></object>
-            {% elif source[12] == 1 %}
-                <object id="src_frame" style="position: absolute" class="scaled" data="{{ url_for('static', filename=source[9]) }}" width="{{ source[13] }}" height="50000px"></object>
-            {% elif "http" in source[9] %}
+                <object draggable="false" id="src_frame" class="scaled" style="zoom: 100%" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
+            {% elif ".pdf" in source[6] and "Images/" in source[6] %}
+                <object type="application/pdf" style="zoom: 100%" id="src_frame" data="{{ url_for('static', filename=source[6]) }}#view=FitV" width="{{ source[9] }}" height="700px"></object>
+            {% elif "http" in source[6] %}
                 <object id="src_frame" style="zoom: 100%" data="{{ source[9] }}#view=FitV" width="{{ source[13] }}"></object>
             {% else %}
-                    <object draggable="false" id="src_frame" style="image-rendering: -webkit-optimize-contrast;" class="scaled" data="{{ url_for('static', filename=source[9]) }}" width="{{ source[13] }}"></object>
+                    <object draggable="false" id="src_frame" style="image-rendering: -webkit-optimize-contrast;" class="scaled" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
                     <script>console.log('using other')</script>
             {% endif %}
         <script src="{{ url_for('static', filename="scripts/viewer.js") }}" defer></script>
         </div>
         <div id="metadata">
             <p>
-                Author: {{ source[4] }}<br><br>
-                Date: {{ source[1] }}/{{ source[2] }}/{{ source[3] }}<br><br>
-                Country: {{ ', '.join(source[5]) }}<br><br>
-                Topics: {{ ', '.join(source[6]) }}<br><br>
-                Description: {{ source[7] }}<br><br>
+                Author: {{ source[5] }}<br><br>
+                Date: {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
+                Country: {{ ', '.join(source[11]) }}<br><br>
+                Topics: {{ ', '.join(source[12]) }}<br><br>
+                Description: {{ source[1] }}<br><br>
                 Source: {{ source[8] }}<br><br>
-                {% if source[10] != None %}
+                {% if source[7] != None %}
                     Link:
-                    {% for url in source[10] %}
                         <br>
                         <br>
-                         <a href="{{ url }}" target="_blank">{{ url }}</a>
-                    {% endfor %}
+                         <a href="{{ source[7] }}" target="_blank">{{ source[7] }}</a>
                 {% endif %}
                 <br>
                 <br>
-                {% if source[12] != None %}
-                    Attribution Statement: {{ source[12] }}<br><br>
-                {% endif %}
-                Source ID: {{ id }}
+                Source ID: {{ source[0] }}
                 <br><br>
             </p>
-        {% if ".pdf" not in source[9] and "Images/" in source[9] %}
-            <button>+</button>
-            <button>-</button>
-        {% endif %}
         </div>
         <br>
         <br>

@@ -8,7 +8,7 @@
 }
 #title{
     color: saddlebrown;
-    font-family: Copperplate;
+    font-family: "Winky Rough";
     text-align: center;
 }
 footer{
@@ -22,7 +22,7 @@ footer{
 .src_link{
     text-decoration: none;
     color: peachpuff;
-    font-family: Copperplate;
+    font-family: "Winky Rough";
  }
 
 #content{
@@ -65,7 +65,7 @@ h1{
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-    font-family: Copperplate, ui-rounded;
+    font-family: "Winky Rough", ui-rounded;
   font-size: 17px;
 }
 
@@ -115,7 +115,7 @@ h1{
 }
 
 #metadata{
-    font-family: Copperplate;
+    font-family: "Winky Rough";
     font-size: 15px;
     margin-left: 0px;
     padding-left: 40px;

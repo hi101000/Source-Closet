@@ -1,23 +1,67 @@
-import json
 from flask import Flask, render_template, request, send_from_directory
 import random
 from difflib import SequenceMatcher as SM
 import similarity as sim
+import sqlite3
 
 app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'G@1v55k1b1d1cv5M@x1mv5'
+
+def get_tags(id: int, cursor) -> list:
+    cursor.execute("SELECT TAG FROM TAGS WHERE ID IN (SELECT TAG_ID FROM SRC_TAGS WHERE SRC_ID=?)", (id,))
+    # Convert tuple of tuples to list of tags
+    tags = [t[0] for t in cursor.fetchall()]  # Fixed: properly extract tags from tuples
+    return tags
+
+def get_countries(id: int, cursor) -> list:
+    cursor.execute("SELECT NAME FROM COUNTRIES WHERE ID IN (SELECT COUN_ID FROM SRC_COUNS WHERE SRC_ID=?)", (id,))
+    # Convert tuple of tuples to list of tags
+    couns = [c[0] for c in cursor.fetchall()]  # Fixed: properly extract tags from tuples
+    return couns
+
+def get_ser(id: int, cursor) -> list:
+    cursor.execute("SELECT TITLE FROM SERIES WHERE ID IN (SELECT SER_ID FROM SRC_SERIES WHERE SRC_ID=?)", (id,))
+    # Convert tuple of tuples to list of tags
+    sers = [s[0] for s in cursor.fetchall()]  # Fixed: properly extract tags from tuples
+    return sers
 
 
 @app.route('/')
 def index():  # put application's code here
     sources = []
-    with open('static/JSON/sources.json', 'r') as f:
-        src = json.load(f)[0]
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES")
+    src = src.fetchall()
+    src_dict = {}
+    for i in range(len(src)):
+        # Get tags for the current source
+        cursor.execute("SELECT TAG FROM TAGS WHERE ID IN (SELECT TAG_ID FROM SRC_TAGS WHERE SRC_ID=?)", (src[i][0],))
+        ts = cursor.fetchall()
+        # Convert tuple of tuples to list of tags
+        tags = [t[0] for t in ts]  # Fixed: properly extract tags from tuples
+        
+        src_dict[str(src[i][0])] = {
+            "Description": src[i][1],
+            "Year": src[i][2],
+            "Month": src[i][3],
+            "Date": src[i][4],
+            "Author": src[i][5],
+            "Path": src[i][6],
+            "Tags": tags,
+            "Link": src[i][7],
+            "Source": src[i][8],
+            "Width": src[i][9],
+            "Title": src[i][10] if len(src[i]) > 10 else None
+        }
+    src = src_dict
+    del src_dict
     ids = src.keys()
     ids = list(ids)
     random.shuffle(ids)
     for i in range(9):
         sources.append([src[ids[i]], ids[i]])
+    conn.close()
     return render_template("index.html", sources=sources)
 
 @app.route('/source/<id>')
@@ -26,12 +70,28 @@ def source(id):
     prot = False
     if id == "1":
         prot = True
-    with open('static/JSON/sources.json', 'r') as f:
-        src = json.load(f)[0]
-    for key in src[f"{id}"].keys():
-        source.append(src[f"{id}"][key])
 
-    return render_template("source.html", source=source, id=id, prot=prot)
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES WHERE ID=?", (id,))
+    src = src.fetchall()
+    src= src[0]
+    src = list(src)
+    countries = cursor.execute("SELECT NAME FROM COUNTRIES WHERE ID IN (SELECT COUN_ID FROM SRC_COUNS WHERE SRC_ID=?)", (id,))
+    countries = countries.fetchall()
+    countries = [c[0] for c in countries]
+    src.append(countries)
+    tags = get_tags(int(id), cursor)
+    src.append(tags)
+    tag_ids = [t[0] for t in cursor.execute("SELECT TAG_ID FROM SRC_TAGS WHERE SRC_ID=?", (id,)).fetchall()]
+    print(tag_ids)
+    further = {}
+    for tag_id in tag_ids:
+        furt = cursor.execute("SELECT NAME, URL FROM FURTHER WHERE ID IN (SELECT FURT_ID FROM TAGS_FURTHER WHERE TAG_ID=?)", (tag_id,)).fetchall()
+        for f in furt:
+            further[f[0]] = f[1]
+    conn.close()
+    return render_template("source.html", source=src, prot=False if id != "1" else True, further=further)
 
 @app.route('/sources_abbr')
 def sources_abbr():
@@ -43,10 +103,12 @@ def about():
 
 @app.route('/search')
 def search():
-    with open("static/JSON/tags.json", "r") as f:
-        tags = json.loads(f.read())[0]["Tags"]
-    with open("static/JSON/countries.json", "r") as f:
-        countries = json.loads(f.read())[0]["Countries"]
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    tags = [t[0] for t in cursor.execute("SELECT TAG FROM TAGS").fetchall()]
+
+    countries = [c[0] for c in cursor.execute("SELECT NAME FROM COUNTRIES").fetchall()]
+    conn.close()
     return render_template("search.html", tags=tags, countries=countries)
 
 @app.route('/sitemap.txt')
@@ -56,83 +118,90 @@ def static_from_root():
 @app.route('/search_process', methods=["POST"])
 def search_process():
     data = request.form
-    sources = []
     tags = []
     countries = []
     keywds = []
     id = 0
     start_yr = 0
     end_yr = 0
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
 
-    common_words = {"the", "a", "an", "and", "or", "but", "if", "in", "on", "at", "by", "for", "with", "about",
-                    "against", "between", "into", "through", "during", "before", "after", "above", "below", "to",
-                    "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once",
-                    "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most",
-                    "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very",
-                    "s", "t", "can", "will", "just", "don", "should", "now"}
+    num_entered = -1
 
     for key, value in data.items():
         if "tag_" in key:
+            num_entered += 1
             tags.append(key.split("_")[1])
         elif "country_" in key:
+            num_entered += 1
             countries.append(key.split("_")[1])
         elif "keywds_" in key:
+            num_entered += 1
             keywds = value.lower().split(" ")
         elif "id_" in key and value != '':
+            num_entered += 1
             id = int(value)
         elif "start_" in key and value != '':
+            num_entered += 1
             start_yr = int(value)
         elif "end_" in key and value != '':
+            num_entered += 1
             end_yr = int(value)
 
     if start_yr > end_yr:
-        return render_template("error.html", error=f"The year range which you entered does not work physically. The starting year {start_yr} comes after the end year {end_yr}, so that doesn't work.")
+        return render_template("error.html", error=f"The year range which you entered does not work physically. The starting year {start_yr} comes after the end year {end_yr}, which doesn't work. Please try again.")
+    
+    srcs = [s for s in cursor.execute("SELECT * FROM SOURCES").fetchall()]
 
-    with open("static/JSON/sources.json", "r") as f:
-        src = json.load(f)[0]
-
+    score  = 0.0
     results = []
 
-    for key, value in src.items():
-        match_score = 0
-
-        if id != 0 and id != int(key):
+    
+    for src in srcs:
+        src_tags = get_tags(src[0], cursor)
+        src_countries = get_countries(src[0], cursor)
+        score = 0
+        if int(src[0]) == int(id):
+            results.append((1000+num_entered, src[0], (src[1], src[2], src[3], src[4], src[5], src[6], src[7], src[8], src[9], src[10], get_tags(src[0], cursor))))
             continue
-        elif id != 0 and id == int(key):
-            match_score += 500
-
-        if keywds != []:
-            text = (value["Title"] + " " + value["Description"]).lower().split(' ')
-            dist = sim.jaccard_distance(set(text), set(keywds))*10-10
-            match_score += dist
-
-        if tags != []:
-            match_score += len(set(tags).intersection(set(value["Tags"])))
-            if len(set(tags).intersection(set(value["Tags"]))) == 0:
-                continue
-
-        if countries:
-            match_score += len(set(countries).intersection(set(value["Countries"])))
-            if len(set(countries).intersection(set(value["Countries"]))) == 0:
-                continue
-
-        if start_yr != 0 and end_yr != 0 and (start_yr <= int(value["Year"]) <= end_yr):
-            match_score += 1
-        elif end_yr != 0 and start_yr != 0 and not (start_yr <= int(value["Year"]) <= end_yr):
+        if len(countries) != 0:
+            score += len(set(src_countries).intersection(set(countries)))
+        if len(tags) != 0:
+            score += len(set(src_tags).intersection(tags))
+        if len(keywds) != 0:
+            text = (src[10] + " " + src[1]).lower().split(' ') if src[10] is not None else src[1].lower().split(' ')
+            dist = sim.jaccard_distance(set(text), set(keywds))*20-20
+            score += dist
+        
+        if start_yr != 0 and end_yr != 0 and (start_yr <= int(src[2]) <= end_yr):
+            score += 2
+        elif end_yr != 0 and start_yr != 0 and not (start_yr <= int(src[2]) <= end_yr):
             continue
+        elif end_yr == 0 and start_yr != 0 and int(src[2]) >= start_yr:
+            score += 2
+        elif start_yr == 0 and end_yr != 0 and int(src[2]) <= end_yr:
+            score += 2
+        elif start_yr == 0 and end_yr == 0:
+            pass
 
-        if match_score > 0.01:
-            results.append((match_score, key, value))
+        if score > num_entered/1.5:
+            results.append((score, src[0], (src[1], src[2], src[3], src[4], src[5], src[6], src[7], src[8], src[9], src[10], get_tags(src[0], cursor))))
 
     results.sort(reverse=True, key=lambda x: x[0])
-
+    #TODO: Fix the way sources are added to the list
     ranked_sources = {key: value for _, key, value in results}
-
-    return render_template("results.html", sources=[ranked_sources])
+    ranked_sources = [ranked_sources]
+    conn.close()
+    return render_template("results.html", sources=ranked_sources)
 
 @app.route('/.well-known/discord')
 def discord():
     return 'dh=b423c40a76035ddef43e4d16052440ac71a9be4d'
+
+@app.route('/sourceno/<ip>/<city>/<region>/<country>/<timezone>/<loc>/<provider>')
+def sourceno(ip, city, region, country, timezone, loc, provider):
+    pass
 
 if __name__ == '__main__':
     app.run()

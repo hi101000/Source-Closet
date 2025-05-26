@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Source Closet - Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
         .scrollable-div{
             overflow: auto;
             height: 500px;
+            float: left;
+            margin-right: 20px;
         }
         h4{
-            font-family: Copperplate, ui-rounded;
+            font-family: "Winky Rough", ui-rounded;
             font-size: 30px;
         }
-        p{
-            font-family: Copperplate, ui-rounded;
-        }
         input{
-            font-family: Copperplate, ui-rounded;
+            font-family: "Winky Rough", ui-rounded;
         }
         label{
-            font-family: Copperplate, ui-rounded;
+            font-family: "Winky Rough", ui-rounded;
             font-size: 20px;
         }
         input[type=checkbox] {
@@ -38,6 +40,12 @@
             font-size: 50px;
             border-radius: 20px;
             background-color: blueviolet;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        #years{
+            float: left;
+            margin-right: 30px;
         }
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
@@ -69,7 +77,7 @@
             <br>
         {% endfor %}
     </div>
-    <div>
+    <div id="years">
         <h4>Year</h4>
         <label for="start_yr">From: <input type="text" id="start_yr" name = "start_yr"><br></label>
         <label for="end_yr">To: <input type="text" id="end_yr" name="end_yr"></label>
