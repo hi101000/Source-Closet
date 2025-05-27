@@ -2,3 +2,7 @@ todo.txt
 .venv
 .DS_Store
 .idea
+__pychache__
+*.pyc
+*.pyo
+*.pyd
