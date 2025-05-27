@@ -32,6 +32,7 @@
 
         label {
             display: block;
+            font-size: 25px;
         }
         #main_search_content{
             padding-left: 50px;
@@ -46,6 +47,13 @@
         #years{
             float: left;
             margin-right: 30px;
+        }
+        #id, #Keywds, #start_yr, #end_yr {
+            font-family: "Winky Rough", ui-rounded;
+            font-size: 15px;
+            width: 200px;
+            border-radius: 10px;
+            padding: 5px;
         }
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
@@ -62,6 +70,7 @@
 <div id="main_search_content">
 <form action="{{ url_for('search_process') }}" method="post">
     <label for="Keywds">Keywords: <input type="search" id="Keywds" name="keywds_"></label>
+    <br>
     <label for="id">Source ID: <input type="text" id="id" name="id_"></label>
     <div class="scrollable-div">
         <h4>Topics:</h4>
@@ -80,6 +89,7 @@
     <div id="years">
         <h4>Year</h4>
         <label for="start_yr">From: <input type="text" id="start_yr" name = "start_yr"><br></label>
+        <br>
         <label for="end_yr">To: <input type="text" id="end_yr" name="end_yr"></label>
     </div>
     <br>
