@@ -6,3 +6,6 @@ __pychache__
 *.pyc
 *.pyo
 *.pyd
+Scraper.py
+*/.DS_Store
+*/*/.DS_Store
