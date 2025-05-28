@@ -50,14 +50,16 @@
             {% elif ".pdf" in source[6] and "Images/" in source[6] %}
                 <object type="application/pdf" style="zoom: 100%" id="src_frame" data="{{ url_for('static', filename=source[6]) }}#view=FitV" width="{{ source[9] }}" height="700px"></object>
             {% elif "http" in source[6] %}
-                <object id="src_frame" style="zoom: 100%" data="{{ source[9] }}#view=FitV" width="{{ source[13] }}"></object>
+                <object id="src_frame" style="zoom: 100%" data="{{ source[9] }}#view=FitV" width="{{ source[9] }}"></object>
+            {% elif ".svg" in source[6] %}
+                <object draggable="false" class="scaled svg-content" data="{{ url_for('static', filename=source[6]) }}" type="image/svg+xml" width="{{ source[9] }}"></object>
             {% else %}
                     <object draggable="false" id="src_frame" style="image-rendering: -webkit-optimize-contrast;" class="scaled" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
                     <script>console.log('using other')</script>
             {% endif %}
         <script src="{{ url_for('static', filename="scripts/viewer.js") }}" defer></script>
         </div>
-        <div id="metadata">
+        <div id="metadata" style="overflow: auto; width: 100%;">
             <p>
                 Author: {{ source[5] }}<br><br>
                 Date: {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
