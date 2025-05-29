@@ -1,91 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Source Closet - {{ source[0] }}</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <script type="text/javascript">
+    <head>
+        <meta charset="UTF-8">
+        <title>Source Closet - {{ source[0] }}</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+        <script type="text/javascript">
 
-    </script>
-    <style>
-        #my-pdf { height: 500px; border: 1px solid #ccc; }
-        #sidebar-a{
-            color: peachpuff;
-        }
-    </style>
-    <script src="https://unpkg.com/pdfobject"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
-<body id="source_page">
-    <div class="topnav">
-      <a href="{{url_for('index')}}">Home</a>
-      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-      <a href="{{ url_for('search') }}">Search</a>
-      <a href="{{ url_for('about') }}">About</a>
-    </div>
-
-    <div class="sidebar">
-        <h2 class="src_link" style="text-align: center">Other Helpful Sources and Further Reading</h2>
-        <p class="src_link">
-            {% for key, value in further.items() %}
-                <a id="sidebar-a" href="{{ value }}">{{ key }}</a>
-                <br>
-                <br>
-            {% endfor %}
-        </p>
-    </div>
-    <div id="main_content">
-    <h1 id="title">{{ source[10] }}</h1>
-    </div>
-    <div id="main">
-        <div id="content" style="height: 1000px">
-            {% if prot %}
-                <script type="text/javascript">
-                    alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile');
-                </script>
-                <object draggable="false" id="src_frame" class="scaled" style="zoom: 100%" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
-            {% elif ".pdf" in source[6] and "Images/" in source[6] %}
-                <object type="application/pdf" style="zoom: 100%" id="src_frame" data="{{ url_for('static', filename=source[6]) }}#view=FitV" width="{{ source[9] }}" height="700px"></object>
-            {% elif "http" in source[6] %}
-                <object id="src_frame" style="zoom: 100%" data="{{ source[9] }}#view=FitV" width="{{ source[9] }}"></object>
-            {% else %}
-                    <object draggable="false" id="src_frame" style="image-rendering: -webkit-optimize-contrast;" class="scaled" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
-                    <script>console.log('using other')</script>
-            {% endif %}
-        <script src="{{ url_for('static', filename="scripts/viewer.js") }}" defer></script>
+        </script>
+        <style>
+            #my-pdf { height: 500px; border: 1px solid #ccc; }
+            #sidebar-a{
+                color: peachpuff;
+            }
+        </style>
+        <script src="https://unpkg.com/pdfobject"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+    <body id="source_page">
+        <div class="topnav">
+        <a href="{{url_for('index')}}">Home</a>
+        <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+        <a href="{{ url_for('search') }}">Search</a>
+        <a href="{{ url_for('about') }}">About</a>
         </div>
-        <div id="metadata" style="overflow: auto; width: 100%;">
-            <p>
-                Author: {{ source[5] }}<br><br>
-                Date: {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
-                Countries: {{ ', '.join(source[11]) }}<br><br>
-                Topics: {{ ', '.join(source[12]) }}<br><br>
-                Description: {{ source[1] }}<br><br>
-                Source: {{ source[8] }}<br><br>
-                {% if source[7] != None %}
-                    Link:
-                        <br>
-                        <br>
-                         <a href="{{ source[7] }}" target="_blank">{{ source[7] }}</a>
-                {% endif %}
-                <br>
-                <br>
-                Source ID: {{ source[0] }}
-                <br><br>
+
+        <div class="sidebar">
+            <h2 class="src_link" style="text-align: center">Other Helpful Sources and Further Reading</h2>
+            <p class="src_link">
+                {% for key, value in further.items() %}
+                    <a id="sidebar-a" href="{{ value }}">{{ key }}</a>
+                    <br>
+                    <br>
+                {% endfor %}
             </p>
         </div>
-        <br>
-        <br>
-        <br>
+        <div id="main_content">
+        <h1 id="title">{{ source[10] }}</h1>
         </div>
-    </div>
-<footer>
-    <br>
-    Copyright IARF, Pikleman 2025
-    <br>
-</footer>
-</body>
+        <div id="main">
+            <div id="content" style="height: 1000px">
+                {% if prot %}
+                    <script type="text/javascript">
+                        alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile');
+                    </script>
+                    <object draggable="false" id="src_frame" class="scaled" style="zoom: 100%" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
+                {% elif ".pdf" in source[6] and "Images/" in source[6] %}
+                    <object type="application/pdf" style="zoom: 100%" id="src_frame" data="{{ url_for('static', filename=source[6]) }}#view=FitV" width="{{ source[9] }}" height="700px"></object>
+                {% elif "http" in source[6] %}
+                    <object id="src_frame" style="zoom: 100%" data="{{ source[9] }}#view=FitV" width="{{ source[9] }}"></object>
+                {% else %}
+                        <object draggable="false" id="src_frame" style="image-rendering: -webkit-optimize-contrast;" class="scaled" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
+                        <script>console.log('using other')</script>
+                {% endif %}
+            <script src="{{ url_for('static', filename="scripts/viewer.js") }}" defer></script>
+            </div>
+            <div id="metadata" style="overflow: auto; width: 100%;">
+                <p>
+                    Author: {{ source[5] }}<br><br>
+                    Date: {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
+                    Countries: {{ ', '.join(source[11]) }}<br><br>
+                    Topics: {{ ', '.join(source[12]) }}<br><br>
+                    Description: {{ source[1] }}<br><br>
+                    Source: {{ source[8] }}<br><br>
+                    {% if source[7] != None %}
+                        Link:
+                            <br>
+                            <br>
+                            <a href="{{ source[7] }}" target="_blank">{{ source[7] }}</a>
+                    {% endif %}
+                    <br>
+                    <br>
+                    Source ID: {{ source[0] }}
+                    <br><br>
+                </p>
+            </div>
+            <br>
+            <br>
+            <br>
+            </div>
+        </div>
+    <footer>
+        <br>
+        Copyright IARF, Pikleman 2025
+        <br>
+    </footer>
+    </body>
 </html>

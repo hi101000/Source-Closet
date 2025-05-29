@@ -203,5 +203,9 @@ def discord():
 def sourceno(ip, city, region, country, timezone, loc, provider):
     pass
 
+@app.route('/sitemap.txt')
+def sitemap():
+    return send_from_directory(app.static_folder, 'assets/sitemap.txt')
+
 if __name__ == '__main__':
     app.run()
