@@ -207,7 +207,7 @@ def sourceno(ip, city, region, country, timezone, loc, provider):
 def sitemap():
     return send_from_directory(app.static_folder, 'assets/sitemap.txt')
 
-@pp.route('/robots.txt')
+@app.route('/robots.txt')
 def robots():
     return send_from_directory(app.static_folder, 'assets/robots.txt')
 
