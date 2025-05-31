@@ -165,6 +165,9 @@ def search_process():
         if int(src[0]) == int(id):
             results.append((1000+num_entered, src[0], (src[1], src[2], src[3], src[4], src[5], src[6], src[7], src[8], src[9], src[10], get_tags(src[0], cursor))))
             continue
+        elif id != 0 and int(src[0]) != int(id):
+            score -= 1000
+            continue
         if len(countries) != 0:
             score += len(set(src_countries).intersection(set(countries)))
         if len(tags) != 0:
