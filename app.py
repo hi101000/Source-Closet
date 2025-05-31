@@ -213,7 +213,7 @@ def sitemap():
 def robots():
     with open('assets/robots.txt', 'r') as f:
         robots_content = f.read()
-    return robots_content
+    return robots_content, 200, {'Content-Type': 'text/plain'}
 
 if __name__ == '__main__':
     app.run()
