@@ -205,11 +205,15 @@ def sourceno(ip, city, region, country, timezone, loc, provider):
 
 @app.route('/sitemap.txt')
 def sitemap():
-    return send_from_directory(app.static_folder, 'assets/sitemap.txt')
+    with open('assets/sitemap.txt', 'r') as f:
+        sitemap_content = f.read()
+    return sitemap_content
 
 @app.route('/robots.txt')
 def robots():
-    return send_from_directory(app.static_folder, 'assets/robots.txt')
+    with open('assets/robots.txt', 'r') as f:
+        robots_content = f.read()
+    return robots_content
 
 if __name__ == '__main__':
     app.run()
