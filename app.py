@@ -74,8 +74,7 @@ def source(id):
     conn = sqlite3.connect("sources.db")
     cursor = conn.cursor()
     src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES WHERE ID=?", (id,))
-    src = src.fetchall()
-    src= src[0]
+    src = src.fetchall()[0]
     src = list(src)
     countries = cursor.execute("SELECT NAME FROM COUNTRIES WHERE ID IN (SELECT COUN_ID FROM SRC_COUNS WHERE SRC_ID=?)", (id,))
     countries = countries.fetchall()
