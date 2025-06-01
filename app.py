@@ -134,7 +134,7 @@ def search_process():
             countries.append(key.split("_")[1])
         elif "keywds_" in key:
             num_entered += 1
-            keywds = value.lower().replace("-", " ").split(" ")
+            keywds = value.lower().replace("-", " ").replace("\'", " ").split(" ")
         elif "id_" in key and value != '':
             num_entered += 1
             id = int(value)
@@ -169,7 +169,7 @@ def search_process():
         if len(tags) != 0:
             score += len(set(src_tags).intersection(tags))
         if len(keywds) != 0:
-            text = (src[10] + " " + src[1]).lower().replace("-", " ").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
+            text = (src[10] + " " + src[1]).lower().replace("-", " ").replace("\'", " ").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
             dist = sim.jaccard_distance(set(text), set(keywds))*20-20
             score += dist
         
