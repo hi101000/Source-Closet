@@ -20,6 +20,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body id="source_page">
+            <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+            <script>
+                const { animate, scroll } = Motion
+            </script>
         <div class="topnav">
         <a href="{{url_for('index')}}">Home</a>
         <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
@@ -82,6 +86,14 @@
             <br>
             </div>
         </div>
+        <script>
+    animate("#src_frame", {
+        scale: [0.2, 1,0.98,1],
+        opacity: [0, 1],
+        duration: 3.0,
+        delay: 0.9
+    });
+</script>
     <footer>
         <br>
         Copyright IARF, Pikleman 2025
