@@ -11,7 +11,7 @@
 <body>
     <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
     <script>
-        const { animate, scroll } = Motion
+        const { animate, scroll, inView } = Motion
     </script>
 <div class="topnav">
       <a href="{{url_for('index')}}">Home</a>
@@ -32,12 +32,14 @@
         </a>
         <p>{{ src }}</p>
         <script>
-            animate(".source", {
+            inView(".source",(element)=>{animate(element, {
                 scale: [0.2, 1,0.98,1],
                 opacity: [0, 1],
                 duration: 3.0,
+                type: "spring",
+                stiffness: 100,
                 delay: 0.9
-            });
+            });});
         </script>
         <br>
     {% endfor %}
