@@ -170,9 +170,9 @@ def search_process():
             score += len(set(src_tags).intersection(tags))
         if len(keywds) != 0:
             if src[5] is not None:
-                text = (src[10] + " " + src[1] + " " + src[5]).lower().replace("-", " ").replace("\'", " ").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
+                text = (src[10] + " " + src[1] + " " + src[5]).lower().replace("-", " ").replace("\'", " ").replace("\"","").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
             else:
-                text = (src[10] + " " + src[1]).lower().replace("-", " ").replace("\'", " ").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
+                text = (src[10] + " " + src[1]).lower().replace("-", " ").replace("\'", " ").replace("\"","").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
             dist = sim.jaccard_distance(set(text), set(keywds))*20-20
             score += dist
         
