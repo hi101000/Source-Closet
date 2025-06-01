@@ -13,6 +13,14 @@
             float: left;
             margin-right: 20px;
             padding-left: 40px;
+            border-width: 3px;
+            border-style: solid;
+            border-color: blueviolet;
+            border-radius: 20px;
+            padding: auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-right: 20px;
         }
         h4{
             font-family: "Winky Rough", ui-rounded;
@@ -42,6 +50,11 @@
         #years{
             float: left;
             margin-right: 30px;
+            border-width: 3px;
+            border-style: solid;
+            border-color: blueviolet;
+            border-radius: 20px;
+            padding: 20px;
         }
         #id, #Keywds, #start_yr, #end_yr {
             font-family: "Winky Rough", ui-rounded;
@@ -78,6 +91,7 @@
     <label for="Keywds">Keywords: <input type="search" id="Keywds" name="keywds_"></label>
     <br>
     <label for="id">Source ID: <input type="text" id="id" name="id_"></label>
+    <br>
     <div class="scrollable-div">
         <h4>Topics:</h4>
         {% for tag in tags %}
@@ -98,9 +112,10 @@
         <br>
         <label for="end_yr">To: <input type="text" id="end_yr" name="end_yr"></label>
     </div>
+    <div>
     <br>
-    <br>
-    <input type="submit" value="Submit" id="submit">
+    <input type="submit" value="Submit" id="submit" style="margin-top: 40px; margin-left: 40px;">
+    </div>
 </form>
 </div>
 </body>

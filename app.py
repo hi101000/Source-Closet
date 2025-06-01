@@ -164,9 +164,19 @@ def search_process():
             score -= 1000
             continue
         if len(countries) != 0:
+            intersec = len(set(src_countries).intersection(countries))
+            if intersec == 0:
+                score -= 5
+                continue
             score += len(set(src_countries).intersection(set(countries)))
         if len(tags) != 0:
-            score += len(set(src_tags).intersection(tags))
+            intersec = len(set(src_tags).intersection(tags))
+            if intersec == 0:
+                score -= 5
+                continue
+            elif intersec > 0:
+                score += intersec * 10
+            score += intersec
         if len(keywds) != 0:
             if src[5] is not None:
                 text = (src[10] + " " + src[1] + " " + src[5]).lower().replace("-", " ").replace("\'", " ").replace("\"","").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
