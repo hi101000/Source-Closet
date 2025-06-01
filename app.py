@@ -111,10 +111,6 @@ def search():
     conn.close()
     return render_template("search.html", tags=tags, countries=countries)
 
-@app.route('/sitemap.txt')
-def static_from_root():
-    return send_from_directory(app.static_folder, 'assets/'+request.path[1:])
-
 @app.route('/search_process', methods=["POST"])
 def search_process():
     data = request.form
@@ -210,7 +206,7 @@ def sourceno(ip, city, region, country, timezone, loc, provider):
 def sitemap():
     with open('assets/sitemap.txt', 'r') as f:
         sitemap_content = f.read()
-    return sitemap_content
+    return sitemap_content, 200, {'Content-Type': 'text/plain'}
 
 @app.route('/robots.txt')
 def robots():
