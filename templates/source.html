@@ -48,7 +48,7 @@
             <div id="content" style="height: 1000px">
                 {% if prot %}
                     <script type="text/javascript">
-                        alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile');
+                        alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile. If you live in the United Kingdom, please contact your MP to ask them to amend the copyright law to make all public records in TNA part of the public domain, or at least freely usable for non-commercial purposes.');
                     </script>
                     <object draggable="false" id="src_frame" class="scaled" style="zoom: 100%" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
                 {% elif ".pdf" in source[6] and "Images/" in source[6] %}
@@ -65,8 +65,8 @@
                 <p>
                     Author: {{ source[5] }}<br><br>
                     Date: {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
-                    Countries: {{ ', '.join(source[12]) }}<br><br>
-                    Topics: {{ ', '.join(source[13]) }}<br><br>
+                    Countries: {{ ', '.join(source[14]) }}<br><br>
+                    Topics: {{ ', '.join(source[15]) }}<br><br>
                     Description: {{ source[1] }}<br><br>
                     Source: {{ source[8] }}<br><br>
                     {% if source[7] != None %}
@@ -81,6 +81,11 @@
                     <br><br>
                     {% if source[11] != None %}
                         English Translation: <a href="{{ source[11] }}">{{ source[11] }}</a>
+                    {% endif %}
+                    {% if source[12] != None %}
+                        <br><br>
+                        Attribution: {{ source[12] }}<br><br>
+                        License: <a href="{{ source[13] }}">{{ source[13] }}</a>
                     {% endif %}
                 </p>
             </div>
