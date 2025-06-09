@@ -7,18 +7,40 @@ let yAxis;
 let y;
 
 let zoom = 1;
+
+function disableScroll() {
+  // Get the current page scroll position
+  scrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop;
+  scrollLeft =
+      window.pageXOffset ||
+      document.documentElement.scrollLeft;
+      // if any scroll is attempted,
+      // set this to the previous value
+      window.onscroll = function () {
+        window.scrollTo(scrollLeft, scrollTop);
+      };
+}
+
+function enableScroll() {
+    window.onscroll = function () { };
+}
+      
 if(img){
     //img.style.height = container.style.height
     container.addEventListener('mouseenter', e => {
       // Code to execute when the mouse enters the element
       window.onscroll = function () {
             window.scrollTo(0,window.scrollY);
+            disableScroll();
         };
     });
     container.addEventListener('mouseleave', e=>{
         window.onscroll = function () { };
         zoom = 1;
         img.style.transform = `scale(${zoom})`;
+        enableScroll();
     })
     container.addEventListener('wheel', e =>{
         img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;

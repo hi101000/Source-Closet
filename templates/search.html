@@ -5,7 +5,7 @@
     <title>Source Closet - Search</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
         .scrollable-div{
             overflow: auto;
@@ -23,14 +23,14 @@
             padding-right: 20px;
         }
         h4{
-            font-family: "Winky Rough", ui-rounded;
+            font-family: "Winky Sans", ui-rounded;
             font-size: 30px;
         }
         input{
-            font-family: "Winky Rough", ui-rounded;
+            font-family: "Winky Sans", ui-rounded;
         }
         label{
-            font-family: "Winky Rough", ui-rounded;
+            font-family: "Winky Sans", ui-rounded;
             font-size: 20px;
         }
         label {
@@ -57,7 +57,7 @@
             padding: 20px;
         }
         #id, #Keywds, #start_yr, #end_yr {
-            font-family: "Winky Rough", ui-rounded;
+            font-family: "Winky Sans", ui-rounded;
             font-size: 15px;
             width: 200px;
             border-radius: 10px;
@@ -77,7 +77,7 @@
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
-<body>
+<body style="font: 'Winky Sans', ui-rounded, sans-serif; color: rgb(190, 147, 112);">
 <div class="topnav">
       <a href="{{url_for('index')}}">Home</a>
       <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
@@ -95,14 +95,14 @@
     <div class="scrollable-div">
         <h4>Topics:</h4>
         {% for tag in tags %}
-            <label for="tag"><input type="checkbox" id="tag" name="tag_{{ tag }}"> {{ tag }}</label>
+            <label><input type="checkbox" id="tag" name="tag_{{ tag }}"> {{ tag }}</label>
             <br>
         {% endfor %}
     </div>
     <div class="scrollable-div">
         <h4>Countries:</h4>
         {% for country in countries %}
-            <label for={{ country }}><input type="checkbox" id={{ country }} name="country_{{ country }}"> {{ country }}</label>
+            <label><input type="checkbox" id={{ country }} name="country_{{ country }}"> {{ country }}</label>
             <br>
         {% endfor %}
     </div>

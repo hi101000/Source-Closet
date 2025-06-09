@@ -8,8 +8,15 @@
     <meta name="google-site-verification" content="FyuSCl7BsO80rtLPSAib-nEb1hCIjHcgwGOc1pZJ1Y4" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <meta name="description" content="Search the world's information, including webpages, images, video's and more." />
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
+    <style>
+        #title{
+            font-size: 6em;
+
+        }
+    </style>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
@@ -29,7 +36,7 @@
         <h2 class="src_heading">{{ src[0]["Title"] }}</h2>
         <p>{{ src[0]["Month"] }}/{{ src[0]["Date"] }}/{{ src[0]["Year"] }}</p>
         <p>Author: {{ src[0]["Author"] }}</p>
-        <p>Description: {{ src[0]["Description"] }}</p>
+        <p>Description: <span class="desc" style="display: inline;">{{ src[0]["Description"] }}</span></p>
         <p>Tags: {{ ', '.join(src[0]["Tags"]) }}</p>
     </div>
 </a>
@@ -54,10 +61,5 @@
     })
     
 </script>
-<br>
-<footer>
-    <br>
-    Copyright IARF, Pikleman 2025
-</footer>
 </body>
 </html>

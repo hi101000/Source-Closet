@@ -5,8 +5,9 @@
         <title>Source Closet - {{ source[10] }}</title>
             <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
         <script type="text/javascript">
 
         </script>
@@ -32,10 +33,10 @@
         </div>
 
         <div class="sidebar">
-            <h2 class="src_link" style="text-align: center">Other Helpful Sources and Further Reading</h2>
+            <h2 class="src_link" style="text-align: center; color: rgb(254, 199, 153);">Other Helpful Sources and Further Reading</h2>
             <p class="src_link">
                 {% for key, value in further.items() %}
-                    <a id="sidebar-a" href="{{ value }}">{{ key }}</a>
+                    <a id="sidebar-a" href="{{ value }}" style="color: rgb(254, 199, 153);">{{ key }}</a>
                     <br>
                     <br>
                 {% endfor %}
@@ -61,7 +62,7 @@
                 {% endif %}
             <script src="{{ url_for('static', filename="scripts/viewer.js") }}" defer></script>
             </div>
-            <div id="metadata" style="overflow: auto; width: 100%; height: 200%;">
+            <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
                 <p>
                     Author: {{ source[5] }}<br><br>
                     Date: {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
@@ -73,19 +74,19 @@
                         Link:
                             <br>
                             <br>
-                            <a href="{{ source[7] }}" target="_blank">{{ source[7] }}</a>
+                            <a href="{{ source[7] }}" target="_blank" style="color: rgb(107, 104, 255);">{{ source[7] }}</a>
                     {% endif %}
                     <br>
                     <br>
                     Source ID: {{ source[0] }}
                     <br><br>
                     {% if source[11] != None %}
-                        English Translation: <a href="{{ source[11] }}">{{ source[11] }}</a>
+                        English Translation: <a href="{{ source[11] }}" style="color: rgb(107, 104, 255);">{{ source[11] }}</a>
                     {% endif %}
                     {% if source[12] != None %}
                         <br><br>
                         Attribution: {{ source[12] }}<br><br>
-                        License: <a href="{{ source[13] }}">{{ source[13] }}</a>
+                        License: <a href="{{ source[13] }}" style="color: rgb(107, 104, 255);">{{ source[13] }}</a>
                     {% endif %}
                 </p>
             </div>
@@ -102,10 +103,5 @@
         delay: 0.9
     });
 </script>
-    <footer>
-        <br>
-        Copyright IARF, Pikleman 2025
-        <br>
-    </footer>
     </body>
 </html>

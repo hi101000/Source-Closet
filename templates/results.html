@@ -5,7 +5,8 @@
     <title>Title</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
 <body>
@@ -26,7 +27,7 @@
                 <h2 class="src_heading">{{ value[9] }}</h2>
                 <p>{{ value[3] }}/{{ value[2] }}/{{ value[1] }}</p>
                 <p>Author: {{ value[4] }}</p>
-                <p>Description: {{ value[0] }}</p>
+                <p>Description: <span class="desc">{{ value[0] }}</span></p>
                 <p>Tags: {{', '.join(value[10]) }}</p>
             </div>
         </a>
