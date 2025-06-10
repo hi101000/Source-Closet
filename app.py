@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 import random
 from difflib import SequenceMatcher as SM
 import similarity as sim
@@ -24,7 +24,6 @@ def get_ser(id: int, cursor) -> list:
     # Convert tuple of tuples to list of tags
     sers = [s[0] for s in cursor.fetchall()]  # Fixed: properly extract tags from tuples
     return sers
-
 
 @app.route('/')
 def index():  # put application's code here
@@ -248,10 +247,10 @@ def search_process():
 def discord():
     return 'dh=b423c40a76035ddef43e4d16052440ac71a9be4d'
 
-@app.route('/sourceno/<ip>/<city>/<region>/<country>/<timezone>/<loc>/<provider>')
-def sourceno(ip, city, region, country, timezone, loc, provider):
-    pass
-
+@app.route('/sourceno/<ip>/<city>/<region>/<country>/<timezone>/<loc>/<provider>/<number>')
+def sourceno(ip, city, region, country, timezone, loc, provider, number):
+    redirect(url_for('source', id=number), code=302)
+ 
 @app.route('/sitemap.txt')
 def sitemap():
     with open('assets/sitemap.txt', 'r') as f:
