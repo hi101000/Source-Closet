@@ -64,6 +64,44 @@ def index():  # put application's code here
     conn.close()
     return render_template("index.html", sources=sources)
 
+@app.route('/browse')
+def browse():
+    sources = []
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES")
+    src = src.fetchall()
+    src_dict = {}
+    for i in range(len(src)):
+        # Get tags for the current source
+        cursor.execute("SELECT TAG FROM TAGS WHERE ID IN (SELECT TAG_ID FROM SRC_TAGS WHERE SRC_ID=?)", (src[i][0],))
+        ts = cursor.fetchall()
+        # Convert tuple of tuples to list of tags
+        tags = [t[0] for t in ts]  # Fixed: properly extract tags from tuples
+        
+        src_dict[str(src[i][0])] = {
+            "Description": src[i][1],
+            "Year": src[i][2],
+            "Month": src[i][3],
+            "Date": src[i][4],
+            "Author": src[i][5],
+            "Path": src[i][6],
+            "Tags": tags,
+            "Link": src[i][7],
+            "Source": src[i][8],
+            "Width": src[i][9],
+            "Title": src[i][10] if len(src[i]) > 10 else None
+        }
+    src = src_dict
+    del src_dict
+    ids = src.keys()
+    ids = list(ids)
+    random.shuffle(ids)
+    for i in range(len(ids)):
+        sources.append([src[ids[i]], ids[i]])
+    conn.close()
+    return render_template("browse.html", sources=sources)
+
 @app.route('/source/<id>')
 def source(id):
     source = []
