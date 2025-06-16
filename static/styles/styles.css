@@ -90,7 +90,6 @@ h1{
 }
 
 #main{
-
     padding-right: 50px;
     display: flex;
     overflow: auto;
@@ -137,3 +136,19 @@ body{
     font-family: "Winky Sans";
     font-size: 20px;
  }
+
+ .results_heading{
+    font-family: "Winky Sans";
+    font-size: 25px;
+    color: rgb(190, 147, 112);
+    text-align: center;
+    margin-top: 20px;
+}
+.results_subheading{
+    font-family: "Winky Sans";
+    font-size: 25px;
+    color: rgb(190, 147, 112);
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 100px;
+}

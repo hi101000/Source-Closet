@@ -22,6 +22,8 @@
       <a href="{{ url_for('about') }}">About</a>
 </div>
 <p>
+    <h1 class="results_heading">Search Results</h1>
+    <p class="results_subheading">Found {{ sources[0] | length }} results for "{{ query[0] }}"</p>
     {% for key, value in sources[0].items() %}
         <a href="{{ url_for("source", id=key) }}" class="src_link">
             <div class="source">

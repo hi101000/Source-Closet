@@ -7,6 +7,7 @@ import sqlite3
 app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'G@1v55k1b1d1cv5M@x1mv5'
 
+
 def get_tags(id: int, cursor) -> list:
     cursor.execute("SELECT TAG FROM TAGS WHERE ID IN (SELECT TAG_ID FROM SRC_TAGS WHERE SRC_ID=?)", (id,))
     # Convert tuple of tuples to list of tags
@@ -170,7 +171,7 @@ def search_process():
             countries.append(key.split("_")[1])
         elif "keywds_" in key:
             num_entered += 1
-            keywds = value.lower().replace("-", " ").replace("\'", " ").split(" ")
+            keywds = value.lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace("\"", " ").replace(")", " ").replace("[", " ").replace("]", " ").split(" ")
         elif "id_" in key and value != '':
             num_entered += 1
             id = int(value)
@@ -216,9 +217,9 @@ def search_process():
             score += intersec
         if len(keywds) != 0:
             if src[5] is not None:
-                text = (src[10] + " " + src[1] + " " + src[5]).lower().replace("-", " ").replace("\'", " ").replace("\"","").replace(",", "").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
+                text = (src[10] + " " + src[1] + " " + src[5]).lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("\"", " ").split(" ") if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
             else:
-                text = (src[10] + " " + src[1]).lower().replace("-", " ").replace("\'", " ").replace("\"","").replace(",", "").split(' ') if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
+                text = (src[10] + " " + src[1]).lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("\"", " ").split(" ") if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
             dist = sim.jaccard_distance(set(text), set(keywds))*20-20
             score += dist
         
@@ -241,7 +242,7 @@ def search_process():
     ranked_sources = {key: value for _, key, value in results}
     ranked_sources = [ranked_sources]
     conn.close()
-    return render_template("results.html", sources=ranked_sources)
+    return render_template("results.html", sources=ranked_sources, query=keywds)
 
 @app.route('/.well-known/discord')
 def discord():
