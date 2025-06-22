@@ -81,12 +81,17 @@ h1{
     width: 300px;
     box-sizing: border-box;
     position:absolute;
-    background-color: rgb(95, 18, 167);
+    background-color: rgb(97, 37, 153);
     border-radius: 10px;
     padding-left: 40px;
     padding-right: 40px;
     height: 150%;
     z-index: 20;
+}
+.sidebar a{
+    color: rgb(190, 147, 112);
+    font-family: "Winky Sans";
+    font-size: 20px;
 }
 
 #main{

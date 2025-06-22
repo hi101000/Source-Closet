@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Source Closet - Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        h4{
+            font-family: "Winky Sans", ui-rounded;
+            font-size: 30px;
+        }
+        input{
+            font-family: "Winky Sans", ui-rounded;
+            font-size: 15px;
+            width: 200px;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        label{
+            font-family: "Winky Sans", ui-rounded;
+            font-size: 25px;
+        }
+        #main_search_content{
+            padding-left: 50px;
+        }
+        #submit{
+            font-size: 30px;
+            border-radius: 20px;
+            background-color: blueviolet;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+<body style="font: 'Winky Sans', ui-rounded, sans-serif; color: rgb(190, 147, 112);">
+<div class="topnav">
+      <a href="{{url_for('index')}}">Home</a>
+      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+      <a class="active" href="{{ url_for('search') }}">Search</a>
+      <a href="{{ url_for('browse') }}">Browse</a>
+      <a href="{{ url_for('about') }}">About</a>
+</div>
+<br>
+<br>
+<div id="main_search_content">
+<form action="{{ url_for('sign_process') }}" method="post">
+    <label for="UNAME">User Name: <input type="search" id="uname" name="uname_"></label>
+    <br>
+    <label for="PSSWD">Password: <input type="password" id="psswd" name="psswd_"></label>
+    <br>
+    <label for="EMAIL">E-mail: <input type="search" id="email" name="email_"></label>
+    <br>
+    <div>
+    <br>
+    <input type="submit" value="Submit" id="submit" style="margin-top: 40px; margin-left: 40px;">
+    </div>
+</form>
+</div>
+</body>
+</html>

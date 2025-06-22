@@ -13,9 +13,6 @@
         </script>
         <style>
             #my-pdf { height: 500px; border: 1px solid #ccc; }
-            #sidebar-a{
-                color: peachpuff;
-            }
         </style>
         <script src="https://unpkg.com/pdfobject"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -34,10 +31,10 @@
         </div>
 
         <div class="sidebar">
-            <h2 class="src_link" style="text-align: center; color: rgb(254, 199, 153);">Other Helpful Sources and Further Reading</h2>
+            <h2 class="src_link" style="text-align: center;">Other Helpful Sources and Further Reading</h2>
             <p class="src_link">
                 {% for key, value in further.items() %}
-                    <a id="sidebar-a" href="{{ value }}" style="color: rgb(254, 199, 153);">{{ key }}</a>
+                    <a id="sidebar-a" href="{{ value }}">{{ key }}</a>
                     <br>
                     <br>
                 {% endfor %}
@@ -65,7 +62,7 @@
             </div>
             <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
                 <p>
-                    Author: {{ source[5] }}<br><br>
+                    <span class="">Author:</span> {{ source[5] }}<br><br>
                     Date: {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
                     Countries: {{ ', '.join(source[14]) }}<br><br>
                     Topics: {{ ', '.join(source[15]) }}<br><br>

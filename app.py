@@ -26,6 +26,37 @@ def get_ser(id: int, cursor) -> list:
     sers = [s[0] for s in cursor.fetchall()]  # Fixed: properly extract tags from tuples
     return sers
 
+class User:
+    id = None
+    psswd = None
+    email = None
+    uname = None
+    def __init__(self, id, psswd, email, uname, key=None):
+        self.id = id
+        self.psswd = psswd
+        self.email = email
+        self.uname = uname
+        self.key = key
+    @staticmethod
+    def get(user_id):
+        conn = sqlite3.connect("users.db")
+        cursor = conn.cursor()
+        user_data = cursor.execute("SELECT ID, PSSWD, EMAIL, UNAME FROM USERS WHERE ID=?", (user_id,)).fetchone()
+        conn.close()
+        if user_data:
+            return User(*user_data)
+        return None
+    def is_authenticated(self):
+        if self.id is not None and self.psswd is not None and self.email is not None and self.uname is not None:
+            return True
+        return False
+    def is_anonymous(self):
+        return False
+    def get_id(self):
+        return f"{self.id}"
+    def is_active(self):
+        return True
+
 @app.route('/')
 def index():  # put application's code here
     sources = []
@@ -263,6 +294,18 @@ def robots():
     with open('assets/robots.txt', 'r') as f:
         robots_content = f.read()
     return robots_content, 200, {'Content-Type': 'text/plain'}
+
+@app.route('/signup')
+def signup():
+    return render_template("signup.html")
+
+@app.route('/login')
+def login():
+    return render_template("login.html")
+
+@app.route('/sign_process', methods=["POST"])
+def sign_process():
+    pass
 
 if __name__ == '__main__':
     app.run()
