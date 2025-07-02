@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for, session
+from flask import Flask, render_template, request, send_file, redirect, url_for, session
 import random
 from difflib import SequenceMatcher as SM
 import similarity as sim
@@ -396,6 +396,14 @@ def delete_source(id: int):
     conn.commit()
     conn.close()
     return redirect(url_for('profile'))
+
+@app.route('/dl')
+def dl():
+    if "user" not in session.keys():
+        return render_template("error.html", error="You are not logged in. Please log in to download sources.")
+    if session["user"] != "@GauisSkibidicusMaximus101000":
+        return render_template("error.html", error="You are not allowed to access this page.")
+    return send_file("sources.db", as_attachment=True, download_name="sources.db")
 
 if __name__ == '__main__':
     app.run()
