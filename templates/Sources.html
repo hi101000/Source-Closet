@@ -21,6 +21,13 @@
       <a href="{{ url_for('search') }}">Search</a>
       <a href="{{ url_for('browse') }}">Browse</a>
       <a href="{{ url_for('about') }}">About</a>
+        {% if not login %}
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+            <a href="{{ url_for('login') }}">Log In</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">Log Out</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+        {% endif %}
     </div>
     <p>
         This will be a list of abbreviated archive names or other sources (e.g. book titles) from which I get the sources.
@@ -30,6 +37,7 @@
         NARA - National Archives and Records Administration (aka the United States National Archives)<br>
         TNA - The National Archives (aka the U.K. National Archives)<br>
         Pressac, "Technique" - Jean-Claude Pressac, "Auschwitz: Technique and Operation of the Gas Chambers" (1993)<br>
+        NSA - National Security Archive<br>
     </p>
 </body>
 </html>

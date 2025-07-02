@@ -46,17 +46,19 @@ h1{
   background-color: #333;
   overflow: hidden;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0,0);
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  color: rgb(190, 147, 112);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
     font-family: "Winky Sans", ui-rounded;
   font-size: 17px;
+
 }
 
 /* Change the color of links on hover */
@@ -81,7 +83,7 @@ h1{
     width: 300px;
     box-sizing: border-box;
     position:absolute;
-    background-color: rgb(97, 37, 153);
+    background-color: rgb(74, 20, 131);
     border-radius: 10px;
     padding-left: 40px;
     padding-right: 40px;
@@ -156,4 +158,9 @@ body{
     text-align: left;
     margin-top: 20px;
     margin-left: 100px;
+}
+
+.highlighted{
+    color: #d0d0d0;
+    font-weight: bold;
 }

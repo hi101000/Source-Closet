@@ -28,6 +28,13 @@
         <a href="{{ url_for('search') }}">Search</a>
         <a href="{{ url_for('browse') }}">Browse</a>
         <a href="{{ url_for('about') }}">About</a>
+        {% if not login %}
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+            <a href="{{ url_for('login') }}">Log In</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">Log Out</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+        {% endif %}
         </div>
 
         <div class="sidebar">
@@ -61,30 +68,49 @@
             <script src="{{ url_for('static', filename="scripts/viewer.js") }}" defer></script>
             </div>
             <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
+                <script>
+                    function saveSource(){
+                        window.location.href = "{{ url_for('save_source', id=source[0]) }}";
+                    }
+                </script>
+                <style>
+                    #save{
+                        font-size: 30px;
+                        border-radius: 20px;
+                        background-color: rgb(93, 9, 183);
+                        padding-left: 20px;
+                        padding-right: 20px;
+                        font-family: "Winky Sans", ui-rounded;
+                        color: rgb(145, 102, 66);
+                    }
+                </style>
+                {% if login %}
+                    <button id="save" onclick="saveSource()">Save Source</button>
+                {% endif %}
                 <p>
-                    <span class="">Author:</span> {{ source[5] }}<br><br>
-                    Date: {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
-                    Countries: {{ ', '.join(source[14]) }}<br><br>
-                    Topics: {{ ', '.join(source[15]) }}<br><br>
-                    Description: {{ source[1] }}<br><br>
-                    Source: {{ source[8] }}<br><br>
+                    <span class="highlighted">Author:</span> {{ source[5] }}<br><br>
+                    <span class="highlighted">Date:</span> {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
+                    <span class="highlighted">Countries:</span> {{ ', '.join(source[14]) }}<br><br>
+                    <span class="highlighted">Topics:</span> {{ ', '.join(source[15]) }}<br><br>
+                    <span class="highlighted">Description:</span> {{ source[1] }}<br><br>
+                    <span class="highlighted">Source:</span> {{ source[8] }}<br><br>
                     {% if source[7] != None %}
-                        Link:
+                        <span class="highlighted">Link</span>:
                             <br>
                             <br>
                             <a href="{{ source[7] }}" target="_blank" style="color: rgb(107, 104, 255);">{{ source[7] }}</a>
                     {% endif %}
                     <br>
                     <br>
-                    Source ID: {{ source[0] }}
+                    <span class="highlighted">Source ID:</span> {{ source[0] }}
                     <br><br>
                     {% if source[11] != None %}
-                        English Translation: <a href="{{ source[11] }}" style="color: rgb(107, 104, 255);">{{ source[11] }}</a>
+                        <span class="highlighted">English Translation:</span> <a href="{{ source[11] }}" style="color: rgb(107, 104, 255);">{{ source[11] }}</a>
                     {% endif %}
                     {% if source[12] != None %}
                         <br><br>
-                        Attribution: {{ source[12] }}<br><br>
-                        License: <a href="{{ source[13] }}" style="color: rgb(107, 104, 255);">{{ source[13] }}</a>
+                        <span class="highlighted">Attribution:</span> {{ source[12] }}<br><br>
+                        <span class="highlighted">License:</span> <a href="{{ source[13] }}" style="color: rgb(107, 104, 255);">{{ source[13] }}</a>
                     {% endif %}
                 </p>
             </div>

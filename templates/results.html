@@ -20,6 +20,13 @@
       <a href="{{ url_for('search') }}">Search</a>
       <a href="{{ url_for('browse') }}">Browse</a>
       <a href="{{ url_for('about') }}">About</a>
+        {% if not login %}
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+            <a href="{{ url_for('login') }}">Log In</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">Log Out</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+        {% endif %}
 </div>
 <p>
     <h1 class="results_heading">Search Results</h1>

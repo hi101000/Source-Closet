@@ -1,11 +1,17 @@
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for, session
 import random
 from difflib import SequenceMatcher as SM
 import similarity as sim
 import sqlite3
+import smtplib
+from email.mime.text import MIMEText
+import os
+import string
+from datetime import timedelta
 
 app = Flask(__name__)
-#app.config['SECRET_KEY'] = 'G@1v55k1b1d1cv5M@x1mv5'
+app.secret_key = "5ecret_key_@69420_5kibid1"
+app.permanent_session_lifetime = timedelta(minutes=30)
 
 
 def get_tags(id: int, cursor) -> list:
@@ -25,6 +31,21 @@ def get_ser(id: int, cursor) -> list:
     # Convert tuple of tuples to list of tags
     sers = [s[0] for s in cursor.fetchall()]  # Fixed: properly extract tags from tuples
     return sers
+
+def send_bulk_emails(subject, body, sender, recipients, password):
+    # Connect to Gmail's SMTP server using SSL
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+        smtp_server.login(sender, password)  # Log in to the server
+
+        # Loop over each recipient and send them an individual email
+        for recipient in recipients:
+            msg = MIMEText(body)  # Create a MIMEText object with the email body
+            msg['Subject'] = subject  # Set the email's subject
+            msg['From'] = sender  # Set the sender
+            msg['To'] = recipient  # Set the current recipient
+
+            smtp_server.sendmail(sender, recipient, msg.as_string())  # Send the email
+            print(f"Message sent to {recipient}!")
 
 class User:
     id = None
@@ -93,7 +114,7 @@ def index():  # put application's code here
     for i in range(9):
         sources.append([src[ids[i]], ids[i]])
     conn.close()
-    return render_template("index.html", sources=sources)
+    return render_template("index.html", sources=sources, login=["user" in session.keys()][0])
 
 @app.route('/browse')
 def browse():
@@ -131,7 +152,7 @@ def browse():
     for i in range(len(ids)):
         sources.append([src[ids[i]], ids[i]])
     conn.close()
-    return render_template("browse.html", sources=sources)
+    return render_template("browse.html", sources=sources, login=["user" in session.keys()][0])
 
 @app.route('/source/<id>')
 def source(id):
@@ -159,15 +180,15 @@ def source(id):
         for f in furt:
             further[f[0]] = f[1]
     conn.close()
-    return render_template("source.html", source=src, prot=False if id != "1" else True, further=further)
+    return render_template("source.html", source=src, prot=False if id != "1" else True, further=further, login=["user" in session.keys()][0])
 
 @app.route('/sources_abbr')
 def sources_abbr():
-    return render_template('Sources.html')
+    return render_template('Sources.html', login=["user" in session.keys()][0])
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    return render_template("about.html", login=["user" in session.keys()][0])
 
 @app.route('/search')
 def search():
@@ -177,7 +198,7 @@ def search():
 
     countries = [c[0] for c in cursor.execute("SELECT NAME FROM COUNTRIES").fetchall()]
     conn.close()
-    return render_template("search.html", tags=tags, countries=countries)
+    return render_template("search.html", tags=tags, countries=countries, login=["user" in session.keys()][0])
 
 @app.route('/search_process', methods=["POST"])
 def search_process():
@@ -273,7 +294,7 @@ def search_process():
     ranked_sources = {key: value for _, key, value in results}
     ranked_sources = [ranked_sources]
     conn.close()
-    return render_template("results.html", sources=ranked_sources, query=keywds)
+    return render_template("results.html", sources=ranked_sources, query=keywds, login=["user" in session.keys()][0])
 
 @app.route('/.well-known/discord')
 def discord():
@@ -297,15 +318,84 @@ def robots():
 
 @app.route('/signup')
 def signup():
-    return render_template("signup.html")
+    if "user" not in session.keys():
+        token = ""
+        chars = string.digits+string.ascii_letters
+        for i in range(30):
+            token+=random.choice(chars)
+        conn = sqlite3.connect("sources.db")
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO USERS (TOKEN) VALUES (?)", (token,))
+        conn.commit()
+        conn.close()
+        return render_template("signup.html", token=token, login=["user" in session.keys()][0])
+    else:
+        print(session.keys())
+        return render_template("error.html", error="You are already logged in with an account.")
 
 @app.route('/login')
 def login():
-    return render_template("login.html")
+    return render_template("login.html", login=["user" in session.keys()][0])
 
-@app.route('/sign_process', methods=["POST"])
-def sign_process():
-    pass
+@app.route('/login_process', methods=["POST"])
+def login_process():
+    data = request.form
+    token = data.get("token_", "")
+    if token == "":
+        return render_template("error.html", error="You did not enter a token. Please try again.")
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    user_data = cursor.execute("SELECT TOKEN FROM USERS").fetchall()
+    conn.close()
+    user_data = [u[0] for u in user_data]
+    if token not in user_data:
+        return render_template("error.html", error="The token you entered is not valid. Please try again.")
+    else:
+        session["user"] = token
+    return redirect(url_for('index'))
+
+@app.route('/logout')
+def logout():
+    session.pop("user", None)
+    return redirect(url_for('index'))
+
+@app.route('/profile')
+def profile():
+    if "user" not in session.keys():
+        return render_template("error.html", error="You are not logged in. Please log in to view your profile.")
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    user_token = session["user"]
+    sources = conn.execute("SELECT SRC_ID FROM USERS_SRCS WHERE UID=(?)", (user_token,)).fetchall()
+    sources = [s[0] for s in sources]
+    #                              0      1           2     3     4     5       6
+    sources = conn.execute("SELECT ID, DESCRIPTION, YEAR, MONTH, DATE, AUTHOR, TITLE FROM SOURCES WHERE ID IN ({})".format(','.join('?' * len(sources))), sources).fetchall()
+    sources = [list(s) for s in sources]
+    return render_template("profile.html", sources=sources, login=["user" in session.keys()][0])
+
+@app.route('/save_source/<int:id>')
+def save_source(id: int):
+    if "user" not in session.keys():
+        return render_template("error.html", error="You are not logged in. Please log in to save sources.")
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    user_token = session["user"]
+    cursor.execute("INSERT INTO USERS_SRCS (UID, SRC_ID) VALUES (?, ?)", (user_token, id))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('source', id=id))
+
+@app.route('/delete_source/<int:id>')
+def delete_source(id: int):
+    if "user" not in session.keys():
+        return render_template("error.html", error="You are not logged in. Please log in to delete sources.")
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    user_token = session["user"]
+    cursor.execute("DELETE FROM USERS_SRCS WHERE UID=? AND SRC_ID=?", (user_token, id))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('profile'))
 
 if __name__ == '__main__':
     app.run()

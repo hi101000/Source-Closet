@@ -27,7 +27,15 @@
       <a href="{{url_for('index')}}">Home</a>
       <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
       <a href="{{ url_for('search') }}">Search</a>
+      <a href="{{ url_for('browse') }}">Browse</a>
       <a class="active" href="{{ url_for('about') }}">About</a>
+    {% if not login %}
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+        <a href="{{ url_for('login') }}">Log In</a>
+    {% else %}
+        <a href="{{ url_for('logout') }}">Log Out</a>
+        <a href="{{ url_for('profile') }}">Profile</a>
+    {% endif %}
     </div>
         <h1>About me and this site</h1>
         <p>I'm  a high school student in the USA who interested in both history and coding.
@@ -37,6 +45,14 @@
             All materials hosted on this website are, unless otherwise stated, free from copyright and in the public domain. Feel free
             to download and distribute them as you wish. I try to make facsimiles available here, but SOME COUNTRIES (*cough cough* The United Kingdom *cough cough*) have inconvenient copyright policies that don't allow this. In such cases,
             I'll have a transcript here instead.
+            <br>
+            <br>
+            Here's how the login system works:<br>
+            When you sign up, you will be given a token. This token is used to identify you and your account.
+            No other information is required, so that you stay anonymous and your data is safe in case we get hacked (all a hacker will see is that account a12De13234FEH likes sources from the 1930s, for example).
+            Keep this token safe, since it's the only way to access your account. On the login page, just paste your token in (or type it out if your memory's strong) and you'll be logged in. Logging in<br>
+            allows you to save sources for future reference and use our new-ish AI features.
+            <br>
             <br>
             Feel free to contact me using the below details with any questions or concerns.
             I'll try to be prompt in my responses, but sometimes it might take me over a week to reply, due to my own personal schedule and business level.</p>
