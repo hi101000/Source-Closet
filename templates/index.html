@@ -42,9 +42,9 @@
     <div class="source">
         <h2 class="src_heading">{{ src[0]["Title"] }}</h2>
         <p>{{ src[0]["Date"] }}/{{ src[0]["Month"] }}/{{ src[0]["Year"] }}</p>
-        <p>Author: {{ src[0]["Author"] }}</p>
-        <p>Description: <span class="desc" style="display: inline;">{{ src[0]["Description"] }}</span></p>
-        <p>Tags: {{ ', '.join(src[0]["Tags"]) }}</p>
+        <p><span class="desc_lbl">Author:</span> <span class="desc" style="display: inline;">{{ src[0]["Author"] }}</span></p>
+        <p><span class="desc_lbl">Description:</span> <span class="desc" style="display: inline;">{{ src[0]["Description"] }}</span></p>
+        <p><span class="desc_lbl">Tags:</span> <span class="desc" style="display: inline;">{{ ', '.join(src[0]["Tags"]) }}<span></p>
     </div>
 </a>
 <br>

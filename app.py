@@ -223,7 +223,7 @@ def search_process():
             countries.append(key.split("_")[1])
         elif "keywds_" in key:
             num_entered += 1
-            keywds = value.lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace("\"", " ").replace(")", " ").replace("[", " ").replace("]", " ").split(" ")
+            keywds = value.lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace("\"", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("ä", "ae").split(" ")
         elif "id_" in key and value != '':
             num_entered += 1
             id = int(value)
@@ -269,9 +269,9 @@ def search_process():
             score += intersec
         if len(keywds) != 0:
             if src[5] is not None:
-                text = (src[10] + " " + src[1] + " " + src[5]).lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("\"", " ").split(" ") if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
+                text = (src[10] + " " + src[1] + " " + src[5]).lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("\"", " ").replace("ä", "ae").split(" ") if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
             else:
-                text = (src[10] + " " + src[1]).lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("\"", " ").split(" ") if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
+                text = (src[10] + " " + src[1]).lower().replace("-", " ").replace("\'", " ").replace("(", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("\"", " ").replace("ä", "ae").split(" ") if src[10] is not None else src[1].lower().replace("-", " ").split(' ')
             dist = sim.jaccard_distance(set(text), set(keywds))*20-20
             score += dist
         

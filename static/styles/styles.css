@@ -57,7 +57,7 @@ h1{
   padding: 14px 16px;
   text-decoration: none;
     font-family: "Winky Sans", ui-rounded;
-  font-size: 17px;
+  font-size:22px;
 
 }
 
@@ -136,6 +136,7 @@ body{
 .desc{
     font-family: "Patrick Hand SC";
     display: inline;
+    font-size: 22px;
 }
 .src_link{
     text-decoration: none;
@@ -163,4 +164,9 @@ body{
 .highlighted{
     color: #d0d0d0;
     font-weight: bold;
+}
+
+.desc_lbl{
+    font-weight: bold;
+    color: #d0d0d0;;
 }
