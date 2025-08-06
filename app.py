@@ -26,27 +26,6 @@ def get_countries(id: int, cursor) -> list:
     couns = [c[0] for c in cursor.fetchall()]  # Fixed: properly extract tags from tuples
     return couns
 
-def get_ser(id: int, cursor) -> list:
-    cursor.execute("SELECT TITLE FROM SERIES WHERE ID IN (SELECT SER_ID FROM SRC_SERIES WHERE SRC_ID=?)", (id,))
-    # Convert tuple of tuples to list of tags
-    sers = [s[0] for s in cursor.fetchall()]  # Fixed: properly extract tags from tuples
-    return sers
-
-def send_bulk_emails(subject, body, sender, recipients, password):
-    # Connect to Gmail's SMTP server using SSL
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
-        smtp_server.login(sender, password)  # Log in to the server
-
-        # Loop over each recipient and send them an individual email
-        for recipient in recipients:
-            msg = MIMEText(body)  # Create a MIMEText object with the email body
-            msg['Subject'] = subject  # Set the email's subject
-            msg['From'] = sender  # Set the sender
-            msg['To'] = recipient  # Set the current recipient
-
-            smtp_server.sendmail(sender, recipient, msg.as_string())  # Send the email
-            print(f"Message sent to {recipient}!")
-
 class User:
     id = None
     psswd = None
@@ -404,6 +383,15 @@ def dl():
     if session["user"] != "@GauisSkibidicusMaximus101000":
         return render_template("error.html", error="You are not allowed to access this page.")
     return send_file("sources.db", as_attachment=True, download_name="sources.db")
+
+@app.route('/further_reading')
+def further_reading():
+    conn = sqlite3.connect("sources.db")
+    cursor = conn.cursor()
+    further_reading = cursor.execute("SELECT NAME, URL FROM FURTHER").fetchall()
+    conn.close()
+    
+    return render_template("further-reading.html", further_reading=further_reading)
 
 if __name__ == '__main__':
     app.run()
