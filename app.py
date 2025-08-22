@@ -386,12 +386,19 @@ def dl():
 
 @app.route('/further_reading')
 def further_reading():
-    conn = sqlite3.connect("sources.db")
+    conn = sqlite3.connect("further.db")
     cursor = conn.cursor()
-    further_reading = cursor.execute("SELECT NAME, URL FROM FURTHER").fetchall()
+    further_reading = cursor.execute("SELECT Title, Author, Date, coverPath, TimePeriod_start, TimePeriod_end, TopicsList FROM Further_Sources").fetchall()
+    further_reading = [list(f) for f in further_reading]
     conn.close()
+    topicsList = set()
+    for f in further_reading:
+        f[6] = f[6].split(",") if f[6] else []
+        for topic in f[6]:
+            topicsList.add(topic.strip())
+    topicsList = list(topicsList)
     
-    return render_template("further-reading.html", further_reading=further_reading)
+    return render_template("further-reading.html", further_reading=further_reading, str=str, topicsList=topicsList, login=["user" in session.keys()][0])
 
 if __name__ == '__main__':
     app.run()

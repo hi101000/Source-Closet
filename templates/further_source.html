@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Source Closet - {{ source[10] }}</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+        <script type="text/javascript">
+
+        </script>
+        <style>
+            #my-pdf { height: 500px; border: 1px solid #ccc; }
+        </style>
+        <script src="https://unpkg.com/pdfobject"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+    <body id="source_page">
+            <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+            <script>
+                const { animate, scroll } = Motion
+            </script>
+        <div class="topnav">
+        <a href="{{url_for('index')}}">Home</a>
+        <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
+        <a href="{{ url_for('search') }}">Search</a>
+        <a href="{{ url_for('browse') }}">Browse</a>
+        <a href="{{ url_for('further_reading') }}">Further Reading</a>
+        <a href="{{ url_for('about') }}">About</a>
+        {% if not login %}
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+            <a href="{{ url_for('login') }}">Log In</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">Log Out</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+        {% endif %}
+        </div>
+
+        <div class="sidebar">
+            <h2 class="src_link" style="text-align: center;">Other Helpful Sources and Further Reading</h2>
+            <p class="src_link">
+                {% for key, value in further.items() %}
+                    <a id="sidebar-a" href="{{ value }}">{{ key }}</a>
+                    <br>
+                    <br>
+                {% endfor %}
+            </p>
+        </div>
+        <div id="main_content">
+        <h1 id="title">{{ source[10] }}</h1>
+        </div>
+        <div id="main">
+            <div id="content" style="height: 1000px">
+                {% if prot %}
+                    <script type="text/javascript">
+                        alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile. If you live in the United Kingdom, please contact your MP to ask them to amend the copyright law to make all public records in TNA part of the public domain, or at least freely usable for non-commercial purposes.');
+                    </script>
+                    <object draggable="false" id="src_frame" class="scaled" style="zoom: 100%" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
+                {% elif ".pdf" in source[6] and "Images/" in source[6] %}
+                    <object type="application/pdf" style="zoom: 100%" id="src_frame" data="{{ url_for('static', filename=source[6]) }}#view=FitV" width="{{ source[9] }}" height="700px"></object>
+                {% elif "http" in source[6] %}
+                    <object id="src_frame" style="zoom: 100%" data="{{ source[9] }}#view=FitV" width="{{ source[9] }}"></object>
+                {% else %}
+                        <object draggable="false" id="src_frame" style="image-rendering: -webkit-optimize-contrast;" class="scaled" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
+                        <script>console.log('using other')</script>
+                {% endif %}
+            <script src="{{ url_for('static', filename="scripts/viewer.js") }}" defer></script>
+            </div>
+            <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
+                <script>
+                    function saveSource(){
+                        window.location.href = "{{ url_for('save_source', id=source[0]) }}";
+                    }
+                </script>
+                <style>
+                    #save{
+                        font-size: 30px;
+                        border-radius: 20px;
+                        background-color: rgb(93, 9, 183);
+                        padding-left: 20px;
+                        padding-right: 20px;
+                        font-family: "Winky Sans", ui-rounded;
+                        color: rgb(218, 139, 74);
+                    }
+                </style>
+                {% if login %}
+                    <button id="save" onclick="saveSource()">Save Source</button>
+                {% endif %}
+                <p>
+                    <span class="highlighted">Author:</span> {{ source[5] }}<br><br>
+                    <span class="highlighted">Date:</span> {{ source[4] }}/{{ source[3] }}/{{ source[2] }}<br><br>
+                    <span class="highlighted">Countries:</span> {{ ', '.join(source[14]) }}<br><br>
+                    <span class="highlighted">Topics:</span> {{ ', '.join(source[15]) }}<br><br>
+                    <span class="highlighted">Description:</span> {{ source[1] }}<br><br>
+                    <span class="highlighted">Source:</span> {{ source[8] }}<br><br>
+                    {% if source[7] != None %}
+                        <span class="highlighted">Link</span>:
+                            <br>
+                            <br>
+                            <a href="{{ source[7] }}" target="_blank" style="color: rgb(107, 104, 255);">{{ source[7] }}</a>
+                    {% endif %}
+                    <br>
+                    <br>
+                    <span class="highlighted">Source ID:</span> {{ source[0] }}
+                    <br><br>
+                    {% if source[11] != None %}
+                        <span class="highlighted">English Translation:</span> <a href="{{ source[11] }}" style="color: rgb(107, 104, 255);">{{ source[11] }}</a>
+                    {% endif %}
+                    {% if source[12] != None %}
+                        <br><br>
+                        <span class="highlighted">Attribution:</span> {{ source[12] }}<br><br>
+                        <span class="highlighted">License:</span> <a href="{{ source[13] }}" style="color: rgb(107, 104, 255);">{{ source[13] }}</a>
+                    {% endif %}
+                </p>
+            </div>
+            <br>
+            <br>
+            <br>
+            </div>
+        </div>
+        <script>
+    animate("#src_frame", {
+            delay: 0.5,
+            duration: 1,
+            opacity: [0, 1],
+            translateY: [-50, 0]
+        });
+</script>
+    </body>
+</html>

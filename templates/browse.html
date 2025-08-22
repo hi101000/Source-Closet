@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Source Closet - Home</title>
+    <title>Source Closet - Browse</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
     <meta name="google-site-verification" content="FyuSCl7BsO80rtLPSAib-nEb1hCIjHcgwGOc1pZJ1Y4" />
@@ -14,7 +14,6 @@
     <style>
         #title{
             font-size: 6em;
-
         }
     </style>
 </head>
@@ -61,6 +60,10 @@
             type: "spring",
             stiffness: 100,
             delay: 0.9
+        });
+        return () => animate(element, {
+                scale: 0.2,
+                opacity: 0
         });
     });
     hover(".source", (element) => {

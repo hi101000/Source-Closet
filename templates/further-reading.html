@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Source Closet - Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <title>Source Closet - Further Reading</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
     <meta name="google-site-verification" content="FyuSCl7BsO80rtLPSAib-nEb1hCIjHcgwGOc1pZJ1Y4" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,13 +12,121 @@
     <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <meta name="description" content="Search the world's information, including webpages, images, video's and more." />
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <style>
         #title{
             font-size: 4em;
         }
+        body{
+            background-color: #1b212e;
+        }
+        .cover{
+            padding-right: 20%;
+            float: right;
+        }
+        .source{
+            padding-bottom: 0%;
+            padding-left: 0%;
+            padding-right: 0%;
+        }
+        #filter{
+            float: left;
+            width: 20%;
+            padding-right: 2%;
+            background-color: rgb(190, 147, 112);
+            padding-left: 2%;
+            font-family: "Winky Sans", sans-serif;
+            border-radius: 20px;
+            padding-top: 2%;
+            margin-right: 2%;
+            margin-left: 2%;
+        }
+        .txtbx{
+            border-radius: 5px;
+            border-width: 0px;
+            text-align: center;;
+        }
+        #srcs{
+            margin-right: 0%;
+            margin-left: 25%;
+            padding-left: 0%;
+            padding-right: 0%;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(30%, 90%));
+            column-gap: 0px;
+            grid-template-rows: auto;
+        }
+        .card{
+            margin-bottom: 20px;
+            margin-right: 20px;
+            background-color: rgb(95, 18, 167);
+            font-family: "Winky Sans", sans-serif;
+            color: rgb(190, 147, 112);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body{
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            justify-content: flex-end;
+        }
+        .card-title,
+        .card-text,
+        .year {
+            /* Optional: allow these to grow/shrink as needed */
+            flex-shrink: 0;
+        }
+        .card-img-top{
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            margin-top: 6%;
+            border-radius: 20px;
+        }
+        .topnav {
+            background-color: #333;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0,0);
+            margin-top: 0.5%;
+            margin-left: 0.5%;
+            margin-right: 0.5%;
+            padding: 0px;
+        }
+
+    /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            color: rgb(190, 147, 112);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-family: "Winky Sans", ui-rounded;
+            font-size:22px;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #1b212e;
+            color: white;
+            border-radius: 10px;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a.active {
+            background-color: rgb(95, 18, 167);
+            color: white;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <div class="topnav">
         <a href="{{url_for('index')}}">Home</a>
         <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
@@ -33,5 +142,148 @@
             <a href="{{ url_for('profile') }}">Profile</a>
         {% endif %}
     </div>
+    <br>
+    <div id="filter" width="20%">
+        <label for="date">Year Published:</label>
+        <input class="txtbx" type="text" id="date" readonly>
+        <br>
+        <br>
+        <div class="range-slider" id="year_pub"></div>
+        <br>
+        <br>
+        <br>
+        <label for="period">Time Period Covered</label>
+        <input class="txtbx" type="text" id="period" readonly>
+        <br>
+        <br>
+        <div class="range-slider" id="period_range"></div>
+        <br>
+        <br>
+        <br>
+        <!--<label for="events">Historical Periods/Events:</label>
+        <div class="events">
+            <label><input type="checkbox" id="ww2" name="ww2" value="World War II"> World War II</label>
+        </div>
+        <br>
+        <br>
+        <br>-->
+    </div>
+    <div id="srcs">
+        {% for src in further_reading %}
+            <div class="card source" data-period-strt="{{ src[4] }}" data-period-end="{{ src[5] }}">
+                <img src="{{ url_for('static', filename=str(src[3])) }}" width="50%" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ src[0] }}</h5>
+                    <p class="card-text"><span>{{ src[1] }}</span></p>
+                    <p class="year" class="card-text">Year: <span class="year-pub">{{src[2]}}</span></p>
+                    <a href="#" class="btn btn-primary" style="margin-bottom: 1.5%;">Check it out</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <br>
+    <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+    <script>
+        const { animate, scroll, inView, hover } = Motion
+    </script>
+    <script name="animations">
+        inView(".source",(element, enterInfo)=>{
+            animate(element, {
+                scale: [0.7, 1,0.98,1],
+                opacity: [1],
+                duration: 3.0,
+                type: "spring",
+                stiffness: 100,
+                delay: 0
+            });
+            return () => animate(element, {
+                scale: 0.2,
+                opacity: 0
+            });
+        });
+        hover(".source", (element) => {
+            animate(element, { scale: 0.97 })
+
+            return () => animate(element, { scale: 1 })
+        });
+    </script>
+    <script name="slider">
+    function filterSources() {
+        let yearRange = $("#date").val().split(" - ").map(Number);
+        let periodRange = $("#period").val().split(" - ").map(Number);
+        console.log(periodRange);
+        //let ww2 = document.getElementById("ww2").checked;
+
+        // Always select ALL sources, not just visible ones
+        let sources = Array.from(document.querySelectorAll(".source"));
+        sources.forEach(element => {
+            // Year Published
+            const yearElem = element.querySelector(".year-pub");
+            let year;
+            if (yearElem) {
+                year = parseInt(yearElem.innerHTML);
+            } else {
+                year = NaN; // Skip year filter if yearElem is null
+            }
+            // Period Covered
+            const periodStart = parseInt(element.dataset.periodStrt);
+            const periodEnd = parseInt(element.dataset.periodEnd);
+
+            let show = true;
+
+            // Year filter
+            if (!isNaN(year) && (year < yearRange[0] || year > yearRange[1])) show = false;
+
+            // Period filter
+            if (show && (!isNaN(periodStart) && !isNaN(periodEnd))) {
+                if (periodEnd < periodRange[0] || periodStart > periodRange[1]) show = false;
+            }
+
+            // WW2 checkbox filter
+            /*if (show && ww2) {
+                if (!(periodStart <= 1939 && periodEnd >= 1945)) show = false;
+            }*/
+
+            // Always set display, regardless of previous state
+            if (show) {
+                element.style.removeProperty("display");
+            } else {
+                element.style.display = "none";
+            }
+        });
+    }
+
+    // Attach to sliders and checkbox
+    $(function() {
+        $("#year_pub").slider({
+            range: true,
+            min: 1700,
+            max: 2025,
+            values: [1700, 2025],
+            slide: function(event, ui) {
+                $("#date").val(ui.values[0] + " - " + ui.values[1]);
+                filterSources();
+            }
+        });
+        $("#date").val($("#year_pub").slider("values", 0) +
+            " - " + $("#year_pub").slider("values", 1));
+
+        $("#period_range").slider({
+            range: true,
+            min: 1800,
+            max: 2025,
+            values: [1800, 2025],
+            slide: function(event, ui) {
+                $("#period").val(ui.values[0] + " - " + ui.values[1]);
+                filterSources();
+            }
+        });
+        $("#period").val($("#period_range").slider("values", 0) +
+            " - " + $("#period_range").slider("values", 1));
+
+        // Checkbox
+        //$("#ww2").on("change", filterSources);
+    });
+</script>
 </body>
 </html>

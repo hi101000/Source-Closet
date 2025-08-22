@@ -51,7 +51,12 @@
                 type: "spring",
                 stiffness: 100,
                 delay: 0.9
-            });});
+            });
+            return () => animate(element, {
+                scale: 0.2,
+                opacity: 0
+            });
+        });
             hover(".source", (element) => {
                 animate(element, { scale: 0.97 })
 
