@@ -7,7 +7,7 @@ import smtplib
 from email.mime.text import MIMEText
 import os
 import string
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 app = Flask(__name__)
 app.secret_key = "5ecret_key_@69420_5kibid1"
@@ -304,7 +304,8 @@ def signup():
             token+=random.choice(chars)
         conn = sqlite3.connect("sources.db")
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO USERS (TOKEN) VALUES (?)", (token,))
+        current_datetime = datetime.now()
+        cursor.execute("INSERT INTO USERS (TOKEN, DATE_CREATED) VALUES (?, ?)", (token, f"{current_datetime.year}-{current_datetime.month}-{current_datetime.day}"))
         conn.commit()
         conn.close()
         return render_template("signup.html", token=token, login=["user" in session.keys()][0])
