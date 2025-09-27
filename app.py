@@ -401,11 +401,13 @@ def further_reading():
     
     return render_template("further-reading.html", further_reading=further_reading, str=str, topicsList=topicsList, login=["user" in session.keys()][0])
 
-@app.route('/further-source/<id>')
-def further-source(id):
+@app.route('/further_source/<id>')
+def further_source(id):
     conn = sqlite3.connect("further.db")
     cursor = conn.cursor()
-    source = cursor.execute("SELECT TITLE, AUTHOR, DATE, BLURB, TOPICSLIST, TIMEPERIOD_START, TIMEPERIOD_END, SELLERLINK FROM Further_sources WHERE coverPath IS ?", (f"covers/{id}.jpeg",))
+    source = cursor.execute("SELECT TITLE, AUTHOR, DATE, BLURB, TOPICSLIST, TIMEPERIOD_START, TIMEPERIOD_END, SELLERLINK FROM Further_sources WHERE coverPath IS ?", (f"covers/{id}.jpeg",)).fetchall()
+    source = [list(s) for s in source][0]
+    return render_template("further-source.html", source = source, login=["user" in session.keys()][0])
 
 
 if __name__ == '__main__':
