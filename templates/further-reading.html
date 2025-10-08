@@ -176,7 +176,7 @@
                     <h5 class="card-title">{{ src[0] }}</h5>
                     <p class="card-text"><span>{{ src[1] }}</span></p>
                     <p class="year" class="card-text">Year: <span class="year-pub">{{src[2]}}</span></p>
-                    <a href="#" class="btn btn-primary" style="margin-bottom: 1.5%;">Check it out</a>
+                    <a href="{{ url_for('further_source', id=src[3][7:][:-5]) }}" class="btn btn-primary" style="margin-bottom: 1.5%;">Check it out</a>
                 </div>
             </div>
         {% endfor %}

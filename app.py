@@ -297,6 +297,10 @@ def robots():
 
 @app.route('/signup')
 def signup():
+    return render_template("signup.html", login=["user" in session.keys()][0])
+    
+@app.route('/signup_process')
+def signup_process():
     if "user" not in session.keys():
         token = ""
         chars = string.digits+string.ascii_letters
@@ -308,7 +312,7 @@ def signup():
         cursor.execute("INSERT INTO USERS (TOKEN, DATE_CREATED) VALUES (?, ?)", (token, f"{current_datetime.year}-{current_datetime.month}-{current_datetime.day}"))
         conn.commit()
         conn.close()
-        return render_template("signup.html", token=token, login=["user" in session.keys()][0])
+        return render_template("signup_process.html", token=token, login=["user" in session.keys()][0])
     else:
         print(session.keys())
         return render_template("error.html", error="You are already logged in with an account.")
@@ -405,9 +409,10 @@ def further_reading():
 def further_source(id):
     conn = sqlite3.connect("further.db")
     cursor = conn.cursor()
-    source = cursor.execute("SELECT TITLE, AUTHOR, DATE, BLURB, TOPICSLIST, TIMEPERIOD_START, TIMEPERIOD_END, SELLERLINK FROM Further_sources WHERE coverPath IS ?", (f"covers/{id}.jpeg",)).fetchall()
+    source = cursor.execute("SELECT TITLE, AUTHOR, DATE, BLURB, TOPICSLIST, TIMEPERIOD_START, TIMEPERIOD_END, SELLERLINK, coverPath FROM Further_sources WHERE coverPath IS ?", (f"covers/{id}.jpeg",)).fetchall()
     source = [list(s) for s in source][0]
-    return render_template("further-source.html", source = source, login=["user" in session.keys()][0])
+    conn.close()
+    return render_template("further_source.html", source = source, login=["user" in session.keys()][0])
 
 
 if __name__ == '__main__':

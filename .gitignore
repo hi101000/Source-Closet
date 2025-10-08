@@ -14,3 +14,4 @@ static/.DS_Store
 add_src.py
 to-add.txt
 update_usrs.py
+run.sh
