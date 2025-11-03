@@ -57,16 +57,8 @@
                     <script type="text/javascript">
                         alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile. If you live in the United Kingdom, please contact your MP to ask them to amend the copyright law to make all public records in TNA part of the public domain, or at least freely usable for non-commercial purposes.');
                     </script>
-                    <object draggable="false" id="src_frame" class="scaled" style="zoom: 100%" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
-                {% elif ".pdf" in source[6] and "Images/" in source[6] %}
-                    <object type="application/pdf" style="zoom: 100%" id="src_frame" data="{{ url_for('static', filename=source[6]) }}#view=FitV" width="{{ source[9] }}" height="700px"></object>
-                {% elif "http" in source[6] %}
-                    <object id="src_frame" style="zoom: 100%" data="{{ source[9] }}#view=FitV" width="{{ source[9] }}"></object>
-                {% else %}
-                        <object draggable="false" id="src_frame" style="image-rendering: -webkit-optimize-contrast;" class="scaled" data="{{ url_for('static', filename=source[6]) }}" width="{{ source[9] }}"></object>
-                        <script>console.log('using other')</script>
                 {% endif %}
-            <script src="{{ url_for('static', filename="scripts/viewer.js") }}" defer></script>
+                <iframe src="https://drive.google.com/file/d/{{ source[6] }}/preview" width="640" height="900" allow="autoplay"></iframe>
             </div>
             <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
                 <script>
