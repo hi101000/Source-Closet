@@ -8,12 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
         <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-        <script type="text/javascript">
-
-        </script>
-        <style>
-            #my-pdf { height: 500px; border: 1px solid #ccc; }
-        </style>
         <script src="https://unpkg.com/pdfobject"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
@@ -58,7 +52,7 @@
                         alert('Due to copyright concerns, I am required to put a transcript of the document here rather than a photo/facsimile. If you live in the United Kingdom, please contact your MP to ask them to amend the copyright law to make all public records in TNA part of the public domain, or at least freely usable for non-commercial purposes.');
                     </script>
                 {% endif %}
-                <iframe src="https://drive.google.com/file/d/{{ source[6] }}/preview" width="640" height="900" allow="autoplay"></iframe>
+                <iframe id="content" src="https://drive.google.com/file/d/{{ source[6] }}/preview" width="650" height="900" allow="autoplay"></iframe>
             </div>
             <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
                 <script>

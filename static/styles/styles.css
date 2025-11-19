@@ -15,27 +15,6 @@
     -webkit-text-stroke: 2px black;
 }
 
-#content{
-    padding-left: 330px;
-    width: 150%;
-    height: 550%;
-    align-items: center;
-    overflow: auto;
-    position: relative;
-    padding-right: 0;
-}
-
-.scaled {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform-origin: center center;
-    z-index: 100;
-    overflow: auto;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 h1{
     text-align: center;
 }
@@ -113,7 +92,7 @@ h1{
 #metadata{
     font-family: "Winky Sans";
     font-size: 15px;
-    margin-left: 0px;
+    margin-left: 5%;
     padding-left: 40px;
     overflow: auto;
 }
@@ -169,4 +148,8 @@ body{
 .desc_lbl{
     font-weight: bold;
     color: #d0d0d0;;
+}
+
+#content{
+    margin-left: 15%;
 }
