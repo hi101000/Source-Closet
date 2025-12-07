@@ -70,7 +70,7 @@ def index():  # put application's code here
 @app.route('/browse')
 def browse():
     sources = []
-    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
     src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES")
     src = src.fetchall()
@@ -112,7 +112,7 @@ def source(id):
     if id == "1":
         prot = True
 
-    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
     src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE,TRANS,ATTR,LICENSE_LINK FROM SOURCES WHERE ID=?", (id,))
     src = src.fetchall()[0]
@@ -143,7 +143,7 @@ def about():
 
 @app.route('/search')
 def search():
-    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
     tags = [t[0] for t in cursor.execute("SELECT TAG FROM TAGS").fetchall()]
 
@@ -160,7 +160,7 @@ def search_process():
     id = 0
     start_yr = 0
     end_yr = 0
-    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
 
     num_entered = -1
@@ -279,7 +279,7 @@ def signup_process():
             chars = string.digits+string.ascii_letters
             for i in range(30):
                 token+=random.choice(chars)
-            conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+            conn = libsql.connect(url, auth_token=auth_token)
             cursor = conn.cursor()
             current_datetime = datetime.now()
             cursor.execute("INSERT INTO USERS (TOKEN, DATE_CREATED) VALUES (?, ?)", (token, f"{current_datetime.year}-{current_datetime.month}-{current_datetime.day}"))
@@ -303,7 +303,7 @@ def login_process():
     token = data.get("token_", "")
     if token == "":
         return render_template("error.html", error="You did not enter a token. Please try again.")
-    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
     user_data = cursor.execute("SELECT TOKEN FROM USERS").fetchall()
     conn.close()
@@ -323,7 +323,7 @@ def logout():
 def profile():
     if "user" not in session.keys():
         return render_template("error.html", error="You are not logged in. Please log in to view your profile.")
-    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
     user_token = session["user"]
     uid = cursor.execute("SELECT ID FROM USERS WHERE TOKEN=(?)", (user_token,)).fetchone()[0]
@@ -338,7 +338,7 @@ def profile():
 def save_source(id: int):
     if "user" not in session.keys():
         return render_template("error.html", error="You are not logged in. Please log in to save sources.")
-    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
     user_token = session["user"]
     cursor.execute("INSERT INTO USERS_SRCS (UID, SRC_ID) VALUES (?, ?)", (user_token, id))
@@ -351,7 +351,7 @@ def save_source(id: int):
 def delete_source(id: int):
     if "user" not in session.keys():
         return render_template("error.html", error="You are not logged in. Please log in to delete sources.")
-    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
     user_token = session["user"]
     cursor.execute("DELETE FROM USERS_SRCS WHERE UID=? AND SRC_ID=?", (user_token, id))
