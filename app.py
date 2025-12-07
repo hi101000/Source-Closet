@@ -29,41 +29,10 @@ def get_countries(id: int, cursor) -> list:
     couns = [c[0] for c in cursor.fetchall()]  # Fixed: properly extract tags from tuples
     return couns
 
-class User:
-    id = None
-    psswd = None
-    email = None
-    uname = None
-    def __init__(self, id, psswd, email, uname, key=None):
-        self.id = id
-        self.psswd = psswd
-        self.email = email
-        self.uname = uname
-        self.key = key
-    @staticmethod
-    def get(user_id):
-        conn = libsql.connect("users.db")
-        cursor = conn.cursor()
-        user_data = cursor.execute("SELECT ID, PSSWD, EMAIL, UNAME FROM USERS WHERE ID=?", (user_id,)).fetchone()
-        conn.close()
-        if user_data:
-            return User(*user_data)
-        return None
-    def is_authenticated(self):
-        if self.id is not None and self.psswd is not None and self.email is not None and self.uname is not None:
-            return True
-        return False
-    def is_anonymous(self):
-        return False
-    def get_id(self):
-        return f"{self.id}"
-    def is_active(self):
-        return True
-
 @app.route('/')
 def index():  # put application's code here
     sources = []
-    conn = libsql.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
     src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES")
     src = src.fetchall()
