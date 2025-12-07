@@ -32,8 +32,7 @@ def get_countries(id: int, cursor) -> list:
 @app.route('/')
 def index():  # put application's code here
     sources = []
-    conn = libsql.connect(":memory:", sync_url=url, auth_token=auth_token, sync_interval=0)
-    conn.sync()
+    conn = libsql.connect(url, auth_token=auth_token)
     cursor = conn.cursor()
     src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES")
     src = src.fetchall()
