@@ -2,12 +2,15 @@ from flask import Flask, render_template, request, send_file, redirect, url_for,
 import random
 from difflib import SequenceMatcher as SM
 import similarity as sim
-import sqlite3
+import libsql
 import smtplib
 from email.mime.text import MIMEText
 import os
 import string
 from datetime import timedelta, datetime
+
+url = os.getenv("TURSO_DATABASE_URL")
+auth_token = os.getenv("TURSO_AUTH_TOKEN")
 
 app = Flask(__name__)
 app.secret_key = "5ecret_key_@69420_5kibid1"
@@ -39,7 +42,7 @@ class User:
         self.key = key
     @staticmethod
     def get(user_id):
-        conn = sqlite3.connect("users.db")
+        conn = libsql.connect("users.db")
         cursor = conn.cursor()
         user_data = cursor.execute("SELECT ID, PSSWD, EMAIL, UNAME FROM USERS WHERE ID=?", (user_id,)).fetchone()
         conn.close()
@@ -60,7 +63,7 @@ class User:
 @app.route('/')
 def index():  # put application's code here
     sources = []
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db")
     cursor = conn.cursor()
     src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES")
     src = src.fetchall()
@@ -98,7 +101,7 @@ def index():  # put application's code here
 @app.route('/browse')
 def browse():
     sources = []
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
     src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE FROM SOURCES")
     src = src.fetchall()
@@ -140,7 +143,7 @@ def source(id):
     if id == "1":
         prot = True
 
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
     src = cursor.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,PATH,LINK,CITATION,WIDTH,TITLE,TRANS,ATTR,LICENSE_LINK FROM SOURCES WHERE ID=?", (id,))
     src = src.fetchall()[0]
@@ -171,7 +174,7 @@ def about():
 
 @app.route('/search')
 def search():
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
     tags = [t[0] for t in cursor.execute("SELECT TAG FROM TAGS").fetchall()]
 
@@ -188,7 +191,7 @@ def search_process():
     id = 0
     start_yr = 0
     end_yr = 0
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
 
     num_entered = -1
@@ -301,21 +304,25 @@ def signup():
     
 @app.route('/signup_process')
 def signup_process():
-    if "user" not in session.keys():
-        token = ""
-        chars = string.digits+string.ascii_letters
-        for i in range(30):
-            token+=random.choice(chars)
-        conn = sqlite3.connect("sources.db")
-        cursor = conn.cursor()
-        current_datetime = datetime.now()
-        cursor.execute("INSERT INTO USERS (TOKEN, DATE_CREATED) VALUES (?, ?)", (token, f"{current_datetime.year}-{current_datetime.month}-{current_datetime.day}"))
-        conn.commit()
-        conn.close()
-        return render_template("signup_process.html", token=token, login=["user" in session.keys()][0])
-    else:
-        print(session.keys())
-        return render_template("error.html", error="You are already logged in with an account.")
+    try:
+        if "user" not in session.keys():
+            token = ""
+            chars = string.digits+string.ascii_letters
+            for i in range(30):
+                token+=random.choice(chars)
+            conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
+            cursor = conn.cursor()
+            current_datetime = datetime.now()
+            cursor.execute("INSERT INTO USERS (TOKEN, DATE_CREATED) VALUES (?, ?)", (token, f"{current_datetime.year}-{current_datetime.month}-{current_datetime.day}"))
+            conn.commit()
+            conn.sync()
+            conn.close()
+            return render_template("signup_process.html", token=token, login=["user" in session.keys()][0])
+        else:
+            print(session.keys())
+            return render_template("error.html", error="You are already logged in with an account.")
+    except Exception as e:
+        return render_template("error.html", error=f"We are currently experiencing some difficulties with our signup process. Please try again later. Error details: {e}")
 
 @app.route('/login')
 def login():
@@ -327,7 +334,7 @@ def login_process():
     token = data.get("token_", "")
     if token == "":
         return render_template("error.html", error="You did not enter a token. Please try again.")
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
     user_data = cursor.execute("SELECT TOKEN FROM USERS").fetchall()
     conn.close()
@@ -347,10 +354,11 @@ def logout():
 def profile():
     if "user" not in session.keys():
         return render_template("error.html", error="You are not logged in. Please log in to view your profile.")
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
     user_token = session["user"]
-    sources = conn.execute("SELECT SRC_ID FROM USERS_SRCS WHERE UID=(?)", (user_token,)).fetchall()
+    uid = cursor.execute("SELECT ID FROM USERS WHERE TOKEN=(?)", (user_token,)).fetchone()[0]
+    sources = conn.execute("SELECT SRC_ID FROM USERS_SRCS WHERE UID=(?)", (uid,)).fetchall()
     sources = [s[0] for s in sources]
     #                              0      1           2     3     4     5       6
     sources = conn.execute("SELECT ID, DESCRIPTION, YEAR, MONTH, DATE, AUTHOR, TITLE FROM SOURCES WHERE ID IN ({})".format(','.join('?' * len(sources))), sources).fetchall()
@@ -361,11 +369,12 @@ def profile():
 def save_source(id: int):
     if "user" not in session.keys():
         return render_template("error.html", error="You are not logged in. Please log in to save sources.")
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
     user_token = session["user"]
     cursor.execute("INSERT INTO USERS_SRCS (UID, SRC_ID) VALUES (?, ?)", (user_token, id))
     conn.commit()
+    conn.sync()
     conn.close()
     return redirect(url_for('source', id=id))
 
@@ -373,11 +382,12 @@ def save_source(id: int):
 def delete_source(id: int):
     if "user" not in session.keys():
         return render_template("error.html", error="You are not logged in. Please log in to delete sources.")
-    conn = sqlite3.connect("sources.db")
+    conn = libsql.connect("sources.db", sync_url=url, auth_token=auth_token)
     cursor = conn.cursor()
     user_token = session["user"]
     cursor.execute("DELETE FROM USERS_SRCS WHERE UID=? AND SRC_ID=?", (user_token, id))
     conn.commit()
+    conn.sync()
     conn.close()
     return redirect(url_for('profile'))
 
@@ -391,7 +401,7 @@ def dl():
 
 @app.route('/further_reading')
 def further_reading():
-    conn = sqlite3.connect("further.db")
+    conn = libsql.connect("further.db")
     cursor = conn.cursor()
     further_reading = cursor.execute("SELECT Title, Author, Date, coverPath, TimePeriod_start, TimePeriod_end, TopicsList FROM Further_Sources").fetchall()
     further_reading = [list(f) for f in further_reading]
@@ -407,7 +417,7 @@ def further_reading():
 
 @app.route('/further_source/<id>')
 def further_source(id):
-    conn = sqlite3.connect("further.db")
+    conn = libsql.connect("further.db")
     cursor = conn.cursor()
     source = cursor.execute("SELECT TITLE, AUTHOR, DATE, BLURB, TOPICSLIST, TIMEPERIOD_START, TIMEPERIOD_END, SELLERLINK, coverPath FROM Further_sources WHERE coverPath IS ?", (f"covers/{id}.jpeg",)).fetchall()
     source = [list(s) for s in source][0]
