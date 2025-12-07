@@ -284,7 +284,6 @@ def signup_process():
             current_datetime = datetime.now()
             cursor.execute("INSERT INTO USERS (TOKEN, DATE_CREATED) VALUES (?, ?)", (token, f"{current_datetime.year}-{current_datetime.month}-{current_datetime.day}"))
             conn.commit()
-            conn.sync()
             conn.close()
             return render_template("signup_process.html", token=token, login=["user" in session.keys()][0])
         else:
@@ -343,7 +342,6 @@ def save_source(id: int):
     user_token = session["user"]
     cursor.execute("INSERT INTO USERS_SRCS (UID, SRC_ID) VALUES (?, ?)", (user_token, id))
     conn.commit()
-    conn.sync()
     conn.close()
     return redirect(url_for('source', id=id))
 
@@ -356,7 +354,6 @@ def delete_source(id: int):
     user_token = session["user"]
     cursor.execute("DELETE FROM USERS_SRCS WHERE UID=? AND SRC_ID=?", (user_token, id))
     conn.commit()
-    conn.sync()
     conn.close()
     return redirect(url_for('profile'))
 
