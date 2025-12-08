@@ -357,14 +357,6 @@ def delete_source(id: int):
     conn.close()
     return redirect(url_for('profile'))
 
-@app.route('/dl')
-def dl():
-    if "user" not in session.keys():
-        return render_template("error.html", error="You are not logged in. Please log in to download sources.")
-    if session["user"] != "@GauisSkibidicusMaximus101000":
-        return render_template("error.html", error="You are not allowed to access this page.")
-    return send_file("sources.db", as_attachment=True, download_name="sources.db")
-
 @app.route('/further_reading')
 def further_reading():
     conn = libsql.connect("further.db")
