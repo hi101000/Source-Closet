@@ -56,10 +56,10 @@
             </div>
             <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
                 {% if source[0] > 1 %}
-                    <a href="{{ url_for('source', id=source[0]-1) }}"><button id="prev">Previous Source</button></a>
+                    <a href="{{ url_for('source', id=source[0]-1) }}"><button id="prev" class="adj-source-btn">Previous Source</button></a>
                 {% endif %}
                 {% if source[0] < max_id %}
-                    <a href="{{ url_for('source', id=source[0]+1) }}"><button id="next">Next Source</button></a>
+                    <a href="{{ url_for('source', id=source[0]+1) }}"><button id="next" class="adj-source-btn">Next Source</button></a>
                 {% endif %}
                 <script>
                     function saveSource(){
@@ -119,6 +119,27 @@
             opacity: [0, 1],
             translateY: [-50, 0]
         });
+
+        let prev = document.getElementById("prev");
+let next = document.getElementById("next");
+
+if(prev){
+    prev.addEventListener('mouseenter', ()=>{
+        prev.style.cursor = 'pointer';
+    });
+    prev.addEventListener('mouseleave', ()=>{
+        prev.style.cursor = 'default';
+    });
+}
+
+if(next){
+    next.addEventListener('mouseenter', ()=>{
+        next.style.cursor = 'pointer';
+    });
+    next.addEventListener('mouseleave', ()=>{
+        next.style.cursor = 'default';
+    });
+}
 </script>
     </body>
 </html>
