@@ -131,7 +131,7 @@ def source(id):
         for f in furt:
             further[f[0]] = f[1]
     conn.close()
-    return render_template("source.html", source=src, prot=False if id != "1" else True, further=further, login=["user" in session.keys()][0])
+    return render_template("source.html", max_id=69, source=src, prot=False if id != "1" else True, further=further, login=["user" in session.keys()][0])
 
 @app.route('/sources_abbr')
 def sources_abbr():
