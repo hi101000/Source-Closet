@@ -383,6 +383,16 @@ def further_source(id):
     conn.close()
     return render_template("further_source.html", source = source, login=["user" in session.keys()][0])
 
+@app.route('/page-count')
+def page_count():
+    conn = libsql.connect(url, auth_token=auth_token)
+    cursor = conn.cursor()
+    count = cursor.execute("SELECT LENGTH FROM SOURCES").fetchall()
+    count = [int(c[0]) for c in count]
+    count = sum(count)
+    conn.close()
+    return f"Total number of pages hosted on Source Closet: {count}"
+
 
 if __name__ == '__main__':
     app.run()
