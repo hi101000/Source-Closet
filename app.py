@@ -130,8 +130,9 @@ def source(id):
         furt = cursor.execute("SELECT NAME, URL FROM FURTHER WHERE ID IN (SELECT FURT_ID FROM TAGS_FURTHER WHERE TAG_ID=?)", (tag_id,)).fetchall()
         for f in furt:
             further[f[0]] = f[1]
+    max_id = cursor.execute("SELECT MAX(ID) FROM SOURCES").fetchone()[0]
     conn.close()
-    return render_template("source.html", max_id=69, source=src, prot=False if id != "1" else True, further=further, login=["user" in session.keys()][0])
+    return render_template("source.html", max_id=max_id, source=src, prot=False if id != "1" else True, further=further, login=["user" in session.keys()][0])
 
 @app.route('/sources_abbr')
 def sources_abbr():
