@@ -165,7 +165,3 @@ body{
     margin-bottom: 20px;
     border: none;
 }
-.adj-source-btn:hover{
-    background-color: rgb(74, 20, 131);
-    cursor: pointer;
-}
