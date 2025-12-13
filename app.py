@@ -2,11 +2,7 @@ from flask import Flask, render_template, request, send_file, redirect, url_for,
 import random
 from difflib import SequenceMatcher as SM
 import similarity as sim
-try:
-    import libsql
-    print("libsql imported from:", getattr(libsql, "__file__", libsql.__package__))
-except Exception as e:
-    print("libsql import error:", e)
+import libsql
 import smtplib
 from email.mime.text import MIMEText
 import os
