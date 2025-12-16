@@ -4,14 +4,15 @@
   "description": "A port of the source closet website onto a nodejs server that uses nunjucks for templating",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hi101000/Source-Closet.git"
   },
   "keywords": [
-    "souce",
+    "source",
     "closet",
     "history"
   ],
@@ -20,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/hi101000/Source-Closet/issues"
   },
-  "homepage": "https://github.com/hi101000/Source-Closet#readme"
+  "homepage": "https://github.com/hi101000/Source-Closet#readme",
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "express": "^5.2.1",
+    "http-errors": "^2.0.1",
+    "libsql": "^0.5.22",
+    "nunjucks": "^3.2.4"
+  }
 }
