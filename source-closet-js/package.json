@@ -1,0 +1,24 @@
+{
+  "name": "source-closet-js",
+  "version": "1.0.0",
+  "description": "A port of the source closet website onto a nodejs server that uses nunjucks for templating",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hi101000/Source-Closet.git"
+  },
+  "keywords": [
+    "souce",
+    "closet",
+    "history"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hi101000/Source-Closet/issues"
+  },
+  "homepage": "https://github.com/hi101000/Source-Closet#readme"
+}

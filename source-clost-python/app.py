@@ -1,10 +1,8 @@
-from flask import Flask, render_template, request, send_file, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session
 import random
 from difflib import SequenceMatcher as SM
 import similarity as sim
 import libsql
-import smtplib
-from email.mime.text import MIMEText
 import os
 import string
 from datetime import timedelta, datetime
