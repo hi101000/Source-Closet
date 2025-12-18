@@ -1,5 +1,5 @@
 {
-  "name": "source-closet-js",
+  "name": "source-closet",
   "version": "1.0.0",
   "description": "A port of the source closet website onto a nodejs server that uses nunjucks for templating",
   "main": "app.js",

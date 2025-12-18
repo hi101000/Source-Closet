@@ -10,7 +10,7 @@ const readFile = require('fs');
 const app = express();
 const port = 3000;
 
-app.use('/static', express.static('static'));
+app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session({
@@ -366,7 +366,7 @@ app.get('/robots.txt', (req, res) => {
     res.send(robots);
 });
 
-app.get('sitemap.txt', (req, res) => {
+app.get('/sitemap.txt', (req, res) => {
     const sitemap = readFile.readFileSync(path.join(__dirname, 'static/assets/sitemap.txt'), 'utf8');
     res.type('text/plain');
     res.send(sitemap);
