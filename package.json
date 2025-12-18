@@ -29,5 +29,6 @@
     "express-session": "^1.18.2",
     "http-errors": "^2.0.1",
     "nunjucks": "^3.2.4"
-  }
+  },
+  "packageManager": "npm@10.9.4"
 }
