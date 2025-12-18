@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Source Closet - Browse</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
+    <link rel="stylesheet" href="/static/styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
     <meta name="google-site-verification" content="FyuSCl7BsO80rtLPSAib-nEb1hCIjHcgwGOc1pZJ1Y4" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,29 +23,29 @@
         const { animate, scroll, inView, hover } = Motion
     </script>
 <div class="topnav">
-  <a href="{{url_for('index')}}">Home</a>
-  <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-  <a href="{{ url_for('search') }}">Search</a>
-  <a class="active" href="{{ url_for('browse') }}">Browse</a>
-  <a href="{{ url_for('further_reading') }}">Further Reading</a>
-  <a href="{{ url_for('about') }}">About</a>
+  <a href="/">Home</a>
+  <a href="/sources_abbr">Source Abbreviations</a>
+  <a href="/search">Search</a>
+  <a class="active" href="/browse">Browse</a>
+  <a href="/further_reading">Further Reading</a>
+  <a href="/about">About</a>
         {% if not login %}
-            <a href="{{ url_for('signup') }}">Sign Up</a>
-            <a href="{{ url_for('login') }}">Log In</a>
+            <a href="/signup">Sign Up</a>
+            <a href="/login">Log In</a>
         {% else %}
-            <a href="{{ url_for('logout') }}">Log Out</a>
-            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="/logout">Log Out</a>
+            <a href="/profile">Profile</a>
         {% endif %}
 </div>
 <h1 id="title">Source Closet</h1>
 {% for src in sources %}
-<a href="{{ url_for("source", id=src[1]) }}" class="src_link">
+<a href="/source/{{ src.ID}}" class="src_link">
     <div class="source">
-        <h2 class="src_heading">{{ src[0]["Title"] }}</h2>
-        <p>{{ src[0]["Date"] }}/{{ src[0]["Month"] }}/{{ src[0]["Year"] }}</p>
-        <p>Author: {{ src[0]["Author"] }}</p>
-        <p>Description: <span class="desc" style="display: inline;">{{ src[0]["Description"] }}</span></p>
-        <p>Tags: {{ ', '.join(src[0]["Tags"]) }}</p>
+        <h2 class="src_heading">{{ src.TITLE }}</h2>
+        <p>{{ src.DATE }}/{{ src.MONTH }}/{{ src.YEAR }}</p>
+        <p>Author: {{ src.AUTHOR }}</p>
+        <p>Description: <span class="desc" style="display: inline;">{{ src.DESCRIPTION }}</span></p>
+        <p>Tags: {{ src.TAGS }}</p>
     </div>
 </a>
 <br>

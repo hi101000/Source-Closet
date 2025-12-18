@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Source Closet - Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
+    <link rel="stylesheet" href="/static/styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
     <meta name="google-site-verification" content="FyuSCl7BsO80rtLPSAib-nEb1hCIjHcgwGOc1pZJ1Y4" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,33 +37,33 @@
     <script>
         const { animate, scroll, inView, hover } = Motion
         function removeSource(id){
-            window.location.href = "{{ url_for('delete_source', id = 0) }}".replace('0', id);
+            window.location.href = "/delete_source/" + id;
         }
     </script>
 <div class="topnav">
-  <a href="{{url_for('index')}}">Home</a>
-  <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-  <a href="{{ url_for('search') }}">Search</a>
-  <a href="{{ url_for('browse') }}">Browse</a>
-  <a href="{{ url_for('further_reading') }}">Further Reading</a>
-  <a href="{{ url_for('about') }}">About</a>
+  <a href="/">Home</a>
+  <a href="/sources_abbr">Source Abbreviations</a>
+  <a href="/search">Search</a>
+  <a href="/browse">Browse</a>
+  <a href="/further_reading">Further Reading</a>
+  <a href="/about">About</a>
         {% if not login %}
-            <a href="{{ url_for('signup') }}">Sign Up</a>
-            <a href="{{ url_for('login') }}">Log In</a>
+            <a href="/signup">Sign Up</a>
+            <a href="/login">Log In</a>
         {% else %}
-            <a href="{{ url_for('logout') }}">Log Out</a>
-            <a class="active" href="{{ url_for('profile') }}">Profile</a>
+            <a href="/logout">Log Out</a>
+            <a class="active" href="/profile">Profile</a>
         {% endif %}
 </div>
 <h1 id="title">Your Profile</h1>
 {% for src in sources %}
 <div class="source" style="position: relative;">
-    <button class="x-btn" onclick="removeSource({{ src[0] }});">x</button>
-    <a href="{{ url_for('source', id=src[0]) }}" class="src_link" id="{{ src[0] }}" style="display: block;">
-        <h2 class="src_heading">{{ src[6] }}</h2>
-        <p>{{ src[4] }}/{{ src[3] }}/{{ src[2] }}</p>
-        <p>Author: {{ src[5] }}</p>
-        <p>Description: <span class="desc" style="display: inline;">{{ src[1] }}</span></p>
+    <button class="x-btn" onclick="removeSource({{ src.ID }});">x</button>
+    <a href="/source/{{ src.ID }}" class="src_link" id="{{ src.ID }}" style="display: block;">
+        <h2 class="src_heading">{{ src.TITLE }}</h2>
+        <p>{{ src.DATE }}/{{ src.MONTH }}/{{ src.YEAR }}</p>
+        <p>Author: {{ src.AUTHOR }}</p>
+        <p>Description: <span class="desc" style="display: inline;">{{ src.DESCRIPTION }}</span></p>
     </a>
 </div>
 <br>

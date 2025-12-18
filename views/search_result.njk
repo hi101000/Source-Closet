@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="stylesheet" href="/static/styles/styles.css">
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
@@ -15,34 +15,33 @@
         const { animate, scroll, inView, hover } = Motion
     </script>
 <div class="topnav">
-      <a href="{{url_for('index')}}">Home</a>
-      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-      <a href="{{ url_for('search') }}">Search</a>
-      <a href="{{ url_for('browse') }}">Browse</a>
-      <a href="{{ url_for('further_reading') }}">Further Reading</a>
-      <a href="{{ url_for('about') }}">About</a>
+      <a href="/">Home</a>
+      <a href="/source_abbr">Source Abbreviations</a>
+      <a class="active" href="/search">Search</a>
+      <a href="/browse">Browse</a>
+      <a href="/further_reading">Further Reading</a>
+      <a href="/about">About</a>
         {% if not login %}
-            <a href="{{ url_for('signup') }}">Sign Up</a>
-            <a href="{{ url_for('login') }}">Log In</a>
+            <a href="/signup">Sign Up</a>
+            <a href="/login">Log In</a>
         {% else %}
-            <a href="{{ url_for('logout') }}">Log Out</a>
-            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="/logout">Log Out</a>
+            <a href="/profile">Profile</a>
         {% endif %}
 </div>
 <p>
     <h1 class="results_heading">Search Results</h1>
-    <p class="results_subheading">Found {{ sources[0] | length }} results for "{{ ' '.join(query) }}"</p>
-    {% for key, value in sources[0].items() %}
-        <a href="{{ url_for("source", id=key) }}" class="src_link">
+    <p class="results_subheading">Found {{ sources | length }} results for "{{ query }}"</p>
+    {% for src in sources %}
+        <a href="/source/{{ src.ID }}" class="src_link">
             <div class="source">
-                <h2 class="src_heading">{{ value[9] }}</h2>
-                <p>{{ value[3] }}/{{ value[2] }}/{{ value[1] }}</p>
-                <p>Author: {{ value[4] }}</p>
-                <p>Description: <span class="desc">{{ value[0] }}</span></p>
-                <p>Tags: {{', '.join(value[10]) }}</p>
+                <h2 class="src_heading">{{ src.TITLE }}</h2>
+                <p>{{ src.MONTH }}/{{ src.DATE }}/{{ src.YEAR }}</p>
+                <p>Author: {{ src.AUTHOR }}</p>
+                <p>Description: <span class="desc">{{ src.DESCRIPTION }}</span></p>
+                <p>Tags: {{ src.TAGS }}</p>
             </div>
         </a>
-        <p>{{ src }}</p>
         <script>
             inView(".source",(element)=>{animate(element, {
                 scale: [0.2, 1,0.98,1],

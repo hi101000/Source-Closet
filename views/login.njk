@@ -35,25 +35,25 @@
             font-family: "Winky Sans", ui-rounded;
         }
     </style>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="stylesheet" href="/static/styles/styles.css">
 </head>
 <body style="font: 'Winky Sans', ui-rounded, sans-serif; color: rgb(190, 147, 112);">
 <div class="topnav">
-      <a href="{{url_for('index')}}">Home</a>
-      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-      <a href="{{ url_for('search') }}">Search</a>
-      <a href="{{ url_for('browse') }}">Browse</a>
-      <a href="{{ url_for('further_reading') }}">Further Reading</a>
-      <a href="{{ url_for('about') }}">About</a>
+      <a href="/">Home</a>
+      <a href="/sources_abbr">Source Abbreviations</a>
+      <a href="/search">Search</a>
+      <a href="/browse">Browse</a>
+      <a href="/further_reading">Further Reading</a>
+      <a href="/about">About</a>
       {% if not login %}
-        <a href="{{ url_for('signup') }}">Sign Up</a>
-        <a class="active" href="{{ url_for('login') }}">Log In</a>
+        <a href="/signup">Sign Up</a>
+        <a class="active" href="/login">Log In</a>
       {% endif %}
 </div>
 <br>
 <br>
 <div id="main_search_content">
-<form action="{{ url_for('login_process') }}" method="post">
+<form action="/login" method="post">
     <label for="TOKEN">User Token: <input type="search" id="TOKEN" name="token_"></label>
     <br>
     <br>

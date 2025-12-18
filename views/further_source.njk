@@ -2,11 +2,11 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Source Closet - {{ source[10] }}</title>
+        <title>Source Closet - {{ source.Title }}</title>
             <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+        <link rel="stylesheet" href="/static/styles/styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
         <script type="text/javascript">
 
@@ -23,35 +23,35 @@
                 const { animate, scroll } = Motion
             </script>
         <div class="topnav">
-        <a href="{{url_for('index')}}">Home</a>
-        <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-        <a href="{{ url_for('search') }}">Search</a>
-        <a href="{{ url_for('browse') }}">Browse</a>
-        <a href="{{ url_for('further_reading') }}">Further Reading</a>
-        <a href="{{ url_for('about') }}">About</a>
+        <a href="/">Home</a>
+        <a href="/sources_abbr">Source Abbreviations</a>
+        <a href="/search">Search</a>
+        <a href="/browse">Browse</a>
+        <a href="/further_reading">Further Reading</a>
+        <a href="/about">About</a>
         {% if not login %}
-            <a href="{{ url_for('signup') }}">Sign Up</a>
-            <a href="{{ url_for('login') }}">Log In</a>
+            <a href="/signup">Sign Up</a>
+            <a href="/login">Log In</a>
         {% else %}
-            <a href="{{ url_for('logout') }}">Log Out</a>
-            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="/logout">Log Out</a>
+            <a href="/profile">Profile</a>
         {% endif %}
         </div>
 
         <div id="main_content">
-        <h1 id="title">{{ source[0] }}</h1>
+        <h1 id="title">{{ source.Title }}</h1>
         </div>
         <div id="main">
             <div id="content" style="height: 1000px">
-                <img src="{{ url_for('static', filename=source[8]) }}" id="cover">
+                <img src="/static/{{ source.CoverPath }}" id="cover">
             </div>
             <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
                 <p>
-                    <span class="highlighted">Author:</span> {{ source[1] }} <br><br>
-                    <span class="highlighted">Year:</span> {{ source[2] }} <br><br>
-                    <span class="highlighted">Topics:</span> {{ source[4] }} <br><br>
-                    <span class="highlighted">Description:</span> {{ source[3] }} <br><br>
-                    <span class="highlighted"><a href="{{ source[7] }}">Seller Link</a><br><br>
+                    <span class="highlighted">Author:</span> {{ source.Author }} <br><br>
+                    <span class="highlighted">Year:</span> {{ source.Year }} <br><br>
+                    <span class="highlighted">Topics:</span> {% if source.TopicsList %}{{ source.TopicsList }}{% else %}None{% endif %} <br><br>
+                    <span class="highlighted">Description:</span> {{ source.Description }} <br><br>
+                    <span class="highlighted"><a href="{{ source.SellerLink }}">Seller Link</a><br><br>
                 </p>
             </div>
             <br>

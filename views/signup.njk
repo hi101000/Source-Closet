@@ -22,29 +22,30 @@
             padding: 40px;
         }
     </style>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="stylesheet" href="/static/styles/styles.css">
 </head>
 <body style="font: 'Winky Sans', ui-rounded, sans-serif; color: rgb(190, 147, 112);">
 <div class="topnav">
-      <a href="{{url_for('index')}}">Home</a>
-      <a href="{{url_for('sources_abbr')}}">Source Abbreviations</a>
-      <a href="{{ url_for('search') }}">Search</a>
-      <a href="{{ url_for('browse') }}">Browse</a>
-      <a href="{{ url_for('further_reading') }}">Further Reading</a>
-      <a href="{{ url_for('about') }}">About</a>
-      <a class="active" href="{{ url_for('signup') }}">Sign Up</a>
-      <a href="{{ url_for('login') }}">Log In</a>
+      <a href="/">Home</a>
+      <a href="/sources_abbr">Source Abbreviations</a>
+      <a href="/search">Search</a>
+      <a href="/browse">Browse</a>
+      <a href="/further_reading">Further Reading</a>
+      <a href="/about">About</a>
+      <a class="active" href="/signup">Sign Up</a>
+      <a href="/login">Log In</a>
 </div>
 <br>
 <br>
 <div id="token_box">
-    <script>
-        function redirect(){
-            // Navigate to the signup_process route handled by Flask
-            window.location.href = "{{ url_for('signup_process') }}";
-        }
-    </script>
-    <button type="button" class="btn btn-primary" onclick="redirect()">Sign Up Here</button>
+    {% if post %}
+        <h1>Sign Up Successful!</h1>
+        <h2>Your verification token is: {{ token }}</h2>
+    {% else %}
+        <form method="POST" action="/signup">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    {% endif %}
 </div>
 </body>
 </html>

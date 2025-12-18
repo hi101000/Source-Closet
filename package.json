@@ -23,10 +23,11 @@
   },
   "homepage": "https://github.com/hi101000/Source-Closet#readme",
   "dependencies": {
+    "@libsql/client": "^0.15.15",
     "chokidar": "^3.6.0",
     "express": "^5.2.1",
+    "express-session": "^1.18.2",
     "http-errors": "^2.0.1",
-    "libsql": "^0.5.22",
     "nunjucks": "^3.2.4"
   }
 }
