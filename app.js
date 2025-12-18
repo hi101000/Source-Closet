@@ -6,7 +6,6 @@ const createClient = require('@libsql/client').createClient;
 const session = require('express-session');
 const readFile = require('fs');
 
-
 const app = express();
 const port = 3000;
 
@@ -28,10 +27,16 @@ const client = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN
 });
 
-let max_id;
+let max_id = 0;
 
 let maxIdResult = client.execute("SELECT MAX(ID) AS MAX_ID FROM SOURCES").then(result => {
-    max_id = result.rows[0].MAX_ID;
+    const v = result.rows && result.rows[0] && result.rows[0].MAX_ID;
+    const n = Number(v);
+    if (Number.isFinite(n)) {
+        max_id = n;
+    } else {
+        max_id = 0;
+    }
     return result;
 }).catch(error => {
     console.error('Error fetching max ID:', error);
@@ -49,7 +54,8 @@ app.set('view engine', 'njk'); // or 'njk'
 
 app.get('/', async (req, res) => {
     try {
-        const result = await client.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,TITLE FROM SOURCES WHERE ID > (?)", [max_id-5]);
+        const startId = Number.isFinite(max_id) ? Math.max(0, max_id - 5) : 0;
+        const result = await client.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,TITLE FROM SOURCES WHERE ID > (?)", [startId]);
 
         // Fetch tags for each source in parallel and attach them
         await Promise.all(result.rows.map(async (item) => {
