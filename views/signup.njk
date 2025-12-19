@@ -40,7 +40,7 @@
 <div id="token_box">
     {% if post %}
         <h1>Sign Up Successful!</h1>
-        <h2>Your verification token is: {{ token }}</h2>
+        <h2>Your user token is: {{ token }}</h2>
     {% else %}
         <form method="POST" action="/signup">
             <button type="submit" class="btn btn-primary">Sign Up</button>
