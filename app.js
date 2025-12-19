@@ -33,7 +33,6 @@ let maxIdResult = client.execute("SELECT MAX(ID) AS MAX_ID FROM SOURCES").then(r
     const v = result.rows && result.rows[0] && result.rows[0].MAX_ID;
     const n = Number(v);
     if (Number.isFinite(n)) {
-        console.log(`Max ID is ${v}`);
         max_id = n;
     } else {
         max_id = 0;
@@ -55,8 +54,10 @@ app.set('view engine', 'njk'); // or 'njk'
 
 app.get('/', async (req, res) => {
     try {
-        const startId = Number.isFinite(max_id) ? Math.max(0, max_id - 5) : 0;
-        const result = await client.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,TITLE FROM SOURCES WHERE ID > (?)", [startId]);
+        // Use a deterministic query to fetch the latest 5 sources directly.
+        // This avoids relying on the module-level `max_id` which may still be 0
+        // if the initial MAX(ID) query hasn't completed at request time.
+        const result = await client.execute("SELECT ID,DESCRIPTION,YEAR,MONTH,DATE,AUTHOR,TITLE FROM SOURCES ORDER BY ID DESC LIMIT 5");
 
         // Fetch tags for each source in parallel and attach them
         await Promise.all(result.rows.map(async (item) => {
@@ -66,7 +67,8 @@ app.get('/', async (req, res) => {
             );
             item.TAGS = tagResult.rows.map(r => r.TAG).join(', ');
         }));
-        result.rows.reverse();
+
+        // Query returns newest-first due to ORDER BY DESC, keep that order
         res.render('index.njk', { sources: result.rows, length: result.rows.length, login: req.session.user ? true : false });
     } catch (error) {
         console.error('Database query error:', error);
