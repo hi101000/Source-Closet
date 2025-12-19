@@ -1,7 +1,6 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const os = require('os');
 const createClient = require('@libsql/client').createClient;
 const session = require('express-session');
 const readFile = require('fs');
@@ -13,7 +12,7 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session({
-    secret: '@SinghasanKhaliKaro101', // Replace with a strong secret in production
+    secret: process.env.SECRET_KEY, // Replace with a strong secret in production
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
