@@ -211,8 +211,6 @@
     function filterSources() {
         let yearRange = $("#date").val().split(" - ").map(Number);
         let periodRange = $("#period").val().split(" - ").map(Number);
-        console.log(periodRange);
-        //let ww2 = document.getElementById("ww2").checked;
 
         // Always select ALL sources, not just visible ones
         let sources = Array.from(document.querySelectorAll(".source"));

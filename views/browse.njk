@@ -15,7 +15,28 @@
         #title{
             font-size: 6em;
         }
+        #sidebar{
+            width: 30%;
+            height: 100vh;
+            background-color: rgb(95, 18, 167);
+            color: rgb(176, 104, 53);
+            border-radius: 20px;
+            padding: 50px;
+            font-family: 'Winky Sans', cursive;
+            -webkit-text-stroke: 1px black;
+            
+        }
+        label{
+            font-size: 40px;
+        }
+        .range-slider{
+            width: 20vw;
+            background-color: rgb(176, 104, 53);
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
@@ -38,18 +59,31 @@
         {% endif %}
 </div>
 <h1 id="title">Source Closet</h1>
-{% for src in sources %}
-<a href="/source/{{ src.ID}}" class="src_link">
-    <div class="source">
-        <h2 class="src_heading">{{ src.TITLE }}</h2>
-        <p>{{ src.DATE }}/{{ src.MONTH }}/{{ src.YEAR }}</p>
-        <p>Author: {{ src.AUTHOR }}</p>
-        <p>Description: <span class="desc" style="display: inline;">{{ src.DESCRIPTION }}</span></p>
-        <p>Tags: {{ src.TAGS }}</p>
+<div id='content-browse' style='display: flex;'>
+    <div id='sidebar'>
+        <label for="yr">Year:</label>
+        <input class="txtbx" type="text" id="yr" readonly>
+        <br>
+        <br>
+        <div class="range-slider" id="year"></div>
     </div>
-</a>
-<br>
-{% endfor %}
+    <div id='sources'>
+        {% for src in sources %}
+        <div class="src_div">
+            <a href="/source/{{ src.ID}}" class="src_link" data-year="{{ src.YEAR }}" data-month="{{ src.MONTH }}" data-day="{{ src.DAY }}" data-tags="{{ src.TAGS }}">
+                <div class="source">
+                    <h2 class="src_heading">{{ src.TITLE }}</h2>
+                    <p>{{ src.DATE }}/{{ src.MONTH }}/{{ src.YEAR }}</p>
+                    <p>Author: {{ src.AUTHOR }}</p>
+                    <p>Description: <span class="desc" style="display: inline;">{{ src.DESCRIPTION }}</span></p>
+                    <p>Tags: {{ src.TAGS }}</p>
+                </div>
+            </a>
+            <br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 <br>
 <script>
     inView(".source",(element, enterInfo)=>{
@@ -70,8 +104,10 @@
         animate(element, { scale: 0.97 })
 
         return () => animate(element, { scale: 1 })
-    })
-    
+    });
+    let year_min = {{ year_min }};
+    let year_max = {{ year_max }};
 </script>
+<script defer src="/static/scripts/slider.js"></script>
 </body>
 </html>

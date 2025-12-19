@@ -294,9 +294,11 @@ app.get('/browse', async (req, res) => {
                 [item.ID]
             );
             item.TAGS = tagResult.rows.map(r => r.TAG).join(', ');
-            console.log(item);
         }));
-    res.render('browse.njk', { sources: result.rows, login: req.session.user ? true : false });
+    const year_max = Math.max(...result.rows.map(r => r.YEAR));
+    const year_min = Math.min(...result.rows.map(r => r.YEAR));
+    
+    res.render('browse.njk', { sources: result.rows, login: req.session.user ? true : false, year_max: year_max, year_min: year_min });
 });
 
 app.get('/signup', (req, res) => {
@@ -340,7 +342,6 @@ app.get('/further_reading', async (req, res) => {
             r.previewId = '';
         }
     });
-    console.log(result.rows);
     res.render('further_reading.njk', { login: req.session.user ? true : false, further_reading: result.rows });
 });
 
