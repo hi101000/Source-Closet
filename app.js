@@ -27,12 +27,13 @@ const client = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN
 });
 
-let max_id = 0;
+var max_id = 0;
 
 let maxIdResult = client.execute("SELECT MAX(ID) AS MAX_ID FROM SOURCES").then(result => {
     const v = result.rows && result.rows[0] && result.rows[0].MAX_ID;
     const n = Number(v);
     if (Number.isFinite(n)) {
+        console.log(`Max ID is ${v}`);
         max_id = n;
     } else {
         max_id = 0;
