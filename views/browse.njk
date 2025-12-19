@@ -24,14 +24,16 @@
             padding: 50px;
             font-family: 'Winky Sans', cursive;
             -webkit-text-stroke: 1px black;
-            
+        }
+        h2{
+            font-size: 40px;
         }
         label{
-            font-size: 40px;
+            font-size: 30px;
+            font-weight: bold;
         }
         .range-slider{
             width: 20vw;
-            background-color: rgb(176, 104, 53);
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -61,6 +63,7 @@
 <h1 id="title">Source Closet</h1>
 <div id='content-browse' style='display: flex;'>
     <div id='sidebar'>
+        <h2>Filter</h2>
         <label for="yr">Year:</label>
         <input class="txtbx" type="text" id="yr" readonly>
         <br>
