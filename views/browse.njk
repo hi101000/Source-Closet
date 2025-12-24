@@ -73,7 +73,7 @@
     <div id='sources'>
         {% for src in sources %}
         <div class="src_div">
-            <a href="/source/{{ src.ID}}" class="src_link" data-year="{{ src.YEAR }}" data-month="{{ src.MONTH }}" data-day="{{ src.DAY }}" data-tags="{{ src.TAGS }}">
+            <a href="/source/{{ src.ID}}" class="src_link" data-year="{{ src.YEAR }}" data-month="{{ src.MONTH }}" data-day="{{ src.DAY }}" data-tags="{{ src.TAGS.split(', ') }}">
                 <div class="source">
                     <h2 class="src_heading">{{ src.TITLE }}</h2>
                     <p>{{ src.DATE }}/{{ src.MONTH }}/{{ src.YEAR }}</p>
