@@ -48,7 +48,7 @@
             <div id="metadata" style="overflow: auto; width: 100%; height: 200%; color: rgb(190, 147, 112);">
                 <p>
                     <span class="highlighted">Author:</span> {{ source.Author }} <br><br>
-                    <span class="highlighted">Year:</span> {{ source.Year }} <br><br>
+                    <span class="highlighted">Year:</span> {{ source.Date }} <br><br>
                     <span class="highlighted">Topics:</span> {% if source.TopicsList %}{{ source.TopicsList }}{% else %}None{% endif %} <br><br>
                     <span class="highlighted">Description:</span> {{ source.Description }} <br><br>
                     <span class="highlighted"><a href="{{ source.SellerLink }}">Seller Link</a><br><br>
