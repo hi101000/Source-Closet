@@ -4,6 +4,9 @@ const path = require('path');
 const createClient = require('@libsql/client').createClient;
 const session = require('express-session');
 const readFile = require('fs');
+const inject = require('@vercel/analytics').inject;
+
+inject();
 
 const app = express();
 const port = 3000;

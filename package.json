@@ -24,6 +24,7 @@
   "homepage": "https://github.com/hi101000/Source-Closet#readme",
   "dependencies": {
     "@libsql/client": "^0.15.15",
+    "@vercel/analytics": "^1.6.1",
     "chokidar": "^3.6.0",
     "express": "^5.2.1",
     "express-session": "^1.18.2",
