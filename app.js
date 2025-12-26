@@ -22,20 +22,6 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
 }));
-app.use((req, res, next) => {
-    const referer = req.header('Referer') || req.header('Referrer'); // Check both spellings
-
-    console.log(referer || 'No referer');
-    
-    // Check if the referer is in the allowed list or if it's a same-origin request
-    if (referer && disallowedOrigins.some(origin => referer.startsWith(origin))) {
-        // Block the request if the referer is not allowed
-        res.status(403).json({ error: 'Forbidden: Unauthorized referer' });
-    } else {
-        // Optionally allow requests with no referer (e.g., direct access or privacy-focused browsers)
-        next(); // Allow the request to proceed
-    }
-});
 
 const tursoAuthToken = process.env.TURSO_AUTH_TOKEN || '';
 const tursoDBURL = process.env.TURSO_DATABASE_URL || '';
