@@ -10,32 +10,6 @@ inject();
 
 const disallowedOrigins = ['https://odysee.com']
 
-function validateReferrer(req, res, next) {
-  const referer = req.get('Referer'); // Use req.get() to access the header
-  
-  // Check if the referer is present and matches an allowed origin
-  const isAllowed = referer && disallowedOrigins.every(origin => {
-    if (typeof origin === 'string') {
-      return !referer.startsWith(origin);
-    }
-    // Handle regex check for patterns
-    return !origin.test(referer);
-  });
-
-  // If the referer is not valid, block the request
-  if (!isAllowed) {
-    if(!referer) {
-      // Do nothing
-    }else{
-        console.log(`Blocked request from invalid referrer: ${referer}`);
-        return res.status(403).json({ error: 'Unauthorized access: Invalid referrer' });
-    }
-  }
-
-  // If valid, continue to the next middleware or route handler
-  next();
-}
-
 const app = express();
 const port = 3000;
 
@@ -48,7 +22,18 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
 }));
-app.use(validateReferrer);
+app.use((req, res, next) => {
+    const referer = req.header('Referer') || req.header('Referrer'); // Check both spellings
+    
+    // Check if the referer is in the allowed list or if it's a same-origin request
+    if (referer && disallowedOrigins.some(origin => referer.startsWith(origin))) {
+        // Block the request if the referer is not allowed
+        res.status(403).json({ error: 'Forbidden: Unauthorized referer' });
+    } else {
+        // Optionally allow requests with no referer (e.g., direct access or privacy-focused browsers)
+        next(); // Allow the request to proceed
+    }
+});
 
 const tursoAuthToken = process.env.TURSO_AUTH_TOKEN || '';
 const tursoDBURL = process.env.TURSO_DATABASE_URL || '';
