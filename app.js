@@ -8,7 +8,7 @@ const inject = require('@vercel/analytics').inject;
 
 inject();
 
-const disallowedOrigins = ['https://odysee.com']
+const disallowedOrigins = ['https://odysee.com', 'https://www.odysee.com', 'https://odysee.tv', 'https://www.odysee.tv'];
 
 const app = express();
 const port = 3000;
@@ -24,6 +24,8 @@ app.use(session({
 }));
 app.use((req, res, next) => {
     const referer = req.header('Referer') || req.header('Referrer'); // Check both spellings
+
+    console.log(referer || 'No referer');
     
     // Check if the referer is in the allowed list or if it's a same-origin request
     if (referer && disallowedOrigins.some(origin => referer.startsWith(origin))) {
