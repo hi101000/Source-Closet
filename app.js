@@ -8,8 +8,6 @@ const inject = require('@vercel/analytics').inject;
 
 inject();
 
-const disallowedOrigins = ['https://odysee.com', 'https://www.odysee.com', 'https://odysee.tv', 'https://www.odysee.tv'];
-
 const app = express();
 const port = 3000;
 
