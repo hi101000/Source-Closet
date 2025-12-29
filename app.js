@@ -5,6 +5,9 @@ const createClient = require('@libsql/client').createClient;
 const session = require('express-session');
 const readFile = require('fs');
 const inject = require('@vercel/analytics').inject;
+const injectSpeedInsights = require('@vercel/speed-insights').injectSpeedInsights;
+
+injectSpeedInsights();
 
 inject();
 
